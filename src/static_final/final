@@ -1,0 +1,26 @@
+- Final được sử dụng để chỉ định rằng một biến, một phương thức hoặc một lớp không thể thay đổi sau khi khởi tạo.
+- final variable (biến final):
+    + Khi đã gán giá trị thì không thể thay đổi lại.
+    + Giống như hằng số (constant).
+- final method (phương thức final):
+    + Không thể bị override (ghi đè) ở class con.
+- final class (lớp final):
+    + Không thể bị kế thừa. Ví dụ: String là một lớp final
+
+- static final là:
+    + static → biến/method/class gắn liền với class, không phụ thuộc vào object.
+    + final → không thể thay đổi (với biến), không thể override (với method), không thể kế thừa (với class).
+    + Khi kết hợp:
+        . static final variable = hằng số (constant), giá trị cố định và dùng chung cho tất cả đối tượng.
+        . Thường được viết hoa để phân biệt với biến thường.
+        -> Dùng để khai báo hằng số toàn cục
+
+- So sánh static final với chỉ final hoặc static
+    + final int x = 10; → mỗi object có một x, nhưng không thể đổi.
+    + static int y = 20; → tất cả object dùng chung y, có thể đổi.
+    + static final int z = 30; → tất cả object dùng chung z, và không thể đổi → hằng số toàn cục.
+
+- Sự khác nhau giữa final và static
+    Từ khóa	    |Ý nghĩa		                                    |Có thể thay đổi?
+    final	    |không thể thay đổi sau khi gán/khởi tạo	        |Biến primitive: không thể. Biến object: không đổi tham chiếu, nhưng có thể thay đổi nội dung bên trong object
+    static	    |dùng chung cho tất cả object	                    |Có thể thay đổi nếu không dùng final

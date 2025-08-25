@@ -1,0 +1,32 @@
+- Từ khóa static được sử dụng để quản lý bộ nhớ tốt hơn và nó có thể được truy cập trực tiếp thông qua lớp mà không cần khởi tạo.
+- Từ khóa static thuộc về lớp chứ không thuộc về instance (thể hiện) của lớp.
+- Dùng để khai báo:
+    + Biến static (static variables): khi bạn khai báo một biến là static, thì biến đó được gọi là biến tĩnh, hay biến static.
+    + Phương thức static (static methods): khi bạn khai báo một phương thức là static, thì phương thức đó gọi là phương thức static.
+    + Khối static (static blocks): được sử dụng để khởi tạo thành viên dữ liệu static.
+    + Lớp static (static class): một class được có thể được đặt là static chỉ khi nó là một nested class. Một  nested static class có thể được truy cập mà không cần một object của outer class (lớp bên ngoài).
+
+- Khi nào dùng thuộc tính static (static variables):
+    + Dùng khi mọi object của lớp đều cần dùng chung một giá trị → chỉ lưu một bản duy nhất trong bộ nhớ.
+    + Ví dụ:
+        . Số lượng object đã tạo.
+        . Tên trường học chung cho tất cả sinh viên.
+
+- Khi nào dùng phương thức static (static methods):
+    + Khi hành vi (method) không phụ thuộc vào object cụ thể.
+    + Dùng để thao tác trên biến static hoặc thực hiện logic chung chung.
+
+- Khi nào dùng khối static (static block):
+    + Khi muốn khởi tạo giá trị static phức tạp (không thể gán trực tiếp).
+    + Nó chạy một lần duy nhất khi lớp được nạp vào bộ nhớ.
+
+- Static variable → khi giá trị dùng chung cho tất cả object.
+- Static method → khi hành vi không phụ thuộc vào object, thường dùng cho hàm tiện ích.
+- Static block → khi cần khởi tạo static biến phức tạp.
+- Static class (nested) → khi không cần tham chiếu tới non-static của outer class.
+
+- Cách truy cập:
+    + Static variable → ClassName.variableName
+    + Static method → ClassName.methodName()
+    + Static block → tự động chạy khi class load
+    + Static nested class → OuterClass.InnerClass.methodName()
