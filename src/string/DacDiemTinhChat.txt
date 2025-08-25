@@ -1,0 +1,17 @@
+-String là gì
+    + Là chuỗi ký tự (sequence of characters).
+    + Được biểu diễn bằng lớp String trong Java.
+- Không phải kiểu nguyên thủy
+    + String là reference type (kiểu tham chiếu), không phải primitive type.
+    + Biến String thực chất là biến tham chiếu trỏ tới một đối tượng chuỗi.
+- Có nhiều constructor (13 cái) và hơn 40 phương thức.
+- Immutable (Bất biến)
+    + Một khi đã tạo thì nội dung chuỗi không thay đổi được.
+    + Khi gán giá trị mới, Java sẽ tạo đối tượng String mới, biến tham chiếu trỏ sang đối tượng đó.
+- String Pool (Bể chuỗi) & Interned String
+    + JVM lưu các string literal trong một vùng nhớ đặc biệt gọi là String Pool.
+    + Nếu hai string literal giống nhau → chúng cùng trỏ đến một đối tượng duy nhất (tái sử dụng, tiết kiệm bộ nhớ).
+    + String tạo bằng new String("...") luôn tạo đối tượng mới, không nằm trong pool.
+- Hỗ Trợ Quốc Tế Hóa (Internationalization)
+    + String hỗ trợ Unicode, có thể chứa hầu hết mọi ngôn ngữ trên thế giới.
+    + Điều này giúp xây dựng ứng dụng toàn cầu hóa dễ dàng hơn.
