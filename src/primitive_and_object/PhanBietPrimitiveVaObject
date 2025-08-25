@@ -1,0 +1,28 @@
+# Kiểu dữ liệu nguyên thủy
+- Là kiểu dữ liệu cơ bản mà Java cung cấp sẵn
+- Dùng để lưu trữ các giá trị cơ bản
+- Lưu trực tiếp giá trị trong stack.
+- Nhanh, ít tốn bộ nhớ.
+- Gồm:
+ + Integers: byte, short, int, long
+ + Float-point: float, double
+ + Character: char
+ + Boolean: boolean
+- Giá trị:
+    Tên         |   Giá trị mặc định  | Kích thước    | Miền giá trị
+    + byte      |  0                  | 1 byte        |-2^7, 2^7 -1
+    + short     |  0                  | 2 byte        | -2^15, 2^15 -1
+    + int       |  0                  | 4 byte        | -2^31, 2^31 -1
+    + long      |  0L                 | 8 byte        | -2^63, 2^63 -1
+    + float     |  0.0f               | 4 byte        | 1.4E-45, 3.4028235E38
+    + double    |  0.0d               | 8 byte        | 4.9E-324, 1.7976931348623157E308
+    + char      |  '\u0000'           | 2 byte        | '\u0000', '\uffff' hoặc 0, 65,535
+    + boolean   | false               | 1-bit         | true/false
+# Kiểu dữ liệu Object
+- Bao gồm String, Array, List, Set, All user-defined classes, etc...
+- Lưu địa chỉ tham chiếu trong stack, còn giá trị thực nằm trong heap.
+- Chậm hơn primitive do phải thông qua tham chiếu.
+- Giá trị mặc định: null.
+- Được chia làm 2 loại:
+    + Framwork định nghĩa
+    + Người dùng định nghĩa

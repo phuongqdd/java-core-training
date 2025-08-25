@@ -1,0 +1,26 @@
+Trong Java, mỗi kiểu nguyên thủy (int, double, char, …) đều có một lớp bao (wrapper class) tương ứng (Integer, Double, Character, …).
+Ta có thể chuyển đổi qua lại giữa chúng theo 2 cách:
+# Boxing (bao gói)
+- Là quá trình chuyển kiểu nguyên thủy thành đối tượng (wrapper).
+- Cách thủ công:
+```
+int x = 10;
+Integer obj = Integer.valueOf(x);
+```
+- Cách tự động(AutoBoxing)
+```
+int y = 20;
+Integer obj2 = y;
+```
+# Unboxing(mở gói)
+-Là quá trình chuyển đối tượng (wrapper) thành kiểu nguyên thủy.
+-Cách thủ công:
+```
+Integer obj = new Integer(30);
+int z = obj.intValue();
+```
+-Tự động (Auto-unboxing):
+```
+Integer obj2 = 40;
+int k = obj2;
+```
