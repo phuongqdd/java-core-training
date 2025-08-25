@@ -1,0 +1,19 @@
+- StringBuilder và StringBuffer là mutable objects → có thể thay đổi nội dung chuỗi mà không tạo object mới.
+- Cả hai đều quản lý một mảng char bên trong để lưu trữ nội dung.
+- Thao tác append, insert, delete, replace, reverse trực tiếp trên object.
+- Điểm khác nhau chính:
+    Tiêu chí	StringBuilder	StringBuffer
+    Thread-safe	Không	        Có (synchronized)
+    Hiệu năng	Nhanh hơn	    Chậm hơn một chút
+    Khi dùng	Single-thread	Multi-thread
+
+    Thread-safe = đảm bảo an toàn khi nhiều thread truy cập cùng lúc.
+    Single-thread = chỉ một luồng thao tác, StringBuilder nhanh hơn vì không kiểm tra đồng bộ.
+- Khi nào dùng:
+    + StringBuilder: Chuỗi thay đổi nhiều, single-thread, muốn hiệu năng cao.
+    + StringBuffer: Chuỗi thay đổi nhiều, multi-thread, cần thread-safe.
+- Lưu ý:
+    + StringBuilder và StringBuffer ≠ String → khi cần String phải dùng .toString().
+    + Không override equals(), mặc định so sánh tham chiếu.
+    + Mutable → thao tác trực tiếp trên object, không tạo object mới như String.
+    + Capacity: StringBuilder/Buffer có bộ đệm char, tự mở rộng khi append vượt quá.
