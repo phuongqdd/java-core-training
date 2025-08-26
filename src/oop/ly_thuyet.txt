@@ -1,0 +1,69 @@
+# Class and instance:
+    - Instance:
+        + là một thực thể trong thế giới thực
+        + Mỗi đối tượng có các đặc trưng và hành động
+          mô tả nó là cái gì hoặc nó làm gì
+    - Class:
+        + Các đối tượng có thuộc tính và đặc trưng giống nhau được khái
+          quát thành một lớp
+        + Lớp đóng vai trò như bản mẫu cho việc tạo lập và xây dựng các
+          đối tượng
+        + Mỗi đối tượng là một thực thể của lớp
+
+
+#Phạm vi truy cập:
+   - public: dùng được ở mọi nơi
+   - protected: sử dụng trong package và các lớp con ngoài package
+   - default: sử dụng trong package, không cần khai báo default
+   - private: chỉ dùng trong 1 lớp
+
+# Các tính chất:
+- Encapsulation (Đóng gói): Che giấu dữ liệu bên trong class, chỉ cho phép truy cập qua getter/setter.
+    + Các thuộc tính của 1 lớp thường để phạm vi truy cập là private
+    + Tính đóng gói thực hiện cơ chế che dấu thông tin -> Tăng tính bảo mật
+- Inheritance (Kế thừa): Cho phép class con kế thừa thuộc tính và phương thức từ class cha.
+    + Cung cấp khả năng tái sử dụng tài nguyên (thuộc tính, phương thức)
+    + Tính kế thừa cho phép sử dụng 1 lớp đã có để xây dựng lớp mới
+    + Lớp cơ sở (lớp cha – superclass) được dùng để kế thừa cho các lớp khác
+    + Lớp kế thừa lớp cơ sở được gọi là lớp dẫn xuất (lớp con – subclass)
+    + Mỗi lớp dẫn xuất dùng chung các thuộc tính và hàm thành phần với lớp cơ sở. Nó cũng có thể có những thuộc tính và hàm thành phần riêng
+    + Tính kế thừa được sử dụng qua 2 từ khóa: extends và implements
+    + Một lớp extends một abstract class hoặc implements một interface thì phải ghi đè tất cả các phương thức abstract và thực hiện phần thân hàm
+    => Chú ý
+     Một lớp chỉ được extends 1 lớp khác. Lớp dẫn xuất không thể có nhiều hơn 1 lớp cơ sở.
+     Một lớp không thể extends 1 final class
+     Một lớp có thể implements nhiều hơn 1 interface
+     Một interface có thể extends nhiều hơn 1 interface
+- Polymorphism (Đa hình): cho phép một hàm thành phần được thực hiện bằng nhiều cách khác nhau trong 1 lớp hoặc lớp dẫn xuất
+    + Được thể hiện dưới 2 hình thức:
+       Nạp chồng phương thức (overloading): Nạp chồng phương thức cho phép các phương thức cùng tên
+         Các nguyên tắc của nạp chồng phương thức:
+            . Các tham số (parameter) của các phương thức khác nhau về số lượng,
+            thứ tự và kiểu dữ liệu
+            . Có thể thay đổi kiểu trả về của phương thức
+            . Có thể thay đổi phạm vi truy cập (access modifier) của phương thức
+         Một phương thức có thể được nạp chồng trong cùng 1 lớp hoặc trong 1 lớp dẫn xuất
+       Ghi đè phương thức (overriding):
+         Khai báo một phương thức trong lớp con (subclass) đã có
+            ở lớp cha (parent class) được gọi là ghi đè phương thức
+         Ưu điểm chính của phương pháp ghi đè là lớp con có thể triển
+            khai phương thức kế thừa theo cách riêng của nó mà không cần
+            sửa đổi ở lớp cha
+         Các nguyên tắc ghi đè phương thức:
+            . Danh sách tham số: phải giống với danh sách của phương thức trong lớp
+            cha
+            . Phạm vi truy cập: phải lớn hơn phạm vi truy cập của phương thức
+            bị ghi đè ở lớp cha
+- Abstraction (Trừu tượng): là cách che dấu sự triển khai chi tiết của chức
+                            năng (hàm thành phần), chỉ hiển thị chức năng cho người dùng
+
+  #Phan biet abstract va interface
+  Sử dụng lớp trừu tượng và interface để đạt được tính trừu tượng. Tuy
+  nhiên, chúng có một số điểm khác nhau:
+  STT   |Lớp trừu tượng (Abstract class)                            |interface
+  1     |Có thể có phương thức abstract và non-abstract             |Chỉ có phương thức abstract
+  2     |Không hỗ trợ đa kế thừa                                    |Hỗ trợ đa kế thừa
+  3     |Có thể có phương thức tĩnh, hàm khởi tạo (constructor)     |Không có phương thức tĩnh, hàm khởi tạo (constructor)
+  4     |Có thể implement các interface                             |Không thể implement abstract class
+  5     |Sử dụng từ khóa abstract để khai báo abstract class        |Sử dụng từ khóa interface để khai báo interface
+    + Trường hợp 2 interface hoặc 1 abstract + 1 interface có cùng tên method:

@@ -1,0 +1,152 @@
+========================
+1. Các tính chất quan trọng của OOP
+========================
+- Tính đóng gói (Encapsulation): Giấu thông tin, chỉ expose những gì cần thiết.
+- Tính kế thừa (Inheritance): Lớp con có thể kế thừa thuộc tính/phương thức của lớp cha.
+- Tính đa hình (Polymorphism): Một hành động nhưng có nhiều cách thực hiện (Overriding, Overloading).
+- Tính trừu tượng (Abstraction): Che giấu chi tiết, chỉ để lộ cái cốt lõi.
+
+DEMO:
+class Animal {
+    void sound() {
+        System.out.println("Some sound");
+    }
+}
+class Dog extends Animal {
+    @Override
+    void sound() {
+        System.out.println("Bark");
+    }
+}
+Animal a = new Dog();
+a.sound(); // Polymorphism → Bark
+
+
+========================
+2. Access Modifier trong Java
+========================
+- public: Truy cập mọi nơi.
+- protected: Truy cập trong cùng package + lớp con khác package.
+- default (không ghi gì): Truy cập trong cùng package.
+- private: Chỉ trong class đó.
+
+DEMO:
+class Demo {
+    public int pubVar = 1;
+    protected int proVar = 2;
+    int defVar = 3;
+    private int priVar = 4;
+}
+
+
+========================
+3. Class vs Instance
+========================
+- Class: Khuôn mẫu (template) để tạo đối tượng.
+- Instance (object): Thực thể cụ thể được tạo ra từ class.
+
+DEMO:
+class Student {
+    String name;
+}
+Student s1 = new Student(); // instance
+
+
+========================
+4. Abstract vs Interface
+========================
+- Abstract class:
+  + Có thể có cả phương thức trừu tượng và cụ thể.
+  + Hỗ trợ biến instance.
+  + Kế thừa: extends (1 abstract class).
+- Interface:
+  + Chỉ có phương thức trừu tượng (Java 8+ có default & static).
+  + Chỉ chứa hằng số.
+  + Kế thừa: implements (nhiều interface cùng lúc).
+
+Trường hợp sử dụng:
+- Dùng Abstract khi cần chia sẻ logic chung + bắt buộc lớp con triển khai.
+- Dùng Interface khi muốn định nghĩa "hợp đồng" cho nhiều class khác nhau.
+
+Nếu abstract và interface có cùng tên function → class phải implement/override. Nếu cùng tên, khác kiểu trả về → lỗi compile.
+
+DEMO:
+abstract class Animal {
+    abstract void sound();
+}
+interface Pet {
+    void sound();
+}
+class Dog extends Animal implements Pet {
+    @Override
+    void sound() {
+        System.out.println("Bark");
+    }
+}
+
+
+========================
+5. Overriding vs Overloading
+========================
+- Overriding: Lớp con viết lại method của lớp cha (giống tên, giống tham số).
+- Overloading: Cùng 1 class, cùng tên method nhưng khác tham số.
+
+DEMO:
+class Demo {
+    void show(int a) { System.out.println("int"); }
+    void show(String a) { System.out.println("String"); } // Overloading
+}
+class Parent {
+    void display() { System.out.println("Parent"); }
+}
+class Child extends Parent {
+    @Override
+    void display() { System.out.println("Child"); } // Overriding
+}
+
+
+========================
+6. private / static method có override được không?
+========================
+- private: Không override được (chỉ thuộc class đó).
+- static: Không override được (thuộc class, không thuộc object). Có thể "hide" method nhưng không đa hình.
+
+
+========================
+7. final method có kế thừa được không?
+========================
+- Có thể kế thừa, nhưng KHÔNG thể override.
+- Vì final method không được phép thay đổi.
+
+DEMO:
+class Parent {
+    final void show() { System.out.println("final"); }
+}
+class Child extends Parent {
+    // Lỗi nếu override show()
+}
+
+
+========================
+8. this vs super
+========================
+- this:
+  + Trỏ đến đối tượng hiện tại.
+  + Gọi constructor khác trong cùng class.
+- super:
+  + Trỏ đến lớp cha.
+  + Gọi constructor hoặc method của lớp cha.
+
+DEMO:
+class Parent {
+    void show() { System.out.println("Parent"); }
+}
+class Child extends Parent {
+    void show() {
+        super.show(); // gọi phương thức lớp cha
+        System.out.println("Child");
+    }
+    void printName(String name) {
+        this.show(); // gọi phương thức hiện tại
+    }
+}
