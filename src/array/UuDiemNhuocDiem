@@ -1,0 +1,11 @@
+# Ưu điểm cuủa mảng
+- Truy cập nhanh: Mỗi phần tử có index cố định, nên việc truy xuất arr[i] là O(1).
+- Cung cấp phương tiện lưu trữ và truy xuất các phần tử cùng kiểu dữ liệu trong một vùng nhớ liên tiếp, giúp cho việc quản lý dữ liệu trở nên dễ dàng.
+- Cho phép truy xuất các phần tử trong mảng theo chỉ số, giúp cho việc truy xuất dữ liệu nhanh chóng và dễ dàng.
+- Dễ dàng tạo ra các mảng đa chiều (multidimensional array) để lưu trữ dữ liệu có cấu trúc phức tạp hơn.
+- Hỗ trợ các thao tác tính toán trên mảng như sắp xếp, tìm kiếm, lọc, …
+# Nhược điểm
+- Mảng có kích thước cố định khi khai báo, nếu cần thêm phần tử mới, ta phải tạo một mảng mới với kích thước lớn hơn và sao chép dữ liệu từ mảng cũ sang mảng mới. Điều này có thể làm tốn thời gian và tài nguyên của hệ thống.
+- Không thể chứa các phần tử khác kiểu dữ liệu trong cùng một mảng.
+- Không có cơ chế tự động quản lý vùng nhớ của các phần tử trong mảng. Việc không giải phóng bộ nhớ tạo ra các vấn đề liên quan đến rò rỉ bộ nhớ (memory leak).
+- Khó khăn trong việc thực hiện các thao tác chèn, xóa phần tử giữa mảng.
