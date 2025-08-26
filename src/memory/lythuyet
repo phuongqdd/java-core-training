@@ -1,0 +1,30 @@
+# Cap phát tĩnh (Static Allocation)
+- Bộ nhớ được cấp phát ngay khi chương trình biên dịch và kích thước bộ nhớ không thay ổi trong suốt thời gian chạy
+- Đặc điểm:
+    + Bộ nhớ nằm trên stack hoặc method java area
+    + Biến có thể là biến cục bộ (local variable) hoặc biến static
+    + Khi ra khỏi scope (phạm vi), bộ nhớ sẽ được giải phóng(stack tự thu hồi)
+
+# Cấp phát động
+- Bộ nhớ được cấp phát khi chương trình đang chạy
+- Đặc điểm:
+    + Bộ nhớ được cấp trên heap
+    + Dùng cho các đối tượng được tạo bằng new
+    + Khi không còn tham chiếu, bộ nhớ sẽ được Garbage Collector thu hồi
+
+# Stack Memory
+   - Bộ nhỡ tĩnh
+   - Biến cục bộ, tham chiếu ới object, lời gọi hàm
+   - Chỉ tồn tại trong thời gian thực thi của method, tự xóa khi method kết thúc
+   - Nhanh (do cấp phát/giải phóng theo cơ chế LIFO)
+   - Mỗi Thread có stack riêng
+   - Thường nhỏ hơn heap
+   - JVM tự động cấp phát/giải phongs khhi ra khỏi scope
+# Heap Memory
+    - Bộ nhớ động
+    - Các đối tượng, biến instance
+    - Tồn tại cho đến khi không còn tham chiếu -> sẽ được donj bởi GC
+    - Chậm (do cần quản lý phức tạp, GC dọn dẹp)
+    - Chia sẻ giữa các thread
+    - Thường lớn hơn stack
+    - Quản lý bởi GC
