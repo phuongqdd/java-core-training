@@ -1,0 +1,2 @@
+- Collection trong java là một framework cung cấp các kiến trúc khc nhau để lưu trữ và tổ chức dữ liệu
+- Collection cung cấp các interface(List, Set, Queue, Qeque) và các class(ArrayList, Vector, LinkedList, PriorityQueue, HasSet, LinkedHashSet, TreeSet)

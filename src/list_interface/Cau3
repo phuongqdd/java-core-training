@@ -1,0 +1,78 @@
+1. ArrayList
+-------------
+Đặc điểm:
+- Dựa trên mảng động (dynamic array).
+- Truy xuất phần tử theo index rất nhanh (O(1)).
+- Thêm/xóa ở cuối nhanh (O(1) amortized), nhưng thêm/xóa ở giữa hoặc đầu chậm (O(n)).
+- Không thread-safe.
+
+Trường hợp sử dụng:
+- Khi cần truy xuất dữ liệu nhiều hơn thay đổi.
+- Khi biết số lượng phần tử hoặc thêm phần tử chủ yếu ở cuối.
+- Ví dụ: danh sách sinh viên, danh sách sản phẩm, list dữ liệu để hiển thị.
+
+-------------------------------------------------
+
+2. LinkedList
+-------------
+Đặc điểm:
+- Dựa trên double-linked list.
+- Truy xuất theo index chậm (O(n)), vì phải duyệt từng node.
+- Thêm/xóa ở đầu, cuối hoặc giữa rất nhanh (O(1) nếu có reference).
+- Hỗ trợ deque operations: addFirst, addLast, removeFirst, removeLast.
+
+Trường hợp sử dụng:
+- Khi thêm/xóa phần tử thường xuyên ở đầu hoặc giữa danh sách.
+- Khi cần sử dụng như queue hoặc deque.
+- Ví dụ: hàng đợi nhiệm vụ, lịch sử undo/redo, danh sách liên kết động.
+
+-------------------------------------------------
+
+3. Vector
+---------
+Đặc điểm:
+- Dựa trên mảng, tương tự ArrayList.
+- Thread-safe, tất cả các phương thức synchronized.
+- Truy xuất nhanh, nhưng đồng bộ hóa làm chậm trong môi trường đơn luồng.
+
+Trường hợp sử dụng:
+- Khi cần danh sách đồng bộ trong môi trường đa luồng.
+- Hiếm khi dùng trong ứng dụng hiện đại (ArrayList + Collections.synchronizedList() thay thế tốt hơn).
+
+-------------------------------------------------
+
+4. Stack
+--------
+Đặc điểm:
+- Mở rộng từ Vector.
+- Hoạt động theo LIFO (Last In First Out).
+- Có các phương thức: push(), pop(), peek().
+
+Trường hợp sử dụng:
+- Khi cần cấu trúc stack (ngăn xếp) để lưu trữ tạm thời.
+- Ví dụ: tính toán biểu thức, undo/redo, duyệt cây theo DFS.
+
+-------------------------------------------------
+
+5. CopyOnWriteArrayList
+-----------------------
+Đặc điểm:
+- Thread-safe, mọi thay đổi tạo một bản sao của mảng.
+- Truy xuất đọc rất nhanh.
+- Thêm/xóa tốn kém vì copy toàn bộ mảng.
+
+Trường hợp sử dụng:
+- Khi môi trường đa luồng chủ yếu đọc dữ liệu, ít ghi.
+- Ví dụ: danh sách cấu hình, danh sách người dùng đang online, dữ liệu đọc nhiều mà ít thay đổi.
+
+-------------------------------------------------
+
+TÓM TẮT BẢNG SO SÁNH
+
+| Class                   | Truy xuất | Thêm/Xóa giữa/đầu | Thread-safe | Trường hợp dùng                          |
+|-------------------------|-----------|-----------------|------------|-----------------------------------------|
+| ArrayList               | O(1)      | Chậm O(n)       | Không      | Truy xuất nhiều, ít thêm/xóa            |
+| LinkedList              | Chậm O(n) | Nhanh O(1)      | Không      | Thêm/xóa nhiều, queue/deque             |
+| Vector                  | O(1)      | Chậm O(n)       | Có         | Đồng bộ trong đa luồng (hiếm dùng)      |
+| Stack                   | O(1)      | Chậm O(n)       | Có         | LIFO, undo/redo, DFS                     |
+| CopyOnWriteArrayList    | O(1)      | Rất chậm O(n)   | Có         | Đọc nhiều, ghi ít trong đa luồng        |
