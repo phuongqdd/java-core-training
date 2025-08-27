@@ -1,0 +1,42 @@
+============================
+CLASS TRIỂN KHAI TỪ QUEUE VÀ DEQUE INTERFACE
+============================
+
+1. Queue Interface
+------------------
+
+Các class triển khai phổ biến:
+
+| Class                   | Đặc điểm                                                       | Trường hợp sử dụng                                  |
+|-------------------------|----------------------------------------------------------------|---------------------------------------------------|
+| LinkedList              | Dựa trên liên kết đôi, có thể dùng như queue, cho phép null    | Hàng đợi nhiệm vụ, task scheduling, FIFO        |
+| PriorityQueue           | Queue theo ưu tiên, không cho null, sắp xếp tự động           | Hàng đợi ưu tiên, xử lý công việc quan trọng trước |
+| ArrayDeque              | Queue dạng mảng động, nhanh hơn LinkedList, không thread-safe, không cho null | Hàng đợi thông thường, stack LIFO, queue FIFO hiệu quả |
+| ConcurrentLinkedQueue   | Thread-safe, queue liên kết đơn, non-blocking                  | Hàng đợi trong môi trường đa luồng              |
+
+---
+
+2. Deque Interface
+------------------
+
+Các class triển khai phổ biến:
+
+| Class                   | Đặc điểm                                                       | Trường hợp sử dụng                                  |
+|-------------------------|----------------------------------------------------------------|---------------------------------------------------|
+| LinkedList              | Có thể dùng như double-ended queue, thêm/xóa ở cả đầu/cuối     | Hàng đợi kép, queue FIFO, stack LIFO, undo/redo  |
+| ArrayDeque              | Mảng động, nhanh hơn LinkedList, không thread-safe             | Queue kép, stack LIFO, hiệu năng cao             |
+| ConcurrentLinkedDeque   | Thread-safe, queue kép liên kết đơn                             | Môi trường đa luồng, FIFO/LIFO đồng thời         |
+| LinkedBlockingDeque     | Thread-safe, blocking queue kép                                  | Producer-consumer, xử lý đồng thời, có giới hạn kích thước |
+
+---
+
+3. Phân biệt theo trường hợp sử dụng
+
+| Mục đích                       | Queue                                      | Deque                                         |
+|--------------------------------|--------------------------------------------|-----------------------------------------------|
+| FIFO                            | LinkedList, ArrayDeque, ConcurrentLinkedQueue, PriorityQueue | LinkedList, ArrayDeque, ConcurrentLinkedDeque |
+| Stack / LIFO                    | Không phù hợp                               | LinkedList, ArrayDeque, ConcurrentLinkedDeque |
+| Blocking / Thread-safe           | ConcurrentLinkedQueue                       | ConcurrentLinkedDeque, LinkedBlockingDeque    |
+| Hàng đợi ưu tiên                | PriorityQueue                               | Không có                                      |
+| Hiệu năng cao, không đồng bộ    | ArrayDeque                                  | ArrayDeque                                     |
+
