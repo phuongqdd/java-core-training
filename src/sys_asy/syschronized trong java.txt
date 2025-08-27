@@ -1,0 +1,108 @@
+1. Synchronized trong java là gì
+- Synchronized trong java là một từ khóa được sử dụng để đồng bộ hóa các phương thức hoặc khối lệnh trong môi đa luồng
+- Đảm bảo rằng chỉ 1 thread có thể truy cập một tài nguyên (method/khối code) tại một thời điểm
+- Dùng để tránh lỗi race condition (nhiều thread cùng thay đổi dữ liệu)
+- Một số đặc điểm:
+    + Đảm báo tính đúng đắn của dữ liệu
+    + Đảm bảo an toàn của dữ liệu
+    + Tăng hiệu suất
+    + Không đảm bảo tuân thủ đúng thứ tự
+2. Tại sao cần dùng
+- Môi trường đa luồng: Nhiều thread có thể cùng truy cập tài nguyên chung (biến, đối tượng, file).
+- Nguy cơ: Dễ xảy ra race condition, deadlock, dữ liệu không đồng bộ → sai lệch kết quả.
+- Giải pháp: synchronized đảm bảo chỉ một thread được truy cập tài nguyên tại một thời điểm.
+- Lợi ích: Giúp tránh xung đột, bảo toàn dữ liệu, đảm bảo tính đúng đắn và ổn định cho ứng dụng.
+
+3. Cách hoạt động
+- synchronized sử dụng lock(khóa) để đảm bảo chỉ một thread được truy cập vào phương thức hoặc khối lệnh tại một thời điểm
+- Thread nào lấy được khóa thì vào; thread khác phải chờ đến kho khóa được giải phóng
+- Hỗ trợ khóa đồng bộ hóa, cho phép đồng bộ hóa chỉ một phàn của một phương thức hoặc khối lệnh.
+    Khi sử dụng synchronized block, chỉ phần được khai báo trong khối lệnh đó mới được đồng bộ hóa,
+     giúp tăng hiệu suất cua chương trình
+4. Process Synchronization và Thread Synchronization
+4.1 Process Synchronization
+- Đồng bộ hóa giữa các tiến trình trong hệ thống đa tiến trình
+- Cơ chế thường dùng: Semaphore(truy cập vào 1 tài nguyên cụ thể), Mutex(truy cập vào một tài nguyn duy nhất),
+    Monitor(truy cập vào các phương thư hoặc biến được ánh dấu là đồng bộ hóa),
+    Barrier (Đồng bộ hóa quá trình thực hện của các tiến trình)
+- Mục tiêu: kiểm soát truy cập tài nguyên dùng chung giữa nhiều process
+4.2 Thread Synchronization
+- Đồng bộ hóa giữa các luồng (thread) trong cùng 1 tiến trình
+- Thực hiện qua: synchronized, ReentrantLock
+- có 3 dạng chính:
+    + String Synchronization: dùng huỗi làm khóa -> không khuyến khích
+    + Mutual Exclusion: đảm bảo chỉ một thread truy cập tài nguyên tại một thời điểm
+    + Inter-Thread Communication: giao tiếp giữa các thread bằng: wait(), notify(), notifyAll()
+5. Phân loại: gồm 3 loại
+5.1. Synchronized method
+- Đồng bộ hóa toàn bộ phương thức
+- Kho một thread gọi, nó sẽ khóa đối tượng(instance) chứa phương thức đó
+=> chỉ nên áp dụng cho các phương thức liên quan đến truy cập vào tài nguyên chia sẽ giữa các luồng
+- Ưu: dễ dùng, đảm bảo an toàn khi truy cập taài nguyên chung
+- Nhược: khóa toàn bộ method -> có thể giảm hiệu suất
+public synchronized void increment(){
+    count++;
+}
+5.2. Synchronized Block
+- Đồng bộ hóa một đoạn mã nhỏ trong method
+- Cần chỉ định đối tượng làm lock
+- Ưu: chỉ khóa phần quan trong trọng -> hiệu suất tốt hơn
+- Nhược: code phức tạp hơn
+synchronized(lock){
+    count++;
+}
+5.3. Static Synchronization
+- Dùng với method hoặc block static
+- Lock ở mức class object (MyClass.class) chứ kooong phải object instance
+- Ưu: bảo vệ tài nguyên tĩnh(dùng chung cho tất cả đối tượng)
+- Nhược: có thể gây nghẽn (bottleneck) nếu lạm dụng
+public static synchronized void increment(){
+    count++;
+}
+
+ == Lưu ý khi dùng
+ - chọn đúng đối tuonwgk lock để tránh deadlock và giảm hiệu suất
+ - Không nên ồng bộ hóa bằng String literal hoặc gloval lock
+ - Chỉ đồng bộ hóa khi thật sự cần (tài nguyên dùng chung)
+
+ Mehthod -> dễ dùng nhưng khóa cả hàm
+ Block -> tinh chỉnh, hiệu suất tốt hơn
+ Static -> đồng thời tài nguyễn tĩnh, lock ở cấp class
+
+6. Vấn đề khi sử dụng
+- Hiệu suất giảm
+    + Chỉ một luồng được chạy tại một thời điểm → các luồng khác phải chờ → giảm hiệu suất.
+    + Cách khắc phục: chỉ đồng bộ hóa những đoạn code thật sự cần thiết (synchronized block).
+- Deadlock (khoá chết)
+    + Xảy ra khi nhiều luồng chờ nhau giải phóng lock, dẫn đến treo vô hạn.
+    + Khắc phục: luôn yêu cầu lock theo cùng một thứ tự hoặc dùng tryLock().
+- Starvation (đói tài nguyên)
+    + Một luồng không bao giờ được cấp lock vì bị các luồng khác chiếm liên tục.
+    + Khắc phục: dùng wait(), notify(), notifyAll() để quản lý công bằng hơn.
+- Livelock
+    + Các luồng liên tục phản ứng qua lại mà không làm tiến triển công việc (bị kẹt trong vòng lặp).
+    + Khắc phục: thiết kế logic tránh việc luồng phản hồi vô ích.
+- Tóm lại: synchronized giúp an toàn dữ liệu, nhưng có thể gây ra chậm trễ, deadlock, starvation, và livelock nếu không dùng đúng cách.
+
+7. Các phương pháp đồng bộ hóa khác
+7.1. synchronized
+    - Ưu điểm: Dễ dùng, tự động giải phóng khóa
+    - Nhược điểm: Hiệu suất thấp, dễ deadlock
+    - Khi sử dụng: Khi cần đồng bộ hóa đơn giản trên tài nguyên chung
+7.2. ReentrantLock
+    - Ưu điểm: Linh hoạt, có tính năng nâng cao (fairness, tryLock, timeout)
+    - Nhược điểm: Phức tạp hơn, phải giải phóng khóa thủ công
+    - Khi sử dụng: Khi cần kiểm soát chi tiết việc khóa/giải phóng hoặc nhiều điều kiện chờ
+7.3. AtomicInteger
+    - Ưu điểm: Hiệu suất cao, thao tác nguyên tử, không cần khóa
+    - Nhược điểm: Chỉ áp dụng cho số nguyên
+    - Khi sử dụng: Khi cần thao tác thread-safe trên số nguyên (đếm, tăng/giảm)
+7.4. ConcurrentHashMap
+    - Ưu điểm: Hiệu suất cao, không khóa toàn bộ map
+    - Nhược điểm: Không hỗ trợ sorting, consistency chưa tuyệt đối
+    - Khi sử dụng: Khi cần cấu trúc dữ liệu thread-safe và hiệu suất cao
+=>Tóm lại:
+- Dùng synchronized cho tình huống cơ bản, đơn giản.
+- Dùng ReentrantLock khi cần nhiều tính năng nâng cao.
+- Dùng AtomicInteger cho biến đếm/nguyên tử.
+- Dùng ConcurrentHashMap cho cấu trúc dữ liệu song song.

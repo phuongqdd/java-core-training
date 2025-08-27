@@ -1,0 +1,28 @@
+1. Synchronous (Đồng bộ)
+- Ưu điểm:
+    + Đơn giản, dễ hiểu, dễ debug vì code chạy tuần tự từ trên xuống dưới.
+    + Dữ liệu dễ quản lý hơn vì mọi tác vụ được thực hiện theo thứ tự, tránh việc dữ liệu bị cập nhật song song gây lỗi.
+    + Phù hợp cho các tác vụ nhỏ, nhanh, không tốn thời gian chờ.
+- Nhược điểm:
+    + Hiệu suất thấp: nếu một tác vụ mất nhiều thời gian (ví dụ: gọi API, đọc file lớn, truy vấn DB chậm),
+        toàn bộ chương trình phải chờ.
+    + Không tận dụng được tài nguyên như CPU đa lõi hay khả năng xử lý song song.
+- Trường hợp nên dùng:
+    + Các ứng dụng nhỏ, desktop app đơn giản.
+    + Tác vụ cần đảm bảo tính tuần tự, chính xác tuyệt đối (ví dụ: xử lý dữ liệu tài chính theo thứ tự).
+    + Khi hiệu suất không phải là ưu tiên (ví dụ: công cụ CLI, script chạy một lần).
+2. Asynchronous (Bất đồng bộ)
+- Ưu điểm:
+    + Hiệu suất cao: không cần chờ tác vụ nặng, có thể làm việc khác trong lúc chờ.
+    + Thích hợp cho I/O bound (đọc/ghi file, gọi API, DB query, network request).
+    + Tận dụng tốt tài nguyên: xử lý song song trên nhiều luồng hoặc event loop.
+    + Trải nghiệm người dùng tốt hơn (UI không bị "treo" khi tác vụ chạy nền).4
+- Nhược điểm:
+    + Phức tạp hơn: phải quản lý callback, Future, async/await, dễ sinh bug nếu không cẩn thận.
+    + Khó debug hơn vì nhiều luồng chạy song song.
+    + Nếu không đồng bộ đúng cách có thể dẫn đến race condition hoặc deadlock.
+- Trường hợp nên dùng:
+    + Web server: xử lý nhiều request cùng lúc (Spring Boot, Node.js).
+    + Ứng dụng mobile/UI: không để người dùng chờ đợi khi tải dữ liệu.
+    + Ứng dụng real-time: chat app, game online, hệ thống thông báo.
+    + Xử lý dữ liệu lớn: batch processing, big data, AI training.
