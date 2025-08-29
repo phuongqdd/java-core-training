@@ -1,0 +1,29 @@
+- Khái niệm:
+    + là một tiến trình thực hiện nhiều luồng đồng thời.
+    + Một ứng dụng Java ngoài luồng chính có thể có các luồng khác thực thi đồng thời làm ứng dụng chạy nhanh và hiệu quả hơn.
+    + Ví dụ:
+        + 1 thread lo đọc dữ liệu từ file.
+        + 1 thread lo xử lý dữ liệu.
+        + 1 thread lo hiển thị giao diện.
+        =>  Khi đó, chương trình mượt hơn, nhanh hơn, vì các tác vụ không phải chờ nhau.
+- Ưu điểm:
+    + Tận dụng CPU tốt hơn:
+        . Đặc biệt trên CPU đa nhân (multi-core).
+        . Nhiều thread có thể chạy đồng thời trên nhiều nhân CPU.
+    + Hiệu suất cao hơn cho tác vụ độc lập
+        . Ví dụ: tải nhiều file từ internet cùng lúc.
+    + Cải thiện trải nghiệm người dùng
+        . Trong ứng dụng desktop/mobile: giao diện (UI) không bị “đơ” khi chạy tác vụ nặng.
+    + Tách biệt công việc
+        . Mỗi thread có thể đảm nhiệm một nhiệm vụ riêng → dễ quản lý.
+
+- Nhược điểm:
+    + Khó lập trình hơn
+        . Lập trình đa luồng dễ phát sinh lỗi khó đoán như race condition, deadlock.
+    + Khó debug
+        . Vì nhiều thread chạy song song → kết quả có thể khác nhau mỗi lần chạy.
+    + Tốn tài nguyên
+        . Tạo nhiều thread tốn RAM và CPU cho việc quản lý.
+    + Không phải lúc nào cũng nhanh hơn
+        . Nếu số thread quá nhiều so với số nhân CPU →
+        CPU phải chia sẻ thời gian (context switching) → có thể chậm hơn.

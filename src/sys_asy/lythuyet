@@ -16,7 +16,7 @@
     + Hiệu suất cao: không cần chờ tác vụ nặng, có thể làm việc khác trong lúc chờ.
     + Thích hợp cho I/O bound (đọc/ghi file, gọi API, DB query, network request).
     + Tận dụng tốt tài nguyên: xử lý song song trên nhiều luồng hoặc event loop.
-    + Trải nghiệm người dùng tốt hơn (UI không bị "treo" khi tác vụ chạy nền).4
+    + Trải nghiệm người dùng tốt hơn (UI không bị "treo" khi tác vụ chạy nền).
 - Nhược điểm:
     + Phức tạp hơn: phải quản lý callback, Future, async/await, dễ sinh bug nếu không cẩn thận.
     + Khó debug hơn vì nhiều luồng chạy song song.

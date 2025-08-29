@@ -1,0 +1,10 @@
+- Biên dịch (Compilation) là quá trình chuyển mã nguồn mà ta viê thành mã máy/bytecode mà máy tính có thể hiểu và thực thi
+- Thông dịch(Interpretation) là quá trình đọc và thực thi mã lệnh từng dòng trong lúc chạy
+    + Trong java, bytecode trong file .class không chạy trực tip trên CPU mà sẽ được JVM thông d ho JIT biên dịch thành max máy thật
+- Quá trình chạy chương trình Java:
+    + Code: bạn viết Demo.java
+    + Compile: javac Demo.java → ra Demo.class (bytecode)
+    + Run: java Demo → JVM dịch bytecode thành mã máy thật để CPU thực hiện.
+- JVM (Java Virtual Machine): máy ảo thực thi chương trình Java (dịch bytecode thành mã máy).
+- JRE (Java Runtime Environment): gồm JVM + thư viện cần để chạy Java app.
+- JDK (Java Development Kit): gồm JRE + công cụ phát triển (javac, javadoc, debugger).

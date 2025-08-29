@@ -1,0 +1,49 @@
+1. Process (Tiến trình)
+- Định nghĩa:
+    + Một process là một chương trình đang chạy trong hệ điều hành.
+    + Ví dụ: khi bạn mở Chrome, Zalo, hoặc IntelliJ, mỗi cái là một process riêng.
+- Đặc điểm:
+    + Mỗi process có bộ nhớ riêng biệt (không chia sẻ với process khác).
+    + Process có mã lệnh, dữ liệu, vùng nhớ stack, các tài nguyên (file, socket, …).
+    + Bao gồm thông tin của instruction, data và state.
+    + Giao tiếp giữa các process khó khăn hơn (IPC – Inter-Process Communication).
+- Ví dụ thực tế:
+    + Bạn mở 2 ứng dụng Word và Excel. Mỗi cái là một process độc lập, không ảnh hưởng trực tiếp đến nhau.
+
+2. Thread (Luồng)
+- Định nghĩa:
+    + Thread là đơn vị cơ bản để hệ điều hành quản lý và thực thi. Một process có thể chứa nhiều thread.
+- Đặc điểm:
+    + Các thread chia sẻ bộ nhớ và tài nguyên của process chứa nó.
+    + Thread nhẹ hơn process, tạo thread nhanh hơn tạo process.
+    + Nếu một thread gặp lỗi nghiêm trọng (ví dụ crash), có thể làm ảnh hưởng đến toàn bộ process.
+- Ví dụ thực tế:
+Trình duyệt Chrome (một process) có thể có nhiều thread:
+1 thread tải trang web
+1 thread chạy JavaScript
+1 thread phát nhạc/video
+1 thread xử lý UI
+- Mỗi Thread có chứa các thông tin sau:
+    + ThreadID: Định danh của Thread, thu được qua phương thức getId() của lớp Thread
+    + ThreadName: Tên của Thread, có thể đặt hoặc ko đặt tên (JVM sẽ tự đặt)
+    + Priority: Độ ưu tiên của Thread, là thông số quyết định mức ưu tiên khi cấp phát CPU cho Thread. Để set độ ưu tiên ta gọi phương thức setPriority(int newPriority)
+    + StackSize: Độ lớn ngăn xếp của Thread (tính bằng byte) mà Thread có thể execute.
+
+3. Các cách tạo thread
+- Kế thừa lớp Thread:
+    + Khai báo 1 lớp mới kế thừa từ lớp Thread
+    + Override lại phương thức run ở lớp này, những gì trong phương thức run sẽ được thực thi khi luồng bắt đầu chạy.
+    Sau khi luồng chạy xong tất cả các câu lệnh trong phương thức run thì luồng cũng tự hủy.
+    + Tạo 1 thể hiện (hay 1 đối tượng) của lớp ta vừa khai báo.
+    + Sau đó gọi phương thức start() của đối tượng này để bắt đầu thực thi luồng.
+- Cài đặt (implement) interface Runnable:
+    + Khai báo 1 lớp mới implements từ Interface Runnable
+    + Hiện thực phương thức run() ở lớp này, những gì trong phương thức run() sẽ được thực thi khi luồng bắt đầu chạy.
+        Sau khi luồng chạy xong tất cả các câu lệnh trong phương thức run thì luồng cũng tự hủy.
+    + Tạo 1 thể hiện (hay 1 đối tượng) của lớp ta vừa khai báo. (VD : Tên đối tượng là r1)
+    + Tạo 1 thể hiện của lớp Thread bằng phương thức khởi tạo : Thread(Runnable target)
+        . Runnable target: Là 1 đối tượng thuốc lớp được implements từ giao diện Runnable.
+        . Ví dụ: Thread t1 = new Thread(r1);
+    + Gọi phương thức start() của đối tượng t1.
+- Sử dụng Callable + FutureTask (trả về kết quả)
+- Sử dụng Executor Framework (ExecutorService, ThreadPool)

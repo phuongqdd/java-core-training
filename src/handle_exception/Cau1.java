@@ -16,7 +16,7 @@ public class Cau1 {
         // Sau throw luôn là một đối tượng
         // chủ yếu được sử dụng để ném ngoại lệ tùy chỉnh (ngoại lệ do người dùng tự định nghĩa).
 
-        int age = 18;
+        int age = 14;
         if(age < 18){
             throw new ArithmeticException("tuổi phải >= 18");
         }
