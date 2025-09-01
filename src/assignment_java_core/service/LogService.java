@@ -1,18 +1,16 @@
 package assignment_java_core.service;
 
+import assignment_java_core.dto.request.LogRequest;
+import assignment_java_core.dto.response.LogResponse;
 import assignment_java_core.model.LogEntry;
 
 import java.time.LocalDateTime;
 import java.util.List;
 
 public interface LogService {
-    boolean checkLog(LogEntry log, String level,
-                       LocalDateTime from, LocalDateTime to,
-                       String keyword);
+    boolean checkLog(LogEntry log, LogRequest logRequest);
 
-    List<LogEntry> searchLogs(String level,
-                              LocalDateTime from, LocalDateTime to,
-                              String keyword);
+    List<LogResponse> searchLogs(LogRequest logRequest);
 
-    void exportLogs(List<LogEntry> logs);
+    void exportLogs(List<LogResponse> logs);
 }

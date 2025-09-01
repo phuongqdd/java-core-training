@@ -18,17 +18,6 @@ public class Utils {
     }
 
     /**
-     * Kiểm tra xem timestamp có nằm trong khoảng from-to không
-     * Nếu from/to null thì coi như không giới hạn
-     */
-    public static boolean isInRange(LocalDateTime timestamp, LocalDateTime from, LocalDateTime to) {
-        if (timestamp == null) return false;
-        if (from != null && timestamp.isBefore(from)) return false;
-        if (to != null && timestamp.isAfter(to)) return false;
-        return true;
-    }
-
-    /**
      * Định dạng LocalDateTime thành String log
      */
     public static String formatTimestamp(LocalDateTime timestamp) {

@@ -1,5 +1,8 @@
 package assignment_java_core.service.impl;
 
+import assignment_java_core.dto.request.LogRequest;
+import assignment_java_core.dto.response.LogResponse;
+import assignment_java_core.mapper.LogMapper;
 import assignment_java_core.model.LogEntry;
 import assignment_java_core.repository.LogRepository;
 import assignment_java_core.repository.impl.LogRepositoryImpl;
@@ -20,43 +23,52 @@ public class LogServiceImpl implements LogService {
         this.logRepository = logRepository;
     }
 
+    /**
+     * Kiểm tra xem timestamp có nằm trong khoảng from-to không
+     * Nếu from/to null thì coi như không giới hạn
+     */
+    public boolean isInRange(LocalDateTime timestamp, LocalDateTime from, LocalDateTime to) {
+        if (timestamp == null) return false;
+        if (from != null && timestamp.isBefore(from)) return false;
+        if (to != null && timestamp.isAfter(to)) return false;
+        return true;
+    }
+
     @Override
-    public boolean checkLog(LogEntry log, String level, LocalDateTime from, LocalDateTime to, String keyword) {
+    public boolean checkLog(LogEntry log, LogRequest logRequest) {
         // Lọc level
-        if (level != null && !log.getLevel().equalsIgnoreCase(level)) return false;
+        if (logRequest.getLevelFilter() != null &&
+                !log.getLevel()
+                        .equalsIgnoreCase(logRequest.getLevelFilter())) return false;
 
         // Lọc khoảng thời gian
-        if (!Utils.isInRange(log.getTimestamp(), from, to)) return false;
+        if (!isInRange(log.getTimestamp(),
+                logRequest.getFromTime(),
+                logRequest.getToTime())) return false;
 
         // Lọc keyword trong message
-        if (keyword != null && !log.getMessage().toLowerCase().contains(keyword.toLowerCase())) return false;
+        if (logRequest.getKeywordFilter() != null &&
+                !log.getMessage().toLowerCase()
+                        .contains(logRequest.getKeywordFilter().toLowerCase())) return false;
 
         return true;
     }
 
     @Override
-    public List<LogEntry> searchLogs(String level, LocalDateTime from, LocalDateTime to, String keyword) {
+    public List<LogResponse> searchLogs(LogRequest logRequest) {
         List<LogEntry> logs = logRepository.readAll();
-        List<LogEntry> rs = new ArrayList<>();
+        List<LogResponse> rs = new ArrayList<>();
         for(LogEntry log : logs){
-            if(checkLog(log, level, from, to, keyword)){
-                rs.add(log);
+            if(checkLog(log, logRequest)){
+                rs.add(LogMapper.toResponse(log));
             }
         }
         return rs;
     }
 
     @Override
-    public void exportLogs(List<LogEntry> logs) {
+    public void exportLogs(List<LogResponse> logs) {
         String outputPaths = Utils.generateOutputFileName();
-        try(BufferedWriter bw = new BufferedWriter(new FileWriter(outputPaths))) {
-            for (LogEntry logEntry : logs){
-                bw.write(logs.toString());
-                bw.newLine();
-            }
-            System.out.println("Kết quả đã lưu vào file: " + outputPaths);
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        logRepository.writeAll(logs, outputPaths);
     }
 }

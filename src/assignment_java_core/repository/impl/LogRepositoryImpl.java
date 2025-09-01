@@ -1,13 +1,11 @@
 package assignment_java_core.repository.impl;
 
+import assignment_java_core.dto.response.LogResponse;
 import assignment_java_core.model.LogEntry;
 import assignment_java_core.repository.LogRepository;
 import assignment_java_core.util.Utils;
 
-import java.io.BufferedReader;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,4 +35,18 @@ public class LogRepositoryImpl implements LogRepository {
 
         return logs;
     }
+
+    @Override
+    public void writeAll(List<LogResponse> logs, String outputPaths) {
+        try(BufferedWriter bw = new BufferedWriter(new FileWriter(outputPaths))) {
+            for (LogResponse logResponse : logs){
+                bw.write(logResponse.toString());
+                bw.newLine();
+            }
+            System.out.println("Kết quả đã lưu vào file: " + outputPaths);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
 }

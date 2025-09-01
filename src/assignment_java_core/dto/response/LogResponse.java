@@ -1,19 +1,17 @@
-package assignment_java_core;
-
-import assignment_java_core.util.Utils;
+package assignment_java_core.dto.response;
 
 import java.time.LocalDateTime;
 
-public class LogEntry {
+public class LogResponse {
     private LocalDateTime timestamp;
     private String level;
     private String service;
     private String message;
 
-    public LogEntry() {
+    public LogResponse() {
     }
 
-    public LogEntry(LocalDateTime timestamp, String level, String service, String message) {
+    public LogResponse(LocalDateTime timestamp, String level, String service, String message) {
         this.timestamp = timestamp;
         this.level = level;
         this.service = service;
@@ -52,23 +50,9 @@ public class LogEntry {
         this.message = message;
     }
 
-    public boolean matches(String level,
-                    LocalDateTime from, LocalDateTime to,
-                    String keyword) {
-        // Lọc level
-        if (level != null && !this.getLevel().equalsIgnoreCase(level)) return false;
-
-        // Lọc khoảng thời gian
-//        if (!Utils.isInRange(this.getTimestamp(), from, to)) return false;
-
-        // Lọc keyword trong message
-        if (keyword != null && !this.getMessage().toLowerCase().contains(keyword.toLowerCase())) return false;
-
-        return true;
-    }
     @Override
     public String toString() {
-        return "LogEntry{" +
+        return "LogResponse{" +
                 "timestamp=" + timestamp +
                 ", level='" + level + '\'' +
                 ", service='" + service + '\'' +
