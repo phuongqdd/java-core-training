@@ -1,6 +1,4 @@
-package assignment_java_core;
-
-import assignment_java_core.util.Utils;
+package assignment_java_core.model;
 
 import java.time.LocalDateTime;
 
@@ -52,20 +50,6 @@ public class LogEntry {
         this.message = message;
     }
 
-    public boolean matches(String level,
-                    LocalDateTime from, LocalDateTime to,
-                    String keyword) {
-        // Lọc level
-        if (level != null && !this.getLevel().equalsIgnoreCase(level)) return false;
-
-        // Lọc khoảng thời gian
-        if (!Utils.isInRange(this.getTimestamp(), from, to)) return false;
-
-        // Lọc keyword trong message
-        if (keyword != null && !this.getMessage().toLowerCase().contains(keyword.toLowerCase())) return false;
-
-        return true;
-    }
     @Override
     public String toString() {
         return "LogEntry{" +

@@ -1,4 +1,6 @@
-package assignment_java_core;
+package assignment_java_core.util;
+
+import assignment_java_core.model.LogEntry;
 
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
@@ -35,7 +37,7 @@ public class Utils {
     }
 
     /**
-     * Tạo tên file kết quả xuất log có timestamp, ví dụ: search_result_20250828_235012.txt
+     * Tạo tên file kết quả xuất log có timestamp
      */
     public static String generateOutputFileName() {
         String timestamp = LocalDateTime.now().format(DateTimeFormatter.ofPattern("yyyyMMdd_HHmmss"));
