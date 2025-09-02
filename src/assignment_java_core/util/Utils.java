@@ -33,22 +33,49 @@ public class Utils {
         return "search_result_" + timestamp + ".txt";
     }
 
-    public static LogEntry parseLogLine(String line){
-        int firstBracket = line.indexOf("]");
-        String ts = line.substring(1, firstBracket);
+//    public static LogEntry parseLogLine(String line){
+//        int firstBracket = line.indexOf("]");
+//        String ts = line.substring(1, firstBracket);
+//
+//        int secondOpen = line.indexOf("[", firstBracket + 1);
+//        int secondClose = line.indexOf("]", secondOpen);
+//        String level = line.substring(secondOpen + 1, secondClose);
+//
+//        int thirdOpen = line.indexOf("[", secondClose + 1);
+//        int thirdClose = line.indexOf("]", thirdOpen);
+//        String service = line.substring(thirdOpen + 1, thirdClose);
+//
+//        String message = line.substring(line.indexOf("-", thirdClose) + 1).trim();
+//
+//        LocalDateTime timestamp = parseTimestamp(ts);
+//        return new LogEntry(timestamp, level, service, message);
+//    }
 
-        int secondOpen = line.indexOf("[", firstBracket + 1);
-        int secondClose = line.indexOf("]", secondOpen);
-        String level = line.substring(secondOpen + 1, secondClose);
+    public static LogEntry parseLogLine(String line) {
+        if (line == null || line.trim().isEmpty()) {
+            return null;
+        }
 
-        int thirdOpen = line.indexOf("[", secondClose + 1);
-        int thirdClose = line.indexOf("]", thirdOpen);
-        String service = line.substring(thirdOpen + 1, thirdClose);
+        line = line.trim();
+        try {
+            int tsStart = line.indexOf("[") + 1;
+            int tsEnd = line.indexOf("]", tsStart);
+            String timestamp = line.substring(tsStart, tsEnd);
 
-        String message = line.substring(line.indexOf("-", thirdClose) + 1).trim();
+            int levelStart = line.indexOf("[", tsEnd + 1) + 1;
+            int levelEnd = line.indexOf("]", levelStart);
+            String level = line.substring(levelStart, levelEnd);
 
-        LocalDateTime timestamp = parseTimestamp(ts);
-        return new LogEntry(timestamp, level, service, message);
+            int svcStart = line.indexOf("[", levelEnd + 1) + 1;
+            int svcEnd = line.indexOf("]", svcStart);
+            String service = line.substring(svcStart, svcEnd);
+
+            String message = line.substring(line.indexOf("-", svcEnd) + 2);
+
+            return new LogEntry(parseTimestamp(timestamp), level, service, message);
+        } catch (Exception e) {
+            System.err.println("Không parse được dòng: " + line);
+            return null;
+        }
     }
-
 }
