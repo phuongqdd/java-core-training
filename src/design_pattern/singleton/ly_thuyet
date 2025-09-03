@@ -1,0 +1,42 @@
+1. Mục đích
+- Đảm bảo chỉ có duy nhất một instance của một class trong toàn bộ ứng dụng.
+- Cung cấp một điểm truy cập toàn cục (global access point) đến instance đó.
+- Tránh việc tạo nhiều object không cần thiết → tiết kiệm tài nguyên (memory, CPU, DB connection…).
+
+2. Cách thức triển khai
+2.1. Eager Initialization
+    - Instance được tạo ngay khi class được load.
+2.2. Lazy Initialization (Khởi tạo muộn)
+    - Instance chỉ được tạo khi cần dùng lần đầu.
+    - Không an toàn trong môi trường đa luồng.
+2.3. Thread-safe (synchronized)
+    - Đảm bảo an toàn trong đa luồng, nhưng synchronized có thể làm giảm hiệu năng.
+2.4. Double-Checked Locking
+    - Hiệu năng tốt hơn, chỉ khóa khi thực sự cần.
+
+3. Ưu điểm
+- Đảm bảo một instance duy nhất → tránh xung đột tài nguyên.
+- Global access point → dễ truy cập từ mọi nơi.
+- Lazy loading (nếu dùng Lazy/Bill Pugh/Double-Checked) → tiết kiệm tài nguyên.
+- Dễ tích hợp với các pattern khác (Factory, Builder, Facade…).
+
+4. Nhược điểm
+- Khó test unit (vì là global state).
+- Có thể bị overused → biến thành “anti-pattern” nếu lạm dụng.
+- Lazy Singleton dễ gặp bug trong môi trường đa luồng nếu không xử lý đúng.
+- Có thể phá vỡ nguyên tắc Single Responsibility (vừa quản lý state, vừa đảm bảo chỉ có một instance).
+
+5. Bài tập
+Trong một ứng dụng, bạn có file cấu hình config.properties chứa thông tin:
+
+app.name=My Application
+app.version=1.0.0
+db.url=jdbc:mysql://localhost:3306/mydb
+db.user=root
+db.password=123456
+
+
+Viết class ConfigManager theo Singleton Design Pattern để:
+- Đảm bảo chỉ load file config một lần duy nhất.
+- Cho phép lấy giá trị theo key (getProperty("app.name")).
+- Test trong main bằng cách gọi từ nhiều nơi → vẫn dùng chung một instance.

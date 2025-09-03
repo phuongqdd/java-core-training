@@ -1,0 +1,105 @@
+1. Mục đích:
+    - Cung cấp 1 interface hoặc abstract class để tạo object, nhưng để
+        cho các subclass quyết định loại object cụ thể nào sẽ được tạo.
+    - Giúp tách biệt phần khởi tạo đối tượng khỏi phần sử dụng đối tượng
+=> Nói ngắn gọn: factory method ủy quyền việc tạo object cho các lớp con,
+        thay vì gọi trực tiếp new.
+
+2. Cách thức triển khai:
+    Creator (abstract)
+             |
+             +--- ConcreteCreatorA
+             |        |
+             |        +--- creates ConcreteProductA
+             |
+             +--- ConcreteCreatorB
+                      |
+                      +--- creates ConcreteProductB
+
+Thành phần chính:
+    - Product(interface/abstract class): định nghĩa interface chung cho object.
+    - ConcreteProduct: các lớp cài đặt cụ thể.
+    - Creator (abstract class): khai báo factory method trả về Product.
+    - ConcreteCreator: triển khai factory method để tạo ConcreteProduct tương ứng.
+
+3. Ưu điểm:
+    - Tách biệt việc khởi tạo object → client không cần biết new object nào.
+    - Dễ mở rộng: thêm loại sản phẩm mới chỉ cần thêm class, không sửa code cũ (tuân thủ Open/Closed Principle).
+    - Linh hoạt: có thể thay đổi logic tạo object tại subclass.
+4. Nhược điểm
+    - Tăng số lượng class (nhiều Creator, Product).
+    - Code phức tạp hơn so với việc dùng new trực tiếp.
+
+5. Cách thức triển khai:
+5.1. Simple Factory (Static Factory Method)
+    - Cách triển khai: Một class Factory chứa 1 phương thức tĩnh (static) trả về đối tượng cụ thể.
+    - Ví dụ:
+class ShapeFactory {
+    public static Shape createShape(String type) {
+        if ("circle".equalsIgnoreCase(type)) return new Circle();
+        if ("square".equalsIgnoreCase(type)) return new Square();
+        throw new IllegalArgumentException("Unknown type");
+    }
+}
+    - Ưu điểm:
+        - Đơn giản, dễ viết, dễ hiểu.
+        - Gom logic khởi tạo vào 1 chỗ → tránh new lung tung.
+        - Thường dùng trong ứng dụng nhỏ/vừa.
+    - Nhược điểm:
+        - Vi phạm Open/Closed Principle: thêm loại mới phải sửa code factory.
+        - Không hỗ trợ kế thừa linh hoạt.
+        - Khó test/mock trong unit test.
+
+5.2. Parameterized Factory
+- Cách triển khai:
+    + Giống Simple Factory, nhưng quyết định loại object dựa vào tham số truyền vào (enum, string, config…).
+    + Shape shape = ShapeFactory.createShape("circle");
+- Ưu điểm:
+    + Linh hoạt hơn Simple Factory.
+    + Giảm số lượng Factory class.
+    + Dễ đọc/dễ maintain nếu số loại object ít.
+- Nhược điểm:
+    + Vẫn phải sửa factory khi thêm sản phẩm mới.
+    + Nếu có quá nhiều loại → phương thức create bị dài, rối.
+
+5.3. GoF Factory Method (chuẩn textbook – kế thừa)
+- Cách triển khai:
+    + Có một interface/abstract class cho Factory (Creator).
+    + Subclass (ConcreteCreator) override factoryMethod() để tạo sản phẩm cụ thể.
+
+    abstract class Dialog {
+        abstract Button createButton();
+    }
+
+    class WindowsDialog extends Dialog {
+        Button createButton() { return new WindowsButton(); }
+    }
+
+- Ưu điểm:
+    + Tuân thủ Open/Closed Principle: thêm loại mới chỉ cần tạo subclass mới.
+    + Dễ mở rộng, dễ test.
+    + Là nền tảng cho Abstract Factory.
+- Nhược điểm:
+    + Nhiều class → phức tạp, “lằng nhằng”.
+    + Với app nhỏ thì bị “overkill”.
+6. Ưu điểm (Advantages)
+    - Tách biệt object creation khỏi client → dễ bảo trì, linh hoạt.
+    - Thêm loại sản phẩm mới dễ dàng → chỉ cần subclass mới.
+    - Dễ unit test nhờ mock objects.
+    - Tái sử dụng logic tạo object ở nhiều nơi.
+    - Giấu product classes cụ thể → giảm phụ thuộc.
+
+8. Bài tập: Hệ thống Giao Hàng (Shipping System)
+Bối cảnh:
+Một công ty thương mại điện tử cần hỗ trợ nhiều phương thức giao hàng khác nhau:
+    - Standard Shipping (giao hàng tiêu chuẩn).
+    - Express Shipping (giao nhanh).
+    - International Shipping (giao quốc tế).
+Hiện tại hệ thống chỉ có Standard và Express, nhưng trong tương lai có thể thêm nhiều loại khác (Drone Shipping, Same-Day Shipping...).
+
+Yêu cầu:
+    - Viết hệ thống sử dụng Factory Method để tạo các đối tượng Shipping tương ứng.
+    - Các đối tượng giao hàng phải có hành vi chung:
+        + calculateCost(double weight) → tính phí vận chuyển theo cân nặng.
+        + deliver(String packageId) → in ra thông báo giao hàng.
+    - Không được để client code (main) phải new trực tiếp các lớp cụ thể. Client chỉ chọn ShippingService phù hợp và gọi processOrder().
