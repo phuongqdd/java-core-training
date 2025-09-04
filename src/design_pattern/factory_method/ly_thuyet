@@ -1,6 +1,5 @@
 1. Mục đích:
-    - Cung cấp 1 interface hoặc abstract class để tạo object, nhưng để
-        cho các subclass quyết định loại object cụ thể nào sẽ được tạo.
+    - Cung cấp 1 interface hoặc abstract class để tạo object, nhưng để cho các subclass quyết định loại object cụ thể nào sẽ được tạo.
     - Giúp tách biệt phần khởi tạo đối tượng khỏi phần sử dụng đối tượng
 => Nói ngắn gọn: factory method ủy quyền việc tạo object cho các lớp con,
         thay vì gọi trực tiếp new.

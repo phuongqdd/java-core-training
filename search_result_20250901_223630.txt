@@ -1,295 +1,209 @@
-LogResponse{timestamp=2024-11-02T08:30:20.128, level='INFO', service='com.example.UserService', message='Email sent - recipient: user161@example.com'}
-LogResponse{timestamp=2024-11-01T11:10:02.718, level='INFO', service='com.example.OrderService', message='Email sent - recipient: user659@example.com'}
-LogResponse{timestamp=2024-11-05T11:15:31.392, level='INFO', service='com.example.DatabaseService', message='New user registered - username: user_996'}
-LogResponse{timestamp=2024-11-03T21:07:39.740, level='INFO', service='com.example.PaymentService', message='New user registered - username: user_702'}
-LogResponse{timestamp=2024-11-06T08:05:37.069, level='INFO', service='com.example.UserService', message='New user registered - username: user_816'}
-LogResponse{timestamp=2024-11-01T21:53:10.955, level='INFO', service='com.example.InventoryService', message='User login successful - user_id: 84'}
-LogResponse{timestamp=2024-11-01T23:05:22.452, level='INFO', service='com.example.UserService', message='New user registered - username: user_776'}
-LogResponse{timestamp=2024-11-05T12:48:56.355, level='INFO', service='com.example.OrderService', message='New user registered - username: user_475'}
-LogResponse{timestamp=2024-11-06T00:03:24.594, level='INFO', service='com.example.InventoryService', message='User login successful - user_id: 799'}
-LogResponse{timestamp=2024-11-07T22:00:11.100, level='INFO', service='com.example.PaymentService', message='Email sent - recipient: user518@example.com'}
-LogResponse{timestamp=2024-11-02T13:03:47.397, level='INFO', service='com.example.DatabaseService', message='Email sent - recipient: user385@example.com'}
-LogResponse{timestamp=2024-11-02T21:37:32.832, level='INFO', service='com.example.DatabaseService', message='New user registered - username: user_379'}
-LogResponse{timestamp=2024-11-10T03:26:05.704, level='INFO', service='com.example.PaymentService', message='User login successful - user_id: 696'}
-LogResponse{timestamp=2024-11-04T14:09:04.707, level='INFO', service='com.example.ShippingService', message='User login successful - user_id: 347'}
-LogResponse{timestamp=2024-11-02T20:45:39.771, level='INFO', service='com.example.UserService', message='Email sent - recipient: user844@example.com'}
-LogResponse{timestamp=2024-11-06T15:10:43.367, level='INFO', service='com.example.ShippingService', message='New user registered - username: user_853'}
-LogResponse{timestamp=2024-11-01T06:35:22.464, level='INFO', service='com.example.PaymentService', message='User login successful - user_id: 11'}
-LogResponse{timestamp=2024-11-10T16:47:13.376, level='INFO', service='com.example.InventoryService', message='Email sent - recipient: user958@example.com'}
-LogResponse{timestamp=2024-11-13T21:54:54.570, level='INFO', service='com.example.PaymentService', message='New user registered - username: user_601'}
-LogResponse{timestamp=2024-11-09T05:19:28.182, level='INFO', service='com.example.CustomerService', message='User login successful - user_id: 211'}
-LogResponse{timestamp=2024-11-10T14:33:38.881, level='INFO', service='com.example.ShippingService', message='Email sent - recipient: user987@example.com'}
-LogResponse{timestamp=2024-11-06T20:23:59.861, level='INFO', service='com.example.AuthService', message='New user registered - username: user_129'}
-LogResponse{timestamp=2024-11-09T01:15:18.100, level='INFO', service='com.example.DatabaseService', message='Email sent - recipient: user158@example.com'}
-LogResponse{timestamp=2024-11-07T01:47:23.592, level='INFO', service='com.example.ShippingService', message='New user registered - username: user_9'}
-LogResponse{timestamp=2024-11-09T00:14:03.656, level='INFO', service='com.example.OrderService', message='User login successful - user_id: 716'}
-LogResponse{timestamp=2024-11-04T02:20:33.370, level='INFO', service='com.example.InventoryService', message='Email sent - recipient: user464@example.com'}
-LogResponse{timestamp=2024-11-02T16:05:13.869, level='INFO', service='com.example.DatabaseService', message='New user registered - username: user_727'}
-LogResponse{timestamp=2024-11-06T11:20:54.615, level='INFO', service='com.example.CustomerService', message='Email sent - recipient: user492@example.com'}
-LogResponse{timestamp=2024-11-10T12:32:15.368, level='INFO', service='com.example.NotificationService', message='Email sent - recipient: user577@example.com'}
-LogResponse{timestamp=2024-11-04T05:46:13.024, level='INFO', service='com.example.ReportService', message='User login successful - user_id: 460'}
-LogResponse{timestamp=2024-11-03T07:18:52.548, level='INFO', service='com.example.DatabaseService', message='New user registered - username: user_786'}
-LogResponse{timestamp=2024-11-12T01:53:41.576, level='INFO', service='com.example.InventoryService', message='New user registered - username: user_418'}
-LogResponse{timestamp=2024-11-02T10:05:27.792, level='INFO', service='com.example.ShippingService', message='New user registered - username: user_630'}
-LogResponse{timestamp=2024-11-02T09:21:37.344, level='INFO', service='com.example.ShippingService', message='New user registered - username: user_110'}
-LogResponse{timestamp=2024-11-07T15:00:29.142, level='INFO', service='com.example.ShippingService', message='Email sent - recipient: user284@example.com'}
-LogResponse{timestamp=2024-11-18T09:37:11.422, level='INFO', service='com.example.CustomerService', message='User login successful - user_id: 438'}
-LogResponse{timestamp=2024-11-10T01:38:57.072, level='INFO', service='com.example.InventoryService', message='New user registered - username: user_51'}
-LogResponse{timestamp=2024-11-02T04:16:28.110, level='INFO', service='com.example.AuthService', message='New user registered - username: user_105'}
-LogResponse{timestamp=2024-11-15T19:29:08.760, level='INFO', service='com.example.UserService', message='User login successful - user_id: 180'}
-LogResponse{timestamp=2024-11-18T18:05:01.890, level='INFO', service='com.example.OrderService', message='Email sent - recipient: user59@example.com'}
-LogResponse{timestamp=2024-11-04T12:49:48.560, level='INFO', service='com.example.AuthService', message='User login successful - user_id: 779'}
-LogResponse{timestamp=2024-11-19T23:19:03.985, level='INFO', service='com.example.AuthService', message='Email sent - recipient: user466@example.com'}
-LogResponse{timestamp=2024-11-05T00:12:49.368, level='INFO', service='com.example.UserService', message='New user registered - username: user_432'}
-LogResponse{timestamp=2024-11-09T21:05:55.206, level='INFO', service='com.example.InventoryService', message='User login successful - user_id: 515'}
-LogResponse{timestamp=2024-11-01T17:46:24.990, level='INFO', service='com.example.NotificationService', message='New user registered - username: user_110'}
-LogResponse{timestamp=2024-11-07T09:41:22.664, level='INFO', service='com.example.DatabaseService', message='Email sent - recipient: user437@example.com'}
-LogResponse{timestamp=2024-11-11T03:44:48.798, level='INFO', service='com.example.DatabaseService', message='New user registered - username: user_417'}
-LogResponse{timestamp=2024-11-03T15:39:17.057, level='INFO', service='com.example.ReportService', message='User login successful - user_id: 701'}
-LogResponse{timestamp=2024-11-20T13:15:18.425, level='INFO', service='com.example.UserService', message='New user registered - username: user_173'}
-LogResponse{timestamp=2024-11-16T04:41:16.080, level='INFO', service='com.example.InventoryService', message='New user registered - username: user_129'}
-LogResponse{timestamp=2024-11-04T23:21:37.384, level='INFO', service='com.example.DatabaseService', message='Email sent - recipient: user279@example.com'}
-LogResponse{timestamp=2024-11-10T17:26:24.375, level='INFO', service='com.example.DatabaseService', message='New user registered - username: user_793'}
-LogResponse{timestamp=2024-11-12T14:21:16.962, level='INFO', service='com.example.ShippingService', message='New user registered - username: user_219'}
-LogResponse{timestamp=2024-11-14T10:26:33.327, level='INFO', service='com.example.DatabaseService', message='Email sent - recipient: user98@example.com'}
-LogResponse{timestamp=2024-11-15T00:07:31.244, level='INFO', service='com.example.CustomerService', message='New user registered - username: user_897'}
-LogResponse{timestamp=2024-11-14T09:49:10.284, level='INFO', service='com.example.PaymentService', message='Email sent - recipient: user653@example.com'}
-LogResponse{timestamp=2024-11-10T13:51:41.525, level='INFO', service='com.example.UserService', message='Email sent - recipient: user77@example.com'}
-LogResponse{timestamp=2024-11-01T17:01:31.348, level='INFO', service='com.example.UserService', message='New user registered - username: user_226'}
-LogResponse{timestamp=2024-11-13T21:51:46.126, level='INFO', service='com.example.PaymentService', message='Email sent - recipient: user655@example.com'}
-LogResponse{timestamp=2024-11-03T19:51:50.550, level='INFO', service='com.example.OrderService', message='Email sent - recipient: user576@example.com'}
-LogResponse{timestamp=2024-11-14T13:02:27.990, level='INFO', service='com.example.PaymentService', message='New user registered - username: user_973'}
-LogResponse{timestamp=2024-11-11T09:45:17.806, level='INFO', service='com.example.ReportService', message='Email sent - recipient: user576@example.com'}
-LogResponse{timestamp=2024-11-23T02:56:36.392, level='INFO', service='com.example.UserService', message='User login successful - user_id: 265'}
-LogResponse{timestamp=2024-11-04T18:04:01.712, level='INFO', service='com.example.CustomerService', message='Email sent - recipient: user215@example.com'}
-LogResponse{timestamp=2024-11-06T10:47:15.060, level='INFO', service='com.example.UserService', message='New user registered - username: user_594'}
-LogResponse{timestamp=2024-11-01T04:11:56.100, level='INFO', service='com.example.AuthService', message='New user registered - username: user_145'}
-LogResponse{timestamp=2024-11-12T11:57:14.439, level='INFO', service='com.example.PaymentService', message='Email sent - recipient: user965@example.com'}
-LogResponse{timestamp=2024-11-03T02:41:14.571, level='INFO', service='com.example.NotificationService', message='New user registered - username: user_155'}
-LogResponse{timestamp=2024-11-02T12:20:47.835, level='INFO', service='com.example.NotificationService', message='User login successful - user_id: 285'}
-LogResponse{timestamp=2024-11-15T11:26:22.180, level='INFO', service='com.example.UserService', message='Email sent - recipient: user326@example.com'}
-LogResponse{timestamp=2024-11-09T11:55:24.024, level='INFO', service='com.example.ShippingService', message='User login successful - user_id: 325'}
-LogResponse{timestamp=2024-11-04T00:30:42.768, level='INFO', service='com.example.ShippingService', message='Email sent - recipient: user102@example.com'}
-LogResponse{timestamp=2024-11-02T20:20:39.920, level='INFO', service='com.example.CustomerService', message='User login successful - user_id: 43'}
-LogResponse{timestamp=2024-11-07T13:41:49.128, level='INFO', service='com.example.AuthService', message='New user registered - username: user_905'}
-LogResponse{timestamp=2024-11-09T13:56:45.210, level='INFO', service='com.example.ReportService', message='New user registered - username: user_969'}
-LogResponse{timestamp=2024-11-21T15:34:36.570, level='INFO', service='com.example.NotificationService', message='User login successful - user_id: 451'}
-LogResponse{timestamp=2024-11-08T21:31:30.261, level='INFO', service='com.example.DatabaseService', message='User login successful - user_id: 749'}
-LogResponse{timestamp=2024-11-25T04:22:00.229, level='INFO', service='com.example.OrderService', message='Email sent - recipient: user841@example.com'}
-LogResponse{timestamp=2024-11-21T01:39:10.680, level='INFO', service='com.example.OrderService', message='User login successful - user_id: 562'}
-LogResponse{timestamp=2024-11-24T12:15:28.562, level='INFO', service='com.example.UserService', message='User login successful - user_id: 458'}
-LogResponse{timestamp=2024-11-01T06:35:30.236, level='INFO', service='com.example.UserService', message='New user registered - username: user_944'}
-LogResponse{timestamp=2024-11-25T06:01:45.640, level='INFO', service='com.example.InventoryService', message='New user registered - username: user_420'}
-LogResponse{timestamp=2024-11-18T11:03:57.892, level='INFO', service='com.example.ShippingService', message='New user registered - username: user_451'}
-LogResponse{timestamp=2024-11-07T19:59:18.670, level='INFO', service='com.example.UserService', message='Email sent - recipient: user198@example.com'}
-LogResponse{timestamp=2024-11-27T21:36:40.068, level='INFO', service='com.example.DatabaseService', message='User login successful - user_id: 704'}
-LogResponse{timestamp=2024-11-08T15:39:54.432, level='INFO', service='com.example.OrderService', message='New user registered - username: user_961'}
-LogResponse{timestamp=2024-11-23T13:10:34.941, level='INFO', service='com.example.NotificationService', message='User login successful - user_id: 984'}
-LogResponse{timestamp=2024-11-23T02:27:07.520, level='INFO', service='com.example.ReportService', message='User login successful - user_id: 7'}
-LogResponse{timestamp=2024-11-18T08:07:34.778, level='INFO', service='com.example.AuthService', message='User login successful - user_id: 712'}
-LogResponse{timestamp=2024-11-03T15:25:10.532, level='INFO', service='com.example.OrderService', message='User login successful - user_id: 445'}
-LogResponse{timestamp=2024-11-15T05:36:30.415, level='INFO', service='com.example.UserService', message='New user registered - username: user_12'}
-LogResponse{timestamp=2024-11-20T14:40:34.375, level='INFO', service='com.example.ShippingService', message='New user registered - username: user_429'}
-LogResponse{timestamp=2024-11-04T06:11:57.340, level='INFO', service='com.example.ReportService', message='User login successful - user_id: 218'}
-LogResponse{timestamp=2024-11-29T00:05:30.344, level='INFO', service='com.example.NotificationService', message='User login successful - user_id: 844'}
-LogResponse{timestamp=2024-11-01T13:20:49.536, level='INFO', service='com.example.DatabaseService', message='Email sent - recipient: user105@example.com'}
-LogResponse{timestamp=2024-11-10T08:40:56.304, level='INFO', service='com.example.ShippingService', message='Email sent - recipient: user936@example.com'}
-LogResponse{timestamp=2024-11-29T09:39:31.960, level='INFO', service='com.example.PaymentService', message='User login successful - user_id: 596'}
-LogResponse{timestamp=2024-11-22T12:38:23.148, level='INFO', service='com.example.UserService', message='New user registered - username: user_263'}
-LogResponse{timestamp=2024-11-25T15:56:37.142, level='INFO', service='com.example.OrderService', message='User login successful - user_id: 151'}
-LogResponse{timestamp=2024-11-29T08:16:48.192, level='INFO', service='com.example.DatabaseService', message='Email sent - recipient: user59@example.com'}
-LogResponse{timestamp=2024-11-26T17:26:38.870, level='INFO', service='com.example.CustomerService', message='User login successful - user_id: 227'}
-LogResponse{timestamp=2024-11-08T16:07:40.276, level='INFO', service='com.example.OrderService', message='New user registered - username: user_587'}
-LogResponse{timestamp=2024-11-28T13:01:14.790, level='INFO', service='com.example.DatabaseService', message='User login successful - user_id: 381'}
-LogResponse{timestamp=2024-11-18T17:52:09.760, level='INFO', service='com.example.OrderService', message='User login successful - user_id: 42'}
-LogResponse{timestamp=2024-11-14T15:30:47.700, level='INFO', service='com.example.ReportService', message='New user registered - username: user_880'}
-LogResponse{timestamp=2024-11-20T20:51:42.765, level='INFO', service='com.example.PaymentService', message='Email sent - recipient: user631@example.com'}
-LogResponse{timestamp=2024-11-27T00:06:21.051, level='INFO', service='com.example.InventoryService', message='New user registered - username: user_78'}
-LogResponse{timestamp=2024-11-03T20:38:45.784, level='INFO', service='com.example.ReportService', message='User login successful - user_id: 524'}
-LogResponse{timestamp=2024-11-14T20:16:07.524, level='INFO', service='com.example.PaymentService', message='Email sent - recipient: user501@example.com'}
-LogResponse{timestamp=2024-11-17T19:50:32.230, level='INFO', service='com.example.CustomerService', message='Email sent - recipient: user443@example.com'}
-LogResponse{timestamp=2024-11-13T00:59:31.200, level='INFO', service='com.example.ReportService', message='User login successful - user_id: 401'}
-LogResponse{timestamp=2024-11-09T16:45:14.464, level='INFO', service='com.example.CustomerService', message='Email sent - recipient: user153@example.com'}
-LogResponse{timestamp=2024-11-26T01:04:23.128, level='INFO', service='com.example.PaymentService', message='New user registered - username: user_792'}
-LogResponse{timestamp=2024-11-30T05:31:53.028, level='INFO', service='com.example.ReportService', message='Email sent - recipient: user169@example.com'}
-LogResponse{timestamp=2024-11-05T21:17:43.120, level='INFO', service='com.example.ShippingService', message='Email sent - recipient: user916@example.com'}
-LogResponse{timestamp=2024-12-01T15:35:25.752, level='INFO', service='com.example.PaymentService', message='User login successful - user_id: 540'}
-LogResponse{timestamp=2024-11-03T02:27:47.523, level='INFO', service='com.example.OrderService', message='New user registered - username: user_712'}
-LogResponse{timestamp=2024-11-27T04:49:52.504, level='INFO', service='com.example.ShippingService', message='Email sent - recipient: user614@example.com'}
-LogResponse{timestamp=2024-11-24T23:35:37.827, level='INFO', service='com.example.ReportService', message='Email sent - recipient: user281@example.com'}
-LogResponse{timestamp=2024-11-04T10:36:51.575, level='INFO', service='com.example.ReportService', message='New user registered - username: user_132'}
-LogResponse{timestamp=2024-11-05T05:43:37.449, level='INFO', service='com.example.ShippingService', message='Email sent - recipient: user450@example.com'}
-LogResponse{timestamp=2024-12-03T14:03:43.985, level='INFO', service='com.example.AuthService', message='User login successful - user_id: 63'}
-LogResponse{timestamp=2024-11-28T11:05:46.660, level='INFO', service='com.example.ReportService', message='Email sent - recipient: user945@example.com'}
-LogResponse{timestamp=2024-11-19T05:13:36.678, level='INFO', service='com.example.InventoryService', message='User login successful - user_id: 125'}
-LogResponse{timestamp=2024-11-25T16:12:52.860, level='INFO', service='com.example.AuthService', message='User login successful - user_id: 549'}
-LogResponse{timestamp=2024-12-02T17:43:50.880, level='INFO', service='com.example.NotificationService', message='New user registered - username: user_261'}
-LogResponse{timestamp=2024-11-10T22:48:11.605, level='INFO', service='com.example.ReportService', message='New user registered - username: user_2'}
-LogResponse{timestamp=2024-11-27T14:01:55.763, level='INFO', service='com.example.PaymentService', message='Email sent - recipient: user574@example.com'}
-LogResponse{timestamp=2024-11-05T03:49:47.395, level='INFO', service='com.example.CustomerService', message='Email sent - recipient: user539@example.com'}
-LogResponse{timestamp=2024-11-24T20:52:31.539, level='INFO', service='com.example.CustomerService', message='User login successful - user_id: 468'}
-LogResponse{timestamp=2024-11-21T16:44:24.145, level='INFO', service='com.example.ReportService', message='New user registered - username: user_878'}
-LogResponse{timestamp=2024-11-23T02:10:49.482, level='INFO', service='com.example.ShippingService', message='User login successful - user_id: 784'}
-LogResponse{timestamp=2024-11-03T04:30:07.090, level='INFO', service='com.example.UserService', message='New user registered - username: user_771'}
-LogResponse{timestamp=2024-12-01T21:43:58.296, level='INFO', service='com.example.NotificationService', message='Email sent - recipient: user934@example.com'}
-LogResponse{timestamp=2024-11-06T16:44:48.530, level='INFO', service='com.example.UserService', message='New user registered - username: user_895'}
-LogResponse{timestamp=2024-11-16T02:08:26.540, level='INFO', service='com.example.OrderService', message='User login successful - user_id: 267'}
-LogResponse{timestamp=2024-11-05T01:09:27.090, level='INFO', service='com.example.ReportService', message='Email sent - recipient: user839@example.com'}
-LogResponse{timestamp=2024-11-21T00:53:54.094, level='INFO', service='com.example.ShippingService', message='Email sent - recipient: user374@example.com'}
-LogResponse{timestamp=2024-11-11T11:11:36.054, level='INFO', service='com.example.InventoryService', message='User login successful - user_id: 135'}
-LogResponse{timestamp=2024-11-06T23:25:39.036, level='INFO', service='com.example.ReportService', message='Email sent - recipient: user100@example.com'}
-LogResponse{timestamp=2024-11-29T09:53:59.677, level='INFO', service='com.example.CustomerService', message='User login successful - user_id: 436'}
-LogResponse{timestamp=2024-11-09T16:32:01.095, level='INFO', service='com.example.ShippingService', message='Email sent - recipient: user768@example.com'}
-LogResponse{timestamp=2024-11-06T18:51:16.833, level='INFO', service='com.example.InventoryService', message='New user registered - username: user_794'}
-LogResponse{timestamp=2024-11-02T08:31:08.444, level='INFO', service='com.example.AuthService', message='Email sent - recipient: user559@example.com'}
-LogResponse{timestamp=2024-12-05T03:11:04.496, level='INFO', service='com.example.OrderService', message='Email sent - recipient: user285@example.com'}
-LogResponse{timestamp=2024-11-10T18:30:38.695, level='INFO', service='com.example.UserService', message='Email sent - recipient: user665@example.com'}
-LogResponse{timestamp=2024-11-04T17:16:02.052, level='INFO', service='com.example.AuthService', message='Email sent - recipient: user997@example.com'}
-LogResponse{timestamp=2024-11-18T09:12:53.280, level='INFO', service='com.example.DatabaseService', message='User login successful - user_id: 385'}
-LogResponse{timestamp=2024-11-23T19:53:33.376, level='INFO', service='com.example.NotificationService', message='User login successful - user_id: 853'}
-LogResponse{timestamp=2024-11-24T11:55:40.024, level='INFO', service='com.example.NotificationService', message='User login successful - user_id: 694'}
-LogResponse{timestamp=2024-11-23T21:09:03.600, level='INFO', service='com.example.NotificationService', message='New user registered - username: user_164'}
-LogResponse{timestamp=2024-11-08T19:43:54.372, level='INFO', service='com.example.CustomerService', message='User login successful - user_id: 930'}
-LogResponse{timestamp=2024-12-02T20:56:00.478, level='INFO', service='com.example.AuthService', message='Email sent - recipient: user63@example.com'}
-LogResponse{timestamp=2024-11-04T03:45:45.268, level='INFO', service='com.example.AuthService', message='New user registered - username: user_840'}
-LogResponse{timestamp=2024-11-11T01:32:38.501, level='INFO', service='com.example.OrderService', message='New user registered - username: user_783'}
-LogResponse{timestamp=2024-11-03T14:28:11.760, level='INFO', service='com.example.OrderService', message='Email sent - recipient: user141@example.com'}
-LogResponse{timestamp=2024-11-26T07:55:18.966, level='INFO', service='com.example.AuthService', message='User login successful - user_id: 85'}
-LogResponse{timestamp=2024-11-30T10:27:12.708, level='INFO', service='com.example.ShippingService', message='New user registered - username: user_889'}
-LogResponse{timestamp=2024-11-07T07:32:14.851, level='INFO', service='com.example.InventoryService', message='User login successful - user_id: 903'}
-LogResponse{timestamp=2024-11-23T15:46:49.448, level='INFO', service='com.example.PaymentService', message='New user registered - username: user_772'}
-LogResponse{timestamp=2024-11-30T00:10:55.605, level='INFO', service='com.example.CustomerService', message='New user registered - username: user_865'}
-LogResponse{timestamp=2024-11-02T09:50:25.235, level='INFO', service='com.example.NotificationService', message='User login successful - user_id: 148'}
-LogResponse{timestamp=2024-12-01T17:42:30.788, level='INFO', service='com.example.OrderService', message='New user registered - username: user_410'}
-LogResponse{timestamp=2024-11-12T04:31:40.896, level='INFO', service='com.example.ShippingService', message='User login successful - user_id: 604'}
-LogResponse{timestamp=2024-11-30T11:52:06.084, level='INFO', service='com.example.OrderService', message='Email sent - recipient: user401@example.com'}
-LogResponse{timestamp=2024-11-14T01:21:25.440, level='INFO', service='com.example.AuthService', message='Email sent - recipient: user918@example.com'}
-LogResponse{timestamp=2024-12-08T08:53:52.638, level='INFO', service='com.example.NotificationService', message='Email sent - recipient: user353@example.com'}
-LogResponse{timestamp=2024-11-17T11:28:35.024, level='INFO', service='com.example.UserService', message='New user registered - username: user_755'}
-LogResponse{timestamp=2024-12-03T23:35:40.516, level='INFO', service='com.example.PaymentService', message='New user registered - username: user_753'}
-LogResponse{timestamp=2024-11-17T20:22:44.716, level='INFO', service='com.example.DatabaseService', message='New user registered - username: user_217'}
-LogResponse{timestamp=2024-11-19T19:11:19.440, level='INFO', service='com.example.AuthService', message='User login successful - user_id: 927'}
-LogResponse{timestamp=2024-12-08T16:22:36.992, level='INFO', service='com.example.ShippingService', message='Email sent - recipient: user722@example.com'}
-LogResponse{timestamp=2024-11-24T10:16:28.560, level='INFO', service='com.example.ShippingService', message='Email sent - recipient: user758@example.com'}
-LogResponse{timestamp=2024-11-04T02:50:49.424, level='INFO', service='com.example.NotificationService', message='User login successful - user_id: 28'}
-LogResponse{timestamp=2024-12-04T02:15:28.542, level='INFO', service='com.example.PaymentService', message='New user registered - username: user_348'}
-LogResponse{timestamp=2024-11-27T14:41:53.808, level='INFO', service='com.example.ReportService', message='User login successful - user_id: 663'}
-LogResponse{timestamp=2024-11-15T23:03:25.576, level='INFO', service='com.example.CustomerService', message='New user registered - username: user_204'}
-LogResponse{timestamp=2024-11-01T02:04:07.935, level='INFO', service='com.example.ShippingService', message='New user registered - username: user_199'}
-LogResponse{timestamp=2024-11-10T13:35:37.545, level='INFO', service='com.example.ReportService', message='New user registered - username: user_91'}
-LogResponse{timestamp=2024-12-02T21:37:54.274, level='INFO', service='com.example.UserService', message='Email sent - recipient: user262@example.com'}
-LogResponse{timestamp=2024-11-20T00:09:57, level='INFO', service='com.example.InventoryService', message='New user registered - username: user_756'}
-LogResponse{timestamp=2024-11-12T04:29:04.920, level='INFO', service='com.example.ReportService', message='Email sent - recipient: user695@example.com'}
-LogResponse{timestamp=2024-11-07T11:30:13.211, level='INFO', service='com.example.NotificationService', message='User login successful - user_id: 393'}
-LogResponse{timestamp=2024-11-02T09:47:20.256, level='INFO', service='com.example.AuthService', message='Email sent - recipient: user322@example.com'}
-LogResponse{timestamp=2024-11-13T10:15:34.816, level='INFO', service='com.example.NotificationService', message='New user registered - username: user_360'}
-LogResponse{timestamp=2024-11-19T15:03:41.571, level='INFO', service='com.example.OrderService', message='Email sent - recipient: user518@example.com'}
-LogResponse{timestamp=2024-11-14T10:07:58, level='INFO', service='com.example.PaymentService', message='New user registered - username: user_655'}
-LogResponse{timestamp=2024-11-11T18:40:08.430, level='INFO', service='com.example.ReportService', message='User login successful - user_id: 12'}
-LogResponse{timestamp=2024-11-19T06:55:36.672, level='INFO', service='com.example.PaymentService', message='New user registered - username: user_203'}
-LogResponse{timestamp=2024-11-02T07:41:05.631, level='INFO', service='com.example.CustomerService', message='New user registered - username: user_927'}
-LogResponse{timestamp=2024-11-29T11:48:36.463, level='INFO', service='com.example.InventoryService', message='New user registered - username: user_584'}
-LogResponse{timestamp=2024-11-13T06:39:15.636, level='INFO', service='com.example.OrderService', message='New user registered - username: user_451'}
-LogResponse{timestamp=2024-12-06T14:44:55.110, level='INFO', service='com.example.DatabaseService', message='New user registered - username: user_860'}
-LogResponse{timestamp=2024-11-01T05:03:50.895, level='INFO', service='com.example.UserService', message='User login successful - user_id: 808'}
-LogResponse{timestamp=2024-11-13T15:58:59.133, level='INFO', service='com.example.AuthService', message='User login successful - user_id: 162'}
-LogResponse{timestamp=2024-11-22T00:56:39.402, level='INFO', service='com.example.NotificationService', message='Email sent - recipient: user523@example.com'}
-LogResponse{timestamp=2024-12-06T19:21:02.370, level='INFO', service='com.example.CustomerService', message='New user registered - username: user_345'}
-LogResponse{timestamp=2024-11-06T16:48:28.416, level='INFO', service='com.example.PaymentService', message='New user registered - username: user_320'}
-LogResponse{timestamp=2024-11-08T12:46:43.608, level='INFO', service='com.example.ShippingService', message='Email sent - recipient: user705@example.com'}
-LogResponse{timestamp=2024-11-15T11:52:01.778, level='INFO', service='com.example.PaymentService', message='User login successful - user_id: 533'}
-LogResponse{timestamp=2024-11-11T12:24:33.680, level='INFO', service='com.example.InventoryService', message='New user registered - username: user_171'}
-LogResponse{timestamp=2024-11-11T08:54:12.130, level='INFO', service='com.example.CustomerService', message='New user registered - username: user_65'}
-LogResponse{timestamp=2024-11-21T02:21:11.880, level='INFO', service='com.example.CustomerService', message='User login successful - user_id: 567'}
-LogResponse{timestamp=2024-11-01T01:28:09.192, level='INFO', service='com.example.AuthService', message='User login successful - user_id: 914'}
-LogResponse{timestamp=2024-11-11T06:56:29.391, level='INFO', service='com.example.PaymentService', message='Email sent - recipient: user257@example.com'}
-LogResponse{timestamp=2024-11-08T13:07:12.050, level='INFO', service='com.example.OrderService', message='Email sent - recipient: user801@example.com'}
-LogResponse{timestamp=2024-11-17T09:22:08.940, level='INFO', service='com.example.CustomerService', message='Email sent - recipient: user197@example.com'}
-LogResponse{timestamp=2024-11-14T02:31:34.485, level='INFO', service='com.example.CustomerService', message='User login successful - user_id: 811'}
-LogResponse{timestamp=2024-11-18T23:47:57.012, level='INFO', service='com.example.PaymentService', message='New user registered - username: user_340'}
-LogResponse{timestamp=2024-11-27T16:01:26.748, level='INFO', service='com.example.DatabaseService', message='User login successful - user_id: 259'}
-LogResponse{timestamp=2024-11-20T11:33:49.125, level='INFO', service='com.example.ShippingService', message='User login successful - user_id: 348'}
-LogResponse{timestamp=2024-11-13T12:38:21.650, level='INFO', service='com.example.ReportService', message='User login successful - user_id: 728'}
-LogResponse{timestamp=2024-11-26T07:17:24.658, level='INFO', service='com.example.InventoryService', message='New user registered - username: user_968'}
-LogResponse{timestamp=2024-11-24T01:57:13.468, level='INFO', service='com.example.InventoryService', message='User login successful - user_id: 554'}
-LogResponse{timestamp=2024-12-02T05:20:35.496, level='INFO', service='com.example.UserService', message='New user registered - username: user_732'}
-LogResponse{timestamp=2024-12-08T15:30:21.060, level='INFO', service='com.example.ShippingService', message='New user registered - username: user_563'}
-LogResponse{timestamp=2024-11-18T12:59:15.116, level='INFO', service='com.example.ReportService', message='User login successful - user_id: 781'}
-LogResponse{timestamp=2024-12-10T21:27:41.250, level='INFO', service='com.example.NotificationService', message='User login successful - user_id: 348'}
-LogResponse{timestamp=2024-11-27T17:13:17.976, level='INFO', service='com.example.NotificationService', message='New user registered - username: user_612'}
-LogResponse{timestamp=2024-12-01T05:36:29.880, level='INFO', service='com.example.UserService', message='User login successful - user_id: 114'}
-LogResponse{timestamp=2024-11-11T07:31:26.500, level='INFO', service='com.example.PaymentService', message='New user registered - username: user_703'}
-LogResponse{timestamp=2024-11-16T15:40:05.640, level='INFO', service='com.example.DatabaseService', message='User login successful - user_id: 146'}
-LogResponse{timestamp=2024-11-13T04:57:00.750, level='INFO', service='com.example.UserService', message='User login successful - user_id: 797'}
-LogResponse{timestamp=2024-12-10T16:04:33.600, level='INFO', service='com.example.UserService', message='New user registered - username: user_643'}
-LogResponse{timestamp=2024-11-07T14:48:34.398, level='INFO', service='com.example.OrderService', message='New user registered - username: user_936'}
-LogResponse{timestamp=2024-11-11T08:09:28.461, level='INFO', service='com.example.OrderService', message='Email sent - recipient: user71@example.com'}
-LogResponse{timestamp=2024-11-14T23:44:16.274, level='INFO', service='com.example.NotificationService', message='New user registered - username: user_573'}
-LogResponse{timestamp=2024-11-29T12:37:39.560, level='INFO', service='com.example.DatabaseService', message='User login successful - user_id: 126'}
-LogResponse{timestamp=2024-12-09T04:20:31.676, level='INFO', service='com.example.OrderService', message='User login successful - user_id: 422'}
-LogResponse{timestamp=2024-11-01T01:15:32.785, level='INFO', service='com.example.DatabaseService', message='Email sent - recipient: user165@example.com'}
-LogResponse{timestamp=2024-11-10T14:55:07.296, level='INFO', service='com.example.CustomerService', message='User login successful - user_id: 20'}
-LogResponse{timestamp=2024-11-12T01:38:48.630, level='INFO', service='com.example.UserService', message='User login successful - user_id: 129'}
-LogResponse{timestamp=2024-12-09T22:06:15.332, level='INFO', service='com.example.CustomerService', message='Email sent - recipient: user599@example.com'}
-LogResponse{timestamp=2024-11-07T16:30:21.030, level='INFO', service='com.example.OrderService', message='Email sent - recipient: user1000@example.com'}
-LogResponse{timestamp=2024-11-13T01:22:54.704, level='INFO', service='com.example.UserService', message='New user registered - username: user_666'}
-LogResponse{timestamp=2024-11-24T09:29:44.366, level='INFO', service='com.example.NotificationService', message='Email sent - recipient: user118@example.com'}
-LogResponse{timestamp=2024-11-25T17:20:58.158, level='INFO', service='com.example.InventoryService', message='User login successful - user_id: 327'}
-LogResponse{timestamp=2024-11-21T13:08:40.838, level='INFO', service='com.example.PaymentService', message='Email sent - recipient: user50@example.com'}
-LogResponse{timestamp=2024-11-27T01:57:46.758, level='INFO', service='com.example.UserService', message='New user registered - username: user_270'}
-LogResponse{timestamp=2024-11-19T20:33:28.624, level='INFO', service='com.example.CustomerService', message='Email sent - recipient: user581@example.com'}
-LogResponse{timestamp=2024-11-30T01:36:53.620, level='INFO', service='com.example.UserService', message='Email sent - recipient: user654@example.com'}
-LogResponse{timestamp=2024-12-10T13:01:03.816, level='INFO', service='com.example.InventoryService', message='Email sent - recipient: user82@example.com'}
-LogResponse{timestamp=2024-11-25T10:41:17.424, level='INFO', service='com.example.ReportService', message='User login successful - user_id: 206'}
-LogResponse{timestamp=2024-12-05T03:01:37.470, level='INFO', service='com.example.AuthService', message='User login successful - user_id: 322'}
-LogResponse{timestamp=2024-12-12T23:50:48.130, level='INFO', service='com.example.ShippingService', message='Email sent - recipient: user961@example.com'}
-LogResponse{timestamp=2024-11-18T15:13:22.905, level='INFO', service='com.example.ShippingService', message='User login successful - user_id: 748'}
-LogResponse{timestamp=2024-12-06T12:53:07.680, level='INFO', service='com.example.AuthService', message='User login successful - user_id: 864'}
-LogResponse{timestamp=2024-11-04T19:35:37.962, level='INFO', service='com.example.DatabaseService', message='User login successful - user_id: 796'}
-LogResponse{timestamp=2024-12-15T00:50:09.630, level='INFO', service='com.example.CustomerService', message='User login successful - user_id: 433'}
-LogResponse{timestamp=2024-11-10T09:13:14.622, level='INFO', service='com.example.UserService', message='New user registered - username: user_933'}
-LogResponse{timestamp=2024-11-23T23:20:13.604, level='INFO', service='com.example.NotificationService', message='User login successful - user_id: 906'}
-LogResponse{timestamp=2024-11-18T22:00:54.195, level='INFO', service='com.example.OrderService', message='User login successful - user_id: 6'}
-LogResponse{timestamp=2024-11-13T02:53:38.917, level='INFO', service='com.example.ShippingService', message='User login successful - user_id: 446'}
-LogResponse{timestamp=2024-11-02T08:16:02.160, level='INFO', service='com.example.InventoryService', message='User login successful - user_id: 550'}
-LogResponse{timestamp=2024-12-14T20:55:24.636, level='INFO', service='com.example.InventoryService', message='New user registered - username: user_88'}
-LogResponse{timestamp=2024-11-14T18:03:06.616, level='INFO', service='com.example.OrderService', message='User login successful - user_id: 292'}
-LogResponse{timestamp=2024-11-16T20:35:20.948, level='INFO', service='com.example.AuthService', message='User login successful - user_id: 268'}
-LogResponse{timestamp=2024-12-04T18:33:27.511, level='INFO', service='com.example.InventoryService', message='Email sent - recipient: user550@example.com'}
-LogResponse{timestamp=2024-12-15T15:07:02.928, level='INFO', service='com.example.AuthService', message='New user registered - username: user_140'}
-LogResponse{timestamp=2024-11-03T20:48:54.525, level='INFO', service='com.example.AuthService', message='User login successful - user_id: 650'}
-LogResponse{timestamp=2024-11-04T10:23:54.636, level='INFO', service='com.example.PaymentService', message='New user registered - username: user_325'}
-LogResponse{timestamp=2024-12-06T03:46:59.853, level='INFO', service='com.example.PaymentService', message='Email sent - recipient: user745@example.com'}
-LogResponse{timestamp=2024-11-29T00:26:44.544, level='INFO', service='com.example.PaymentService', message='Email sent - recipient: user808@example.com'}
-LogResponse{timestamp=2024-12-15T10:02:03.102, level='INFO', service='com.example.ReportService', message='Email sent - recipient: user167@example.com'}
-LogResponse{timestamp=2024-11-26T13:03:31.326, level='INFO', service='com.example.NotificationService', message='Email sent - recipient: user176@example.com'}
-LogResponse{timestamp=2024-11-29T20:53:01.284, level='INFO', service='com.example.DatabaseService', message='New user registered - username: user_681'}
-LogResponse{timestamp=2024-12-15T10:46:23.944, level='INFO', service='com.example.CustomerService', message='New user registered - username: user_574'}
-LogResponse{timestamp=2024-11-06T09:01:34.900, level='INFO', service='com.example.PaymentService', message='User login successful - user_id: 138'}
-LogResponse{timestamp=2024-11-28T16:00:37.640, level='INFO', service='com.example.InventoryService', message='Email sent - recipient: user230@example.com'}
-LogResponse{timestamp=2024-12-10T13:55:24.348, level='INFO', service='com.example.DatabaseService', message='New user registered - username: user_185'}
-LogResponse{timestamp=2024-11-30T12:15:52.132, level='INFO', service='com.example.NotificationService', message='Email sent - recipient: user707@example.com'}
-LogResponse{timestamp=2024-11-27T10:03:42.928, level='INFO', service='com.example.ShippingService', message='New user registered - username: user_646'}
-LogResponse{timestamp=2024-11-14T08:10:19.210, level='INFO', service='com.example.CustomerService', message='Email sent - recipient: user219@example.com'}
-LogResponse{timestamp=2024-11-18T09:22:19.982, level='INFO', service='com.example.OrderService', message='User login successful - user_id: 795'}
-LogResponse{timestamp=2024-11-13T22:58:09.815, level='INFO', service='com.example.ReportService', message='User login successful - user_id: 530'}
-LogResponse{timestamp=2024-11-06T01:33:19.424, level='INFO', service='com.example.NotificationService', message='New user registered - username: user_149'}
-LogResponse{timestamp=2024-11-15T23:43:54.576, level='INFO', service='com.example.UserService', message='Email sent - recipient: user526@example.com'}
-LogResponse{timestamp=2024-12-05T12:05:50.616, level='INFO', service='com.example.DatabaseService', message='User login successful - user_id: 825'}
-LogResponse{timestamp=2024-11-15T12:59:29.880, level='INFO', service='com.example.ReportService', message='User login successful - user_id: 814'}
-LogResponse{timestamp=2024-12-05T11:34:44.910, level='INFO', service='com.example.UserService', message='User login successful - user_id: 721'}
-LogResponse{timestamp=2024-12-01T01:55:11.990, level='INFO', service='com.example.AuthService', message='New user registered - username: user_609'}
-LogResponse{timestamp=2024-12-13T17:02:59.721, level='INFO', service='com.example.CustomerService', message='User login successful - user_id: 371'}
-LogResponse{timestamp=2024-11-14T07:46:57.792, level='INFO', service='com.example.InventoryService', message='User login successful - user_id: 89'}
-LogResponse{timestamp=2024-11-25T10:48:48.710, level='INFO', service='com.example.ReportService', message='User login successful - user_id: 139'}
-LogResponse{timestamp=2024-11-26T11:48:44.999, level='INFO', service='com.example.InventoryService', message='Email sent - recipient: user494@example.com'}
-LogResponse{timestamp=2024-11-02T20:25:06.214, level='INFO', service='com.example.NotificationService', message='New user registered - username: user_101'}
-LogResponse{timestamp=2024-11-13T21:46:56.540, level='INFO', service='com.example.DatabaseService', message='User login successful - user_id: 123'}
-LogResponse{timestamp=2024-11-29T18:02:00.650, level='INFO', service='com.example.AuthService', message='Email sent - recipient: user857@example.com'}
-LogResponse{timestamp=2024-11-26T04:47:31.407, level='INFO', service='com.example.InventoryService', message='User login successful - user_id: 180'}
-LogResponse{timestamp=2024-11-11T14:14:38.562, level='INFO', service='com.example.OrderService', message='Email sent - recipient: user780@example.com'}
-LogResponse{timestamp=2024-11-16T19:56:47.232, level='INFO', service='com.example.ReportService', message='Email sent - recipient: user612@example.com'}
-LogResponse{timestamp=2024-12-16T03:07:43.308, level='INFO', service='com.example.PaymentService', message='Email sent - recipient: user238@example.com'}
-LogResponse{timestamp=2024-11-23T08:45:49.291, level='INFO', service='com.example.AuthService', message='Email sent - recipient: user757@example.com'}
-LogResponse{timestamp=2024-11-07T10:09:38.882, level='INFO', service='com.example.UserService', message='Email sent - recipient: user102@example.com'}
-LogResponse{timestamp=2024-11-30T17:35:38.185, level='INFO', service='com.example.UserService', message='New user registered - username: user_425'}
+[2024-01-06 20:31:44.264] [DEBUG] [com.example.ReportService] - Entering method - method: method_16
+[2024-01-04 10:46:28.000] [INFO] [com.example.NotificationService] - Request processed - duration: 939ms
+[2024-01-04 06:32:10.128] [WARN] [com.example.CustomerService] - Cache miss - key: cache_key_82
+[2024-01-04 05:31:54.143] [TRACE] [com.example.InventoryService] - Detailed trace information - sequence: 7644
+[2024-01-05 22:50:45.814] [INFO] [com.example.InventoryService] - Email sent - recipient: user883@example.com
+[2024-01-05 00:23:39.633] [INFO] [com.example.DatabaseService] - Configuration loaded - version: 281
+[2024-01-04 08:57:49.880] [ERROR] [com.example.NotificationService] - Authentication failed - user: user_6974
+[2024-01-04 02:53:13.204] [TRACE] [com.example.DatabaseService] - Detailed trace information - sequence: 7957
+[2024-01-07 00:43:28.686] [ERROR] [com.example.NotificationService] - Payment processing error - order_id: 4210
+[2024-01-01 04:04:46.138] [TRACE] [com.example.AuthService] - Detailed trace information - sequence: 4400
+[2024-01-06 06:19:03.072] [INFO] [com.example.PaymentService] - User login successful - user_id: 988
+[2024-01-07 01:28:37.185] [TRACE] [com.example.AuthService] - Detailed trace information - sequence: 294
+[2024-01-01 22:24:09.988] [ERROR] [com.example.ShippingService] - Memory allocation failed - size: 6198MB
+[2024-01-04 00:28:08.269] [WARN] [com.example.InventoryService] - Resource threshold exceeded - resource: 2
+[2024-01-03 02:58:41.280] [DEBUG] [com.example.AuthService] - Object created - class: Class_95
+[2024-01-02 12:34:41.924] [TRACE] [com.example.ShippingService] - Detailed trace information - sequence: 4334
+[2024-01-07 09:16:12.990] [ERROR] [com.example.DatabaseService] - Network connection lost - retrying in 9163 seconds
+[2024-01-04 01:18:21.771] [ERROR] [com.example.DatabaseService] - Payment processing error - order_id: 8368
+[2024-01-07 20:13:54.948] [TRACE] [com.example.UserService] - Detailed trace information - sequence: 848
+[2024-01-03 10:45:22.233] [TRACE] [com.example.OrderService] - Detailed trace information - sequence: 1471
+[2024-01-03 12:52:22.206] [WARN] [com.example.PaymentService] - Disk space low - free_space: 23GB
+[2024-01-02 19:25:41.000] [INFO] [com.example.UserService] - Email sent - recipient: user37@example.com
+[2024-01-03 14:32:14.000] [INFO] [com.example.OrderService] - Database query executed - query_time: 106ms
+[2024-01-03 07:55:14.877] [DEBUG] [com.example.NotificationService] - Exiting method - method: method_41
+[2024-01-01 08:39:28.802] [TRACE] [com.example.CustomerService] - Detailed trace information - sequence: 8926
+[2024-01-07 05:11:30.043] [INFO] [com.example.InventoryService] - Data exported - records: 458
+[2024-01-05 00:27:52.200] [ERROR] [com.example.OrderService] - Payment processing error - order_id: 6344
+[2024-01-03 15:59:56.270] [WARN] [com.example.PaymentService] - Cache miss - key: cache_key_56
+[2024-01-03 10:03:31.416] [TRACE] [com.example.PaymentService] - Detailed trace information - sequence: 1846
+[2024-01-01 07:41:48.594] [INFO] [com.example.PaymentService] - Data exported - records: 680
+[2024-01-06 17:10:53.056] [WARN] [com.example.AuthService] - Cache miss - key: cache_key_29
+[2024-01-07 06:32:02.360] [WARN] [com.example.PaymentService] - Resource threshold exceeded - resource: 43
+[2024-01-05 07:28:35.130] [ERROR] [com.example.InventoryService] - Disk write error - file: file_6492.log
+[2024-01-02 15:26:07.310] [ERROR] [com.example.PaymentService] - Network connection lost - retrying in 4274 seconds
+[2024-01-02 14:57:07.924] [ERROR] [com.example.ShippingService] - Database connection failed - error: error_code_2519
+[2024-01-07 01:05:43.026] [DEBUG] [com.example.DatabaseService] - Entering method - method: method_85
+[2024-01-05 01:07:44.440] [WARN] [com.example.InventoryService] - Resource threshold exceeded - resource: 16
+[2024-01-07 05:06:09.849] [ERROR] [com.example.InventoryService] - Disk write error - file: file_5524.log
+[2024-01-04 02:26:40.656] [INFO] [com.example.DatabaseService] - File uploaded successfully - size: 192KB
+[2024-01-05 15:03:41.029] [INFO] [com.example.DatabaseService] - Data exported - records: 322
+[2024-01-02 05:01:03.818] [ERROR] [com.example.ReportService] - External API timeout - service: api_service_3850
+[2024-01-02 12:47:14.655] [INFO] [com.example.OrderService] - Cache hit - key: cache_key_644
+[2024-01-03 02:47:40.956] [TRACE] [com.example.ReportService] - Detailed trace information - sequence: 9293
+[2024-01-03 02:12:27.242] [TRACE] [com.example.OrderService] - Detailed trace information - sequence: 2188
+[2024-01-03 04:59:12.894] [DEBUG] [com.example.OrderService] - SQL query - SELECT * FROM table_58
+[2024-01-06 10:48:54.282] [INFO] [com.example.ShippingService] - Email sent - recipient: user216@example.com
+[2024-01-05 12:36:46.720] [DEBUG] [com.example.DatabaseService] - Variable value - var_9: value_80
+[2024-01-05 05:02:33.465] [ERROR] [com.example.AuthService] - Disk write error - file: file_4841.log
+[2024-01-06 14:12:41.712] [WARN] [com.example.CustomerService] - Unusual activity detected - user: user_54
+[2024-01-04 19:50:34.360] [ERROR] [com.example.DatabaseService] - Database connection failed - error: error_code_9321
+[2024-01-01 08:57:23.076] [TRACE] [com.example.OrderService] - Detailed trace information - sequence: 627
+[2024-01-03 03:20:33.275] [WARN] [com.example.PaymentService] - Deprecated API called - endpoint: /api/v59
+[2024-01-07 12:26:01.536] [DEBUG] [com.example.CustomerService] - Cache operation - type: 86
+[2024-01-02 23:03:54.036] [INFO] [com.example.PaymentService] - User login successful - user_id: 905
+[2024-01-06 17:30:39.864] [WARN] [com.example.DatabaseService] - Cache miss - key: cache_key_48
+[2024-01-03 17:08:13.193] [TRACE] [com.example.AuthService] - Detailed trace information - sequence: 9232
+[2024-01-02 16:55:41.340] [DEBUG] [com.example.NotificationService] - HTTP request headers - request_100
+[2024-01-02 06:04:27.762] [WARN] [com.example.AuthService] - Retry attempt - count: 49
+[2024-01-07 08:03:12.248] [WARN] [com.example.DatabaseService] - Slow database query - duration: 55ms
+[2024-01-07 19:33:48.240] [WARN] [com.example.ReportService] - Cache miss - key: cache_key_18
+[2024-01-02 13:46:16.592] [ERROR] [com.example.UserService] - Database connection failed - error: error_code_8291
+[2024-01-06 04:31:27.070] [TRACE] [com.example.NotificationService] - Detailed trace information - sequence: 8745
+[2024-01-05 10:25:22.224] [DEBUG] [com.example.AuthService] - Cache operation - type: 95
+[2024-01-01 05:55:04.928] [DEBUG] [com.example.ShippingService] - SQL query - SELECT * FROM table_10
+[2024-01-02 12:15:15.754] [INFO] [com.example.CustomerService] - Cache hit - key: cache_key_297
+[2024-01-03 21:04:43.719] [TRACE] [com.example.OrderService] - Detailed trace information - sequence: 6118
+[2024-01-07 07:25:49.360] [ERROR] [com.example.AuthService] - Disk write error - file: file_6519.log
+[2024-01-07 14:35:01.689] [INFO] [com.example.OrderService] - Configuration loaded - version: 646
+[2024-01-04 07:16:05.226] [WARN] [com.example.InventoryService] - Cache miss - key: cache_key_73
+[2024-01-02 11:51:20.026] [TRACE] [com.example.CustomerService] - Detailed trace information - sequence: 8039
+[2024-01-01 08:33:06.624] [INFO] [com.example.PaymentService] - User login successful - user_id: 853
+[2024-01-07 06:24:55.305] [INFO] [com.example.NotificationService] - Email sent - recipient: user435@example.com
+[2024-01-02 11:50:19.512] [DEBUG] [com.example.ReportService] - Variable value - var_8: value_24
+[2024-01-03 09:39:33.996] [TRACE] [com.example.InventoryService] - Detailed trace information - sequence: 6061
+[2024-01-05 20:09:34.128] [ERROR] [com.example.PaymentService] - Null pointer exception - method: method_1466
+[2024-01-04 20:44:18.593] [WARN] [com.example.UserService] - SSL certificate expiring soon - days_left: 22
+[2024-01-03 14:17:03.250] [WARN] [com.example.ReportService] - Slow database query - duration: 62ms
+[2024-01-07 07:33:13.428] [DEBUG] [com.example.InventoryService] - SQL query - SELECT * FROM table_70
+[2024-01-04 06:09:52.800] [DEBUG] [com.example.InventoryService] - Cache operation - type: 61
+[2024-01-04 11:51:14.490] [WARN] [com.example.NotificationService] - SSL certificate expiring soon - days_left: 49
+[2024-01-05 09:53:38.292] [ERROR] [com.example.NotificationService] - Network connection lost - retrying in 3355 seconds
+[2024-01-06 00:46:34.580] [ERROR] [com.example.ReportService] - Database connection failed - error: error_code_5426
+[2024-01-04 02:31:34.288] [WARN] [com.example.ReportService] - Slow database query - duration: 35ms
+[2024-01-05 13:53:41.481] [TRACE] [com.example.NotificationService] - Detailed trace information - sequence: 98
+[2024-01-07 22:08:37.312] [DEBUG] [com.example.InventoryService] - Variable value - var_1: value_67
+[2024-01-07 09:58:37.940] [DEBUG] [com.example.OrderService] - Thread started - thread_id: 95
+[2024-01-07 23:50:43.320] [INFO] [com.example.UserService] - Configuration loaded - version: 523
+[2024-01-03 10:48:41.055] [ERROR] [com.example.NotificationService] - Invalid input parameter - param: param_9569
+[2024-01-01 08:33:52.390] [WARN] [com.example.PaymentService] - Unusual activity detected - user: user_16
+[2024-01-05 12:25:00.525] [ERROR] [com.example.InventoryService] - File not found - path: /data/file_5638.txt
+[2024-01-02 08:50:42.788] [DEBUG] [com.example.NotificationService] - Cache operation - type: 27
+[2024-01-07 21:56:51.715] [ERROR] [com.example.PaymentService] - Network connection lost - retrying in 7265 seconds
+[2024-01-04 19:34:25.314] [TRACE] [com.example.CustomerService] - Detailed trace information - sequence: 4426
+[2024-01-03 05:57:36.830] [ERROR] [com.example.ReportService] - File not found - path: /data/file_4641.txt
+[2024-01-01 11:52:32.752] [TRACE] [com.example.NotificationService] - Detailed trace information - sequence: 3862
+[2024-01-05 12:50:11.607] [ERROR] [com.example.CustomerService] - External API timeout - service: api_service_8025
+[2024-01-07 16:23:22.580] [INFO] [com.example.CustomerService] - API call completed - endpoint: /api/v588/data
+[2024-01-06 11:47:00.180] [DEBUG] [com.example.UserService] - Entering method - method: method_21
+[2024-01-03 14:12:11.232] [WARN] [com.example.DatabaseService] - Cache miss - key: cache_key_18
+[2024-01-03 23:06:26.964] [WARN] [com.example.CustomerService] - Retry attempt - count: 73
+[2024-01-05 22:08:31.308] [DEBUG] [com.example.InventoryService] - Condition evaluated - result: 51
+[2024-01-05 16:48:12.225] [WARN] [com.example.AuthService] - Deprecated API called - endpoint: /api/v86
+[2024-01-07 02:50:18.264] [DEBUG] [com.example.UserService] - Object created - class: Class_39
+[2024-01-02 18:20:48.560] [INFO] [com.example.ShippingService] - Database query executed - query_time: 760ms
+[2024-01-05 12:39:07.578] [WARN] [com.example.InventoryService] - Retry attempt - count: 88
+[2024-01-03 14:51:33.783] [DEBUG] [com.example.NotificationService] - Variable value - var_8: value_62
+[2024-01-02 05:49:24.840] [DEBUG] [com.example.AuthService] - Cache operation - type: 81
+[2024-01-03 09:30:45.864] [WARN] [com.example.ShippingService] - Deprecated API called - endpoint: /api/v97
+[2024-01-05 17:54:10.578] [ERROR] [com.example.AuthService] - Disk write error - file: file_5282.log
+[2024-01-03 03:41:53.069] [ERROR] [com.example.CustomerService] - External API timeout - service: api_service_5379
+[2024-01-05 14:57:49.824] [ERROR] [com.example.CustomerService] - Invalid input parameter - param: param_8638
+[2024-01-01 12:56:39.995] [WARN] [com.example.OrderService] - Deprecated API called - endpoint: /api/v23
+[2024-01-05 03:42:56.728] [DEBUG] [com.example.ShippingService] - Cache operation - type: 93
+[2024-01-06 20:11:23.058] [TRACE] [com.example.NotificationService] - Detailed trace information - sequence: 9687
+[2024-01-03 06:15:55.292] [ERROR] [com.example.PaymentService] - Network connection lost - retrying in 1337 seconds
+[2024-01-05 21:38:43.611] [TRACE] [com.example.OrderService] - Detailed trace information - sequence: 5969
+[2024-01-03 07:15:20.880] [WARN] [com.example.InventoryService] - Resource threshold exceeded - resource: 84
+[2024-01-07 02:15:35.691] [INFO] [com.example.InventoryService] - API call completed - endpoint: /api/v394/data
+[2024-01-02 10:10:01.520] [WARN] [com.example.AuthService] - Slow database query - duration: 91ms
+[2024-01-02 13:44:54.807] [ERROR] [com.example.ReportService] - Database connection failed - error: error_code_4588
+[2024-01-05 07:00:37.364] [DEBUG] [com.example.CustomerService] - Condition evaluated - result: 56
+[2024-01-03 03:20:07.550] [TRACE] [com.example.NotificationService] - Detailed trace information - sequence: 5722
+[2024-01-02 07:56:23.988] [INFO] [com.example.UserService] - File uploaded successfully - size: 543KB
+[2024-01-04 22:43:37.664] [DEBUG] [com.example.PaymentService] - HTTP request headers - request_50
+[2024-01-03 21:18:40.086] [DEBUG] [com.example.ShippingService] - Condition evaluated - result: 13
+[2024-01-07 11:19:44.076] [ERROR] [com.example.ShippingService] - Disk write error - file: file_3063.log
+[2024-01-01 10:51:40.000] [WARN] [com.example.CustomerService] - Connection pool 80% full - connections: 83
+[2024-01-07 20:05:29.067] [INFO] [com.example.NotificationService] - File uploaded successfully - size: 374KB
+[2024-01-04 09:40:28.794] [WARN] [com.example.CustomerService] - Unusual activity detected - user: user_84
+[2024-01-01 04:14:04.572] [DEBUG] [com.example.ShippingService] - Loop iteration - index: 28
+[2024-01-02 03:01:28.900] [DEBUG] [com.example.AuthService] - Variable value - var_7: value_78
+[2024-01-06 22:14:45.915] [TRACE] [com.example.AuthService] - Detailed trace information - sequence: 1583
+[2024-01-07 22:08:08.638] [TRACE] [com.example.NotificationService] - Detailed trace information - sequence: 9656
+[2024-01-07 07:53:32.501] [TRACE] [com.example.ReportService] - Detailed trace information - sequence: 2394
+[2024-01-06 13:52:25.248] [TRACE] [com.example.AuthService] - Detailed trace information - sequence: 3889
+[2024-01-06 12:40:29.480] [ERROR] [com.example.DatabaseService] - Database connection failed - error: error_code_5354
+[2024-01-04 06:38:12.810] [TRACE] [com.example.UserService] - Detailed trace information - sequence: 8888
+[2024-01-07 13:57:14.811] [ERROR] [com.example.ReportService] - File not found - path: /data/file_3737.txt
+[2024-01-06 17:01:21.228] [INFO] [com.example.NotificationService] - User login successful - user_id: 387
+[2024-01-01 22:13:43.896] [INFO] [com.example.CustomerService] - Data exported - records: 479
+[2024-01-05 07:20:50.142] [TRACE] [com.example.ReportService] - Detailed trace information - sequence: 7243
+[2024-01-03 02:06:40.195] [ERROR] [com.example.CustomerService] - Network connection lost - retrying in 1736 seconds
+[2024-01-07 11:02:51.648] [ERROR] [com.example.UserService] - Network connection lost - retrying in 8268 seconds
+[2024-01-04 17:36:57.519] [DEBUG] [com.example.InventoryService] - Variable value - var_9: value_11
+[2024-01-07 13:01:45.722] [WARN] [com.example.CustomerService] - Deprecated API called - endpoint: /api/v20
+[2024-01-01 16:08:10.162] [TRACE] [com.example.InventoryService] - Detailed trace information - sequence: 3293
+[2024-01-04 02:58:58.800] [ERROR] [com.example.ShippingService] - Network connection lost - retrying in 8752 seconds
+[2024-01-03 20:08:54.122] [WARN] [com.example.DatabaseService] - Cache miss - key: cache_key_30
+[2024-01-04 15:41:12.956] [TRACE] [com.example.PaymentService] - Detailed trace information - sequence: 3225
+[2024-01-01 03:18:17.301] [WARN] [com.example.DatabaseService] - SSL certificate expiring soon - days_left: 55
+[2024-01-03 02:58:49.416] [INFO] [com.example.AuthService] - Database query executed - query_time: 298ms
+[2024-01-05 03:27:32.900] [INFO] [com.example.NotificationService] - Data exported - records: 769
+[2024-01-01 17:49:36.426] [INFO] [com.example.ShippingService] - New user registered - username: user_34
+[2024-01-05 16:33:11.070] [TRACE] [com.example.NotificationService] - Detailed trace information - sequence: 9382
+[2024-01-04 16:30:39.700] [INFO] [com.example.ShippingService] - Cache hit - key: cache_key_219
+[2024-01-05 18:37:03.147] [ERROR] [com.example.DatabaseService] - Network connection lost - retrying in 8875 seconds
+[2024-01-02 02:57:10.220] [DEBUG] [com.example.PaymentService] - Condition evaluated - result: 5
+[2024-01-08 00:31:55.004] [ERROR] [com.example.CustomerService] - File not found - path: /data/file_5181.txt
+[2024-01-03 02:54:24.576] [WARN] [com.example.UserService] - High memory usage - usage: 75%
+[2024-01-03 10:31:22.967] [ERROR] [com.example.CustomerService] - Database connection failed - error: error_code_6138
+[2024-01-03 02:01:40.266] [DEBUG] [com.example.InventoryService] - Loop iteration - index: 17
+[2024-01-02 00:28:07.230] [WARN] [com.example.InventoryService] - Connection pool 80% full - connections: 98
+[2024-01-03 19:27:01.020] [WARN] [com.example.UserService] - Resource threshold exceeded - resource: 60
+[2024-01-01 16:42:11.667] [WARN] [com.example.AuthService] - SSL certificate expiring soon - days_left: 74
+[2024-01-03 06:12:58.872] [INFO] [com.example.OrderService] - API call completed - endpoint: /api/v252/data
+[2024-01-06 23:30:16.979] [INFO] [com.example.UserService] - File uploaded successfully - size: 669KB
+[2024-01-07 17:57:02.800] [ERROR] [com.example.ReportService] - Payment processing error - order_id: 9702
+[2024-01-04 00:15:52.269] [WARN] [com.example.DatabaseService] - SSL certificate expiring soon - days_left: 40
+[2024-01-02 01:48:08.500] [DEBUG] [com.example.ShippingService] - Thread started - thread_id: 100
+[2024-01-03 22:27:05.922] [WARN] [com.example.PaymentService] - Retry attempt - count: 40
+[2024-01-04 22:12:15.660] [INFO] [com.example.CustomerService] - File uploaded successfully - size: 443KB
+[2024-01-06 12:37:08.805] [TRACE] [com.example.AuthService] - Detailed trace information - sequence: 1494
+[2024-01-04 05:10:42.222] [INFO] [com.example.ShippingService] - Email sent - recipient: user988@example.com
+[2024-01-05 19:08:59.220] [TRACE] [com.example.DatabaseService] - Detailed trace information - sequence: 4025
+[2024-01-06 02:56:34.304] [ERROR] [com.example.DatabaseService] - Authentication failed - user: user_1070
+[2024-01-07 00:48:21.924] [WARN] [com.example.ShippingService] - Deprecated API called - endpoint: /api/v12
+[2024-01-05 22:30:32.550] [TRACE] [com.example.UserService] - Detailed trace information - sequence: 4270
+[2024-01-02 19:18:00.959] [DEBUG] [com.example.UserService] - Entering method - method: method_51
+[2024-01-03 08:57:00.592] [INFO] [com.example.NotificationService] - Database query executed - query_time: 241ms
+[2024-01-05 11:49:06.330] [INFO] [com.example.AuthService] - User login successful - user_id: 251
+[2024-01-03 00:54:55.810] [ERROR] [com.example.DatabaseService] - Authentication failed - user: user_5777
+[2024-01-04 02:07:19.590] [WARN] [com.example.AuthService] - Deprecated API called - endpoint: /api/v94
+[2024-01-04 18:30:24.456] [DEBUG] [com.example.InventoryService] - Object created - class: Class_52
+[2024-01-05 20:07:59.547] [ERROR] [com.example.AuthService] - Memory allocation failed - size: 8076MB
+[2024-01-01 23:32:48.824] [TRACE] [com.example.OrderService] - Detailed trace information - sequence: 4579
+[2024-01-04 07:33:09.789] [INFO] [com.example.NotificationService] - Email sent - recipient: user144@example.com
+[2024-01-03 23:16:00.180] [TRACE] [com.example.OrderService] - Detailed trace information - sequence: 3611
+[2024-01-06 04:48:54.321] [TRACE] [com.example.NotificationService] - Detailed trace information - sequence: 1110
+[2024-01-01 12:12:50.940] [WARN] [com.example.UserService] - Connection pool 80% full - connections: 18
+[2024-01-02 17:50:33.047] [TRACE] [com.example.UserService] - Detailed trace information - sequence: 8647
+[2024-01-06 01:02:21.008] [WARN] [com.example.NotificationService] - Unusual activity detected - user: user_37
+[2024-01-03 22:56:59.505] [TRACE] [com.example.CustomerService] - Detailed trace information - sequence: 6056
+[2024-01-07 14:27:50.418] [TRACE] [com.example.NotificationService] - Detailed trace information - sequence: 9111
+[2024-01-08 01:51:59.915] [TRACE] [com.example.AuthService] - Detailed trace information - sequence: 159
+[2024-01-01 05:13:57.228] [INFO] [com.example.DatabaseService] - Configuration loaded - version: 610
+[2024-01-03 23:29:43.778] [DEBUG] [com.example.ReportService] - Variable value - var_2: value_23
+[2024-01-01 05:14:21.110] [DEBUG] [com.example.OrderService] - HTTP request headers - request_67
+[2024-01-06 01:51:42.831] [INFO] [com.example.PaymentService] - Cache hit - key: cache_key_999
+[2024-01-05 22:32:30.640] [WARN] [com.example.UserService] - Retry attempt - count: 55
+[2024-01-02 15:20:56.599] [DEBUG] [com.example.AuthService] - Cache operation - type: 5
+[2024-01-02 11:08:19.218] [WARN] [com.example.CustomerService] - Connection pool 80% full - connections: 96
+[2024-01-07 11:17:21.600] [TRACE] [com.example.CustomerService] - Detailed trace information - sequence: 8088
+[2024-01-08 01:19:17.696] [TRACE] [com.example.DatabaseService] - Detailed trace information - sequence: 3378
+[2024-01-06 16:43:20.988] [ERROR] [com.example.ReportService] - Null pointer exception - method: method_4148
+[2024-01-03 19:14:33.560] [DEBUG] [com.example.NotificationService] - Exiting method - method: method_94
+[2024-01-04 13:39:27.005] [ERROR] [com.example.PaymentService] - Authentication failed - user: user_6735
+[2024-01-02 06:05:29.760] [DEBUG] [com.example.DatabaseService] - Loop iteration - index: 40
+[2024-01-07 05:10:55.194] [ERROR] [com.example.UserService] - Null pointer exception - method: method_2340
+[2024-01-05 20:38:45.382] [ERROR] [com.example.NotificationService] - Network connection lost - retrying in 5785
