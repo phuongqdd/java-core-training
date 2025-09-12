@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: learning-management-system
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/lms_db
+    username: root
+    password:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+
+server:
+  servlet:
+    context-path: /lms
+
+jwt:
+  signerKey: "2uN816Tv+fUd+qUi96HnVPRhDipv+E5xygDoaDm2dAUEoPzAqmfdS1N4hRDL7fxk"
