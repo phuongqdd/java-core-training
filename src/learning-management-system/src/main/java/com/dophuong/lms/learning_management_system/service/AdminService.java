@@ -11,7 +11,7 @@ import java.util.List;
 public interface AdminService {
     void unLockUser(Long id);
 
-    UserResponse createUser(UserCreateRequest request, Role role);
+    UserResponse createUser(UserCreateRequest request, String role);
 
     UserResponse getStudent(Long id);
 

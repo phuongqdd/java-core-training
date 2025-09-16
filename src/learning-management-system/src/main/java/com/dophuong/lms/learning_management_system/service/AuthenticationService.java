@@ -5,7 +5,6 @@ import com.dophuong.lms.learning_management_system.dto.response.AuthenticationRe
 import com.dophuong.lms.learning_management_system.dto.response.IntrospectResponse;
 import com.dophuong.lms.learning_management_system.dto.response.UserResponse;
 import com.dophuong.lms.learning_management_system.entity.User;
-import com.dophuong.lms.learning_management_system.enums.Role;
 import jakarta.validation.Valid;
 
 public interface AuthenticationService {
@@ -20,7 +19,7 @@ public interface AuthenticationService {
     void lockAccount(User user);
     boolean unlockWhenTimeExpired(User user);
 
-    UserResponse signup(@Valid UserCreateRequest request, Role role);
+    UserResponse signup(@Valid UserCreateRequest request, String role);
 
     AuthenticationResponse refreshToken(RefreshTokenRequest request);
 }

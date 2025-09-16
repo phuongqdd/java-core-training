@@ -5,12 +5,14 @@ import com.dophuong.lms.learning_management_system.dto.response.AuthenticationRe
 import com.dophuong.lms.learning_management_system.dto.response.IntrospectResponse;
 import com.dophuong.lms.learning_management_system.dto.response.UserResponse;
 import com.dophuong.lms.learning_management_system.entity.InvalidatedToken;
+import com.dophuong.lms.learning_management_system.entity.Role;
 import com.dophuong.lms.learning_management_system.entity.User;
+import com.dophuong.lms.learning_management_system.entity.UserRole;
 import com.dophuong.lms.learning_management_system.enums.ErrorCode;
-import com.dophuong.lms.learning_management_system.enums.Role;
 import com.dophuong.lms.learning_management_system.exception.AppException;
 import com.dophuong.lms.learning_management_system.mapper.UserMapper;
 import com.dophuong.lms.learning_management_system.repository.InvalidatedTokenRepository;
+import com.dophuong.lms.learning_management_system.repository.RoleRepository;
 import com.dophuong.lms.learning_management_system.repository.UserRepository;
 import com.dophuong.lms.learning_management_system.service.AuthenticationService;
 import com.nimbusds.jose.*;
@@ -27,8 +29,10 @@ import org.springframework.stereotype.Service;
 import java.text.ParseException;
 import java.time.LocalDateTime;
 import java.util.Date;
-import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.UUID;
+import java.util.stream.Collectors;
 
 @Service
 @Slf4j
@@ -44,6 +48,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     @Autowired
     private UserRepository userRepository;
     @Autowired
+    private RoleRepository roleRepository;
+    @Autowired
     private InvalidatedTokenRepository tokenRepository;
 
     @Autowired
@@ -54,24 +60,20 @@ public class AuthenticationServiceImpl implements AuthenticationService {
 
 
     @Override
-    public UserResponse signup(UserCreateRequest request, Role role) {
+    public UserResponse signup(UserCreateRequest request, String roleName) {
         // Chuẩn hóa phone
         String phone = request.getPhone();
         if (phone != null && phone.trim().isEmpty()) {
             phone = null;
         }
 
-        // Check trùng username
+        // Check trùng username, email, phone
         if (userRepository.existsByUsername(request.getUsername())) {
             throw new AppException(ErrorCode.USER_EXISTED);
         }
-
-        // Check trùng email
         if (userRepository.existsByEmail(request.getEmail())) {
             throw new AppException(ErrorCode.DUPLICATE_EMAIL);
         }
-
-        // Check trùng phone
         if (phone != null && userRepository.existsByPhone(phone)) {
             throw new AppException(ErrorCode.DUPLICATE_PHONE);
         }
@@ -79,28 +81,40 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         // Map từ DTO sang entity
         User user = userMapper.toEntity(request);
 
-        // Gán role mặc định
-        if (role == Role.INSTRUCTOR) {
-            user.setRole(Role.INSTRUCTOR);
-        } else {
-            user.setRole(Role.STUDENT); // mặc định
+        // Khởi tạo Set<UserRole> nếu chưa khởi tạo
+        if (user.getUserRoles() == null) {
+            user.setUserRoles(new HashSet<>());
         }
 
-        // Set các field mặc định quan trọng
+        // Set các field mặc định
         user.setPhone(phone);
         user.setCreatedAt(LocalDateTime.now());
         user.setIsActive(true);
         user.setAccountNonLocked(true);
         user.setFailedAttempt(0);
 
-        // Mã hóa password trước khi lưu
+        // Mã hóa password
         user.setPassword(passwordEncoder.encode(request.getPassword()));
 
-        // Lưu user
+        // Lấy role từ DB
+        Role role = roleRepository.findByName(roleName)
+                .orElseThrow(() -> new AppException(ErrorCode.ROLE_NOT_FOUND));
+
+        // Tạo UserRole và add vào user
+        UserRole userRole = UserRole.builder()
+                .user(user)
+                .role(role)
+                .build();
+        user.getUserRoles().add(userRole);
+
+        // Lưu user 1 lần, cascade sẽ lưu UserRole
         user = userRepository.save(user);
 
+        // Trả về response DTO
         return userMapper.toResponse(user);
     }
+
+
 
     @Override
     public AuthenticationResponse refreshToken(RefreshTokenRequest request) {
@@ -159,7 +173,7 @@ public class AuthenticationServiceImpl implements AuthenticationService {
         boolean authenticated = passwordEncoder.matches(request.getPassword(), user.getPassword());
         if (!authenticated) {
             increaseFailedAttempts(user);
-            throw new AppException(ErrorCode.UNAUTHENTICATED);
+            throw new AppException(ErrorCode.LOGIN_FAILED);
         }
 
         // Reset failed attempts
@@ -325,9 +339,17 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     }
 
     private String buildScope(User user) {
-        if (user.getRole() != null) {
-            return "ROLE_" + user.getRole().name();
+        log.warn("User roles size: {}", user.getUserRoles() == null ? 0 : user.getUserRoles().size());
+
+        if(user.getUserRoles() == null || user.getUserRoles().isEmpty()){
+            return "";
         }
-        return "";
+
+        String rs =  user.getUserRoles().stream()
+                .map(userRole -> "ROLE_" + userRole.getRole().getName())
+                .collect(Collectors.joining(" "));
+        log.warn("COn điên: " + rs);
+
+        return rs;
     }
 }

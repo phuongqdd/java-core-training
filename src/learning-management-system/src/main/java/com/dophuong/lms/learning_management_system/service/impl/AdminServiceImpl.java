@@ -39,13 +39,13 @@ public class AdminServiceImpl implements AdminService {
     }
 
     @Override
-    public UserResponse createUser(UserCreateRequest request, Role role) {
+    public UserResponse createUser(UserCreateRequest request, String role) {
         return authenticationService.signup(request, role);
     }
 
     @Override
     public UserResponse getInstructor(Long id) {
-        User user = userRepository.findByIdAndRole(id, Role.INSTRUCTOR)
+        User user = userRepository.findById(id)
                 .orElseThrow(() -> new AppException(ErrorCode.INSTRUCTOR_NOT_FOUND));
 
         return userMapper.toResponse(user);
@@ -53,20 +53,20 @@ public class AdminServiceImpl implements AdminService {
 
     @Override
     public List<UserResponse> getAllInstructors() {
-        List<User> users= userRepository.findAllByRole(Role.INSTRUCTOR);
+        List<User> users= userRepository.findAllByRole("INSTRUCTOR");
         return userMapper.toResponseList(users);
     }
 
     @Override
     public UserResponse getStudent(Long id) {
-        User user = userRepository.findByIdAndRole(id, Role.STUDENT)
+        User user = userRepository.findById(id)
                 .orElseThrow(() -> new AppException(ErrorCode.STUDENT_NOT_FOUND));
         return userMapper.toResponse(user);
     }
 
     @Override
     public List<UserResponse> getAllStudents() {
-        List<User> users = userRepository.findAllByRole(Role.STUDENT);
+        List<User> users = userRepository.findAllByRole("STUDENT");
         return userMapper.toResponseList(users);
     }
 }

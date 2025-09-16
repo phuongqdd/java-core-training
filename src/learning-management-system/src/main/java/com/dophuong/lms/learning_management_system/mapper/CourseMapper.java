@@ -31,7 +31,7 @@ public interface CourseMapper {
                     UserSummary summary = new UserSummary();
                     summary.setId(u.getId());
                     summary.setUsername(u.getUsername());
-                    summary.setRole(u.getRole());
+//                    summary.setRole(u.getRole());
                     summary.setAvatarUrl(u.getAvatarUrl());
                     summary.setFullName(u.getFullName());
                     summary.setIsOwner(true);

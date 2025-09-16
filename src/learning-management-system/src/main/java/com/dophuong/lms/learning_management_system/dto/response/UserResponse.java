@@ -9,6 +9,7 @@ import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Set;
 
 @Data
 @Builder
@@ -21,7 +22,7 @@ public class UserResponse {
     private String avatarUrl;
     private LocalDate dateOfBirth;
     private Boolean isActive;
-    private Role role;
+    private Set<RoleResponse> roles;
     private Gender gender;
     private LocalDateTime lastLogin;
     private LocalDateTime createdAt;

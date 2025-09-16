@@ -16,7 +16,10 @@ import org.springframework.security.web.SecurityFilterChain;
 @EnableWebSecurity
 public class SecurityConfig {
 
-    private final String[] PUBLIC_ENDPOINTS = {"auth/login",  "auth/introspect", "auth/logout"};
+    private final String[] PUBLIC_ENDPOINTS = {"auth/login",  "auth/introspect", "auth/logout", "auth/refresh"};
+    public static final String[] AUTHENTICATED_ENDPOINTS = {
+            "/users/profile",
+    };
     @Autowired
     private CustomJwtDecoder customJwtDecoder;
 
@@ -27,9 +30,9 @@ public class SecurityConfig {
                 request
                         // Public endpoints(login, signup)
                         .requestMatchers(HttpMethod.POST, PUBLIC_ENDPOINTS).permitAll()
+//                        .requestMatchers(AUTHENTICATED_ENDPOINTS).authenticated()
                         .requestMatchers("/admin/**").hasRole(Role.ADMIN.name())
-                        .requestMatchers("/users/**").hasRole(Role.ADMIN.name())
-                        .requestMatchers(HttpMethod.POST, "/courses/**").hasRole(Role.INSTRUCTOR.name())
+                        .requestMatchers(HttpMethod.GET, "/courses/**").hasAnyRole(Role.INSTRUCTOR.name(), Role.ADMIN.name())
                         //Student
                         .requestMatchers(HttpMethod.GET, "/quizzes/**").hasRole("STUDENT")
                         // tất cả request cần login

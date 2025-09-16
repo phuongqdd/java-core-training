@@ -3,19 +3,31 @@ package com.dophuong.lms.learning_management_system.enums;
 import org.springframework.http.HttpStatus;
 
 public enum ErrorCode {
+    // User
     USER_EXISTED(1001, "User đã tồn tại", HttpStatus.CONFLICT),
     USER_NOT_EXISTED(1002, "User không tồn tại", HttpStatus.NOT_FOUND),
     DUPLICATE_EMAIL(1003, "Email đã tồn tại", HttpStatus.CONFLICT),
     DUPLICATE_PHONE(1004, "Số điện thoại đã tồn tại", HttpStatus.CONFLICT),
-    INSTRUCTOR_NOT_FOUND(1005, "Không tìm thấy instructor", HttpStatus.NOT_FOUND),
-    STUDENT_NOT_FOUND(1005, "Không tìm thấy student", HttpStatus.NOT_FOUND),
+    NEW_PASSWORD_EMPTY(1005, "Mật khẩu mới không được để trống", HttpStatus.BAD_REQUEST),
+    INVALID_PASSWORD(1006, "Mật khẩu hiện tại không đúng", HttpStatus.BAD_REQUEST),
+    LOGIN_FAILED(1007, "Sai mật khẩu hoặc username", HttpStatus.UNAUTHORIZED),
+    USER_LOCKED(1008, "Tài khoản bị khóa", HttpStatus.LOCKED),
 
-    LOGIN_FAILED(1006, "Sai mật khẩu hoặc username", HttpStatus.UNAUTHORIZED),
-    UNAUTHENTICATED(1007, "Chưa xác thực", HttpStatus.UNAUTHORIZED),
-    INVALID_TOKEN(1008, "Token không hợp lệ", HttpStatus.UNAUTHORIZED),
-    TOKEN_EXPIRED(1009, "Token đã hết hạn", HttpStatus.UNAUTHORIZED),
-    TOKEN_INVALIDATED(1010, "Token đã bị thu hồi", HttpStatus.UNAUTHORIZED),
-    USER_LOCKED(1011, "Tài khoản bị khóa", HttpStatus.LOCKED);
+    // Role / Permission
+    ROLE_NOT_FOUND(1101, "Không tìm thấy role trong hệ thống", HttpStatus.BAD_REQUEST),
+    ROlE_EXISTED(1102, "Role đã tồn tại", HttpStatus.CONFLICT),
+
+    // Instructor
+    INSTRUCTOR_NOT_FOUND(1201, "Không tìm thấy instructor", HttpStatus.NOT_FOUND),
+
+    // Student
+    STUDENT_NOT_FOUND(1301, "Không tìm thấy student", HttpStatus.NOT_FOUND),
+
+    // Token / Authentication
+    UNAUTHENTICATED(1401, "Chưa xác thực", HttpStatus.UNAUTHORIZED),
+    INVALID_TOKEN(1402, "Token không hợp lệ", HttpStatus.UNAUTHORIZED),
+    TOKEN_EXPIRED(1403, "Token đã hết hạn", HttpStatus.UNAUTHORIZED),
+    TOKEN_INVALIDATED(1404, "Token đã bị thu hồi", HttpStatus.UNAUTHORIZED);
 
     private final int code;                  // Mã lỗi nội bộ
     private final String message;            // Thông báo lỗi

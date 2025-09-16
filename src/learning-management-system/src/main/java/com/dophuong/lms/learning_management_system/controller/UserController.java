@@ -1,20 +1,62 @@
 package com.dophuong.lms.learning_management_system.controller;
 
-import com.dophuong.lms.learning_management_system.dto.request.UserCreateRequest;
+import com.dophuong.lms.learning_management_system.dto.request.PasswordChangeRequest;
+import com.dophuong.lms.learning_management_system.dto.request.UserUpdateProfileRequest;
 import com.dophuong.lms.learning_management_system.dto.response.ApiResponse;
 import com.dophuong.lms.learning_management_system.dto.response.UserResponse;
-import com.dophuong.lms.learning_management_system.enums.Role;
 import com.dophuong.lms.learning_management_system.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
+import java.security.Principal;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @RestController
 @RequestMapping("/users")
 public class UserController {
 
+    @Autowired
+    private UserService userService;
+
+    @GetMapping("/profile")
+    public ResponseEntity<ApiResponse<UserResponse>> getProfile(Principal principal){
+        String username = principal.getName();
+        UserResponse profile = userService.getProfile(username);
+        return ResponseEntity.ok(ApiResponse.<UserResponse>builder()
+                        .status(HttpStatus.OK.value())
+                        .message("Lấy thông tin thành công")
+                        .data(profile)
+                        .timestamp(LocalDateTime.now())
+                .build());
+    }
+
+    @PutMapping("/update-profile")
+    public ResponseEntity<ApiResponse<UserResponse>> updateProfile(@RequestBody UserUpdateProfileRequest request,
+                                                                   Authentication authentication){
+        UserResponse userResponse = userService.updateProfile(authentication.getName(), request);
+        return ResponseEntity.ok(ApiResponse.<UserResponse>builder()
+                        .status(200)
+                        .message("Cập nhật profile thành công")
+                        .data(userResponse)
+                        .timestamp(LocalDateTime.now())
+                .build());
+    }
+
+    @PutMapping("/change-password")
+    public ResponseEntity<ApiResponse<String>> changePassword(
+            @RequestBody PasswordChangeRequest request,
+            Authentication authentication
+            ){
+        String username = authentication.getName();
+        userService.changePassword(username, request);
+        return ResponseEntity.ok(ApiResponse.<String>builder()
+                        .status(200)
+                        .message("Đổi mật khẩu thành công!")
+                        .data(null)
+                        .timestamp(LocalDateTime.now())
+                .build());
+    }
 }

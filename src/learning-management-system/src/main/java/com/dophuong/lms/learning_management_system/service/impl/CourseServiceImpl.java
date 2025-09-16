@@ -52,10 +52,10 @@ public class CourseServiceImpl implements CourseService {
     public CourseCreateResponse createCourse(CourseCreateRequest request) {
         User owner = userRepository.findById(request.getOwnerId())
                 .orElseThrow(() -> new RuntimeException("Instructor không tồn tại"));
-
-        if (owner.getRole() != Role.INSTRUCTOR) {
-            throw new RuntimeException("Người tạo khóa học phải là INSTRUCTOR");
-        }
+//
+//        if (owner.getUserRoles() != Role.INSTRUCTOR) {
+//            throw new RuntimeException("Người tạo khóa học phải là INSTRUCTOR");
+//        }
 
         log.info("trngj thai: " + request.getIsPublished());
 

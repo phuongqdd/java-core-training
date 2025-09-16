@@ -13,9 +13,5 @@ spring:
       ddl-auto: update
     show-sql: true
 
-server:
-  servlet:
-    context-path: /lms
-
 jwt:
   signerKey: "2uN816Tv+fUd+qUi96HnVPRhDipv+E5xygDoaDm2dAUEoPzAqmfdS1N4hRDL7fxk"

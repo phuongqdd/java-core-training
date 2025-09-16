@@ -1,14 +1,20 @@
 package com.dophuong.lms.learning_management_system.config;
 
+import com.dophuong.lms.learning_management_system.dto.request.UserCreateRequest;
+import com.dophuong.lms.learning_management_system.dto.response.UserResponse;
 import com.dophuong.lms.learning_management_system.entity.User;
-import com.dophuong.lms.learning_management_system.enums.Role;
+import com.dophuong.lms.learning_management_system.entity.Role;
+import com.dophuong.lms.learning_management_system.repository.RoleRepository;
 import com.dophuong.lms.learning_management_system.repository.UserRepository;
+import com.dophuong.lms.learning_management_system.service.AuthenticationService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.ApplicationRunner;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.crypto.password.PasswordEncoder;
+
+import java.util.Set;
 
 @Configuration
 @Slf4j
@@ -17,19 +23,32 @@ public class ApplicationInitConfig {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @Autowired
+    private UserRepository userRepository;
+    @Autowired
+    private RoleRepository roleRepository;
+
+    @Autowired
+    private AuthenticationService authenticationService;
+
     @Bean
-    ApplicationRunner applicationRunner(UserRepository userRepository){
+    ApplicationRunner applicationRunner(UserRepository userRepository, RoleRepository roleRepository){
         return args -> {
           if(userRepository.findByUsername("admin").isEmpty()){
-              User user = User.builder()
+
+              Role adminRole = roleRepository.findByName("ADMIN")
+                      .orElseGet(() ->  roleRepository.save(Role.builder()
+                                      .name("ADMIN")
+                                      .description("Quản trị hệ thống")
+                              .build()));
+
+              UserCreateRequest request = UserCreateRequest.builder()
                       .username("admin")
-                      .password(passwordEncoder.encode("Admin123@"))
+                      .password("Admin123@")
                       .email("admin123@gmail.com")
-                      .role(Role.ADMIN)
-                      .isActive(true)
                       .build();
-              userRepository.save(user);
-              log.warn("Admin đã được tạo mặc định và có mật khẩu là: Admin123@");
+              UserResponse response = authenticationService.signup(request, "ADMIN");
+              log.warn("Admin đã được tạo mặc định có username là admin và mật khẩu là: Admin123@");
           }
         };
     }
