@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
@@ -24,8 +25,11 @@ public class CourseController {
     private CourseService courseService;
 
     @PostMapping
-    public ResponseEntity<ApiResponse<CourseCreateResponse>> createCourse(@RequestBody @Valid CourseCreateRequest request){
-        CourseCreateResponse response = courseService.createCourse(request);
+    @PreAuthorize("hasAnyRole('ADMIN', 'INSTRUCTOR')")
+    public ResponseEntity<ApiResponse<CourseCreateResponse>> createCourse(
+            @RequestBody @Valid CourseCreateRequest request,
+            Authentication authentication){
+        CourseCreateResponse response = courseService.createCourse(request, authentication.getName());
         ApiResponse<CourseCreateResponse> response1 = ApiResponse.<CourseCreateResponse>builder()
                 .status(HttpStatus.CREATED.value())
                 .data(response)
@@ -56,23 +60,24 @@ public class CourseController {
                 .build());
     }
 
+
+    // Thêm 1 user vào khóa học
     @PostMapping("/{courseId}/users")
-    public ResponseEntity<ApiResponse<String>> addUserToCourse(
+    @PreAuthorize("@courseSecurity.hasInstructorOrAdmin(#courseId)")
+    public ResponseEntity<ApiResponse<AddUserToCourseResponse>> addUserToCourse(
             @PathVariable Long courseId,
             @RequestBody AddUserToCourseRequest request
             ){
-        courseService.addUserToCourse(
-                courseId,
-                request.getUserId(),
-                request.getRole()
-        );
-        return ResponseEntity.ok(ApiResponse.<String>builder()
-                        .status(HttpStatus.OK.value())
-                        .message("Thêm user " + request.getUserId()
-                                + " vào khóa học " + courseId + " thành công")
-                        .data(null)
-                        .timestamp(LocalDateTime.now())
-                .build());
+        AddUserToCourseResponse response = courseService.addUserToCourse(courseId, request);
+
+        ApiResponse<AddUserToCourseResponse> apiResponse = ApiResponse.<AddUserToCourseResponse>builder()
+                .status(200)
+                .message("Thêm user vào khóa học thành công")
+                .timestamp(LocalDateTime.now())
+                .data(response)
+                .build();
+
+        return ResponseEntity.ok(apiResponse);
     }
 
     @PutMapping("/{courseId}/users/{userId}/role")

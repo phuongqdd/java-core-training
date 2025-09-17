@@ -8,11 +8,14 @@ import com.dophuong.lms.learning_management_system.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @RestController
 @RequestMapping("/users")
@@ -58,5 +61,24 @@ public class UserController {
                         .data(null)
                         .timestamp(LocalDateTime.now())
                 .build());
+    }
+
+    @PreAuthorize("hasRole('ADMIN')")
+    @GetMapping
+    public ResponseEntity<ApiResponse<List<UserResponse>>> getAllUsers(){
+        return ResponseEntity.ok(ApiResponse.<List<UserResponse>>builder()
+                        .status(HttpStatus.OK.value())
+                        .message("Lấy danh sách user thành công")
+                        .data(userService.getAllUsers())
+                        .timestamp(LocalDateTime.now())
+                .build());
+    }
+
+    @GetMapping("/test")
+    public ResponseEntity<Boolean> test(){
+        boolean isAdmin = SecurityContextHolder.getContext().getAuthentication()
+                .getAuthorities().stream()
+                .anyMatch(auth -> auth.getAuthority().equals("ROLE_ADMIN"));
+        return ResponseEntity.ok(isAdmin);
     }
 }

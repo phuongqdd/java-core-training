@@ -129,7 +129,7 @@ public class AdminController {
                 .build());
     }
 
-    @PostMapping("/instructor/createInstructor")
+    @PostMapping("/instructor")
     public ResponseEntity<ApiResponse<UserResponse>> createUserInstructor(@RequestBody UserCreateRequest request){
         UserResponse userResponse = adminService.createUser(request, Role.INSTRUCTOR.name());
         ApiResponse<UserResponse> response = ApiResponse.<UserResponse>builder()

@@ -16,6 +16,7 @@ public enum ErrorCode {
     // Role / Permission
     ROLE_NOT_FOUND(1101, "Không tìm thấy role trong hệ thống", HttpStatus.BAD_REQUEST),
     ROlE_EXISTED(1102, "Role đã tồn tại", HttpStatus.CONFLICT),
+    PERMISSION_DENIED_ADD_USER(1103, "Chỉ INSTRUCTOR trong khóa học hoặc ADMIN mới được thêm người vào khóa học này", HttpStatus.FORBIDDEN),
 
     // Instructor
     INSTRUCTOR_NOT_FOUND(1201, "Không tìm thấy instructor", HttpStatus.NOT_FOUND),
@@ -27,9 +28,12 @@ public enum ErrorCode {
     UNAUTHENTICATED(1401, "Chưa xác thực", HttpStatus.UNAUTHORIZED),
     INVALID_TOKEN(1402, "Token không hợp lệ", HttpStatus.UNAUTHORIZED),
     TOKEN_EXPIRED(1403, "Token đã hết hạn", HttpStatus.UNAUTHORIZED),
-    TOKEN_INVALIDATED(1404, "Token đã bị thu hồi", HttpStatus.UNAUTHORIZED);
+    TOKEN_INVALIDATED(1404, "Token đã bị thu hồi", HttpStatus.UNAUTHORIZED),
 
-    private final int code;                  // Mã lỗi nội bộ
+    //Course
+    USER_ALREADY_ENROLLED(1501, "User đã tham gia khóa học", HttpStatus.BAD_REQUEST);
+
+        private final int code;                  // Mã lỗi nội bộ
     private final String message;            // Thông báo lỗi
     private final HttpStatus httpStatus;     // HTTP status trả về
 

@@ -14,6 +14,7 @@ import com.dophuong.lms.learning_management_system.mapper.UserMapper;
 import com.dophuong.lms.learning_management_system.repository.InvalidatedTokenRepository;
 import com.dophuong.lms.learning_management_system.repository.RoleRepository;
 import com.dophuong.lms.learning_management_system.repository.UserRepository;
+import com.dophuong.lms.learning_management_system.repository.UserRoleRepository;
 import com.dophuong.lms.learning_management_system.service.AuthenticationService;
 import com.nimbusds.jose.*;
 import com.nimbusds.jose.crypto.MACSigner;
@@ -49,6 +50,8 @@ public class AuthenticationServiceImpl implements AuthenticationService {
     private UserRepository userRepository;
     @Autowired
     private RoleRepository roleRepository;
+    @Autowired
+    private UserRoleRepository userRoleRepository;
     @Autowired
     private InvalidatedTokenRepository tokenRepository;
 
@@ -149,6 +152,27 @@ public class AuthenticationServiceImpl implements AuthenticationService {
                 .refreshToken(refreshToken)
                 .authenticated(true)
                 .build();
+    }
+
+    @Override
+    public void addGlobalRoleToUser(Long userId, String roleName) {
+        User user = userRepository.findById(userId).orElseThrow(
+                () -> new AppException(ErrorCode.USER_NOT_EXISTED));
+        Role role = roleRepository.findByName(roleName).orElseThrow(
+                () -> new AppException(ErrorCode.ROLE_NOT_FOUND));
+
+        boolean checkRole = user.getUserRoles().stream()
+                        .anyMatch(ur -> ur.getRole().getName().equals(roleName));
+
+        if(checkRole) throw new AppException(ErrorCode.ROlE_EXISTED);
+
+        UserRole userRole = UserRole.builder()
+                .user(user)
+                .role(role)
+                .build();
+        user.getUserRoles().add(userRole);
+        role.getUserRoles().add(userRole);
+        userRoleRepository.save(userRole);
     }
 
 

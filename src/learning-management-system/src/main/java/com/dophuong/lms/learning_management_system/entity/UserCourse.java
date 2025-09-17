@@ -1,6 +1,5 @@
 package com.dophuong.lms.learning_management_system.entity;
 
-import com.dophuong.lms.learning_management_system.enums.Role;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -36,8 +35,8 @@ public class UserCourse {
     @Column(name = "enrolled_at", nullable = false)
     private LocalDateTime enrolledAt = LocalDateTime.now();
 
-    @Enumerated(EnumType.STRING)
-    @Column(nullable = false, length = 20)
+    @ManyToOne(fetch = FetchType.LAZY) // 1 UserCourse có 1 Role
+    @JoinColumn(name = "role_id", nullable = false)
     private Role role;
 
     @Column(name = "is_owner", nullable = false)

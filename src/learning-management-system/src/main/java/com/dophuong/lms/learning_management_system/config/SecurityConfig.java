@@ -1,10 +1,12 @@
 package com.dophuong.lms.learning_management_system.config;
 
 import com.dophuong.lms.learning_management_system.enums.Role;
+import com.dophuong.lms.learning_management_system.exception.CustomAccessDeniedHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
+import org.springframework.security.config.annotation.method.configuration.EnableMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configurers.AbstractHttpConfigurer;
@@ -14,14 +16,18 @@ import org.springframework.security.web.SecurityFilterChain;
 
 @Configuration
 @EnableWebSecurity
+@EnableMethodSecurity(prePostEnabled = true) // bật @PreAuthorize, @PostAuthorize
 public class SecurityConfig {
 
-    private final String[] PUBLIC_ENDPOINTS = {"auth/login",  "auth/introspect", "auth/logout", "auth/refresh"};
+    private final String[] PUBLIC_ENDPOINTS = {"auth/login", "auth/signup",  "auth/introspect", "auth/logout", "auth/refresh"};
     public static final String[] AUTHENTICATED_ENDPOINTS = {
             "/users/profile",
     };
     @Autowired
     private CustomJwtDecoder customJwtDecoder;
+
+    @Autowired
+    private CustomAccessDeniedHandler accessDeniedHandler;
 
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
@@ -32,10 +38,6 @@ public class SecurityConfig {
                         .requestMatchers(HttpMethod.POST, PUBLIC_ENDPOINTS).permitAll()
 //                        .requestMatchers(AUTHENTICATED_ENDPOINTS).authenticated()
                         .requestMatchers("/admin/**").hasRole(Role.ADMIN.name())
-                        .requestMatchers(HttpMethod.GET, "/courses/**").hasAnyRole(Role.INSTRUCTOR.name(), Role.ADMIN.name())
-                        //Student
-                        .requestMatchers(HttpMethod.GET, "/quizzes/**").hasRole("STUDENT")
-                        // tất cả request cần login
                         .anyRequest().authenticated()
 
         );
@@ -47,6 +49,9 @@ public class SecurityConfig {
                                 .jwtAuthenticationConverter(jwtAuthenticationConverter()))
                         .authenticationEntryPoint(new JwtAuthenticationEntryPoint())
         );
+
+        http.exceptionHandling(ex ->
+                ex.accessDeniedHandler(accessDeniedHandler));
 
         http.csrf(AbstractHttpConfigurer::disable);
 

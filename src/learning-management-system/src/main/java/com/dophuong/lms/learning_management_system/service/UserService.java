@@ -4,6 +4,8 @@ import com.dophuong.lms.learning_management_system.dto.request.PasswordChangeReq
 import com.dophuong.lms.learning_management_system.dto.request.UserUpdateProfileRequest;
 import com.dophuong.lms.learning_management_system.dto.response.UserResponse;
 
+import java.util.List;
+
 public interface UserService {
 
     UserResponse getProfile(String username);
@@ -11,4 +13,6 @@ public interface UserService {
     UserResponse updateProfile(String username, UserUpdateProfileRequest request);
 
     void changePassword(String username, PasswordChangeRequest request);
+
+    List<UserResponse> getAllUsers();
 }

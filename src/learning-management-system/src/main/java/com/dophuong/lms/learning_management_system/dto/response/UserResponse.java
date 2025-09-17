@@ -22,7 +22,7 @@ public class UserResponse {
     private String avatarUrl;
     private LocalDate dateOfBirth;
     private Boolean isActive;
-    private Set<RoleResponse> roles;
+    private Set<String> roles;
     private Gender gender;
     private LocalDateTime lastLogin;
     private LocalDateTime createdAt;

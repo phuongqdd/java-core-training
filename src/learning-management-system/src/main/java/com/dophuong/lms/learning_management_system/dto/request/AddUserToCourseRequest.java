@@ -6,5 +6,5 @@ import lombok.Data;
 @Data
 public class AddUserToCourseRequest {
     private Long userId;
-    private Role role;
+    private String role;
 }

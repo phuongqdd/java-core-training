@@ -7,16 +7,17 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Data
 @Builder
 public class QuestionResponse {
     private Long id;
-    private Course course;
     private String content;
-    private Difficulty difficulty;
+    private String difficulty;
     private String imageUrl;
     private String explanation;
-    private LocalDateTime createAt;
-    private LocalDateTime updateAt;
+    private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
+    private List<OptionResponse> options;
 }

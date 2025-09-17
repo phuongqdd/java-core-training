@@ -17,5 +17,5 @@ public class CourseCreateResponse {
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
-    private UserSummary owner;
+    private String owner;
 }

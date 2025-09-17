@@ -3,9 +3,9 @@ package com.dophuong.lms.learning_management_system.mapper;
 import com.dophuong.lms.learning_management_system.dto.request.CourseCreateRequest;
 import com.dophuong.lms.learning_management_system.dto.response.CourseCreateResponse;
 import com.dophuong.lms.learning_management_system.dto.response.CourseResponse;
-import com.dophuong.lms.learning_management_system.dto.response.UserSummary;
 import com.dophuong.lms.learning_management_system.entity.Course;
 import com.dophuong.lms.learning_management_system.entity.User;
+import com.dophuong.lms.learning_management_system.entity.UserCourse;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 import org.springframework.stereotype.Component;
@@ -21,24 +21,17 @@ public interface CourseMapper {
     @Mapping(target = "owner", expression = "java(getOwnerSummary(course))")
     CourseCreateResponse toResponse(Course course);
 
-    default UserSummary getOwnerSummary(Course course){
-        if(course.getUserCourses() == null) return null;
-        return course.getUserCourses().stream()
-                .filter(uc -> uc.getIsOwner() != null && uc.getIsOwner())
-                .findFirst()
-                .map(uc -> {
-                    User u = uc.getUser();
-                    UserSummary summary = new UserSummary();
-                    summary.setId(u.getId());
-                    summary.setUsername(u.getUsername());
-//                    summary.setRole(u.getRole());
-                    summary.setAvatarUrl(u.getAvatarUrl());
-                    summary.setFullName(u.getFullName());
-                    summary.setIsOwner(true);
-                    return summary;
-                })
-                .orElse(null);
+    default String getOwnerSummary(Course course) {
+        if (course == null || course.getUserCourses() == null || course.getUserCourses().isEmpty()) {
+            return null;
+        }
+
+        UserCourse ownerUc = course.getUserCourses().get(0); // chỉ lấy người đầu tiên
+        if (ownerUc == null || ownerUc.getUser() == null) return null;
+
+        return ownerUc.getUser().getUsername();
     }
+
 
     CourseResponse toCuCourseResponse(Course course);
     List<CourseResponse> toResponseList(List<Course> course);

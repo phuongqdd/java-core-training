@@ -75,4 +75,18 @@ public class AuthenticationController {
                 .build();
     }
 
+    @PostMapping("/{userId}/roles")
+    public ResponseEntity<ApiResponse<String>> addGlobalRole(@PathVariable Long userId,
+                                                             @RequestParam String roleName){
+        authenticationService.addGlobalRoleToUser(userId, roleName);
+        return ResponseEntity.ok(ApiResponse.<String>builder()
+                        .data(null)
+                        .timestamp(LocalDateTime.now())
+                        .message("Đã thêm role " + roleName + " cho userid = " + userId + " thành công1")
+                        .status(HttpStatus.OK.value())
+                .build());
+    }
+
+
+
 }

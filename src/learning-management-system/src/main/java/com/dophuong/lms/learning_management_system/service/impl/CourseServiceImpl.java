@@ -1,20 +1,20 @@
 package com.dophuong.lms.learning_management_system.service.impl;
 
+import com.dophuong.lms.learning_management_system.dto.request.AddUserToCourseRequest;
 import com.dophuong.lms.learning_management_system.dto.request.CourseCreateRequest;
+import com.dophuong.lms.learning_management_system.dto.response.AddUserToCourseResponse;
 import com.dophuong.lms.learning_management_system.dto.response.CourseCreateResponse;
-import com.dophuong.lms.learning_management_system.dto.response.CourseResponse;
 import com.dophuong.lms.learning_management_system.dto.response.UserCourseResponse;
 import com.dophuong.lms.learning_management_system.dto.response.UserInCourseResponse;
 import com.dophuong.lms.learning_management_system.entity.Course;
+import com.dophuong.lms.learning_management_system.entity.Role;
 import com.dophuong.lms.learning_management_system.entity.User;
 import com.dophuong.lms.learning_management_system.entity.UserCourse;
-import com.dophuong.lms.learning_management_system.enums.Role;
+import com.dophuong.lms.learning_management_system.enums.ErrorCode;
+import com.dophuong.lms.learning_management_system.exception.AppException;
 import com.dophuong.lms.learning_management_system.mapper.CourseMapper;
 import com.dophuong.lms.learning_management_system.mapper.UserCourseMapper;
-import com.dophuong.lms.learning_management_system.mapper.UserInCourseMapper;
-import com.dophuong.lms.learning_management_system.repository.CourseRepository;
-import com.dophuong.lms.learning_management_system.repository.UserCourseRepository;
-import com.dophuong.lms.learning_management_system.repository.UserRepository;
+import com.dophuong.lms.learning_management_system.repository.*;
 import com.dophuong.lms.learning_management_system.service.CourseService;
 import jakarta.transaction.Transactional;
 import lombok.extern.slf4j.Slf4j;
@@ -31,12 +31,14 @@ public class CourseServiceImpl implements CourseService {
 
     @Autowired
     private CourseRepository courseRepository;
-
     @Autowired
     private UserRepository userRepository;
-
     @Autowired
     private UserCourseRepository userCourseRepository;
+    @Autowired
+    private CourseJdbcRepository courseJdbcRepository;
+    @Autowired
+    private RoleRepository roleRepository;
 
     @Autowired
     private CourseMapper courseMapper;
@@ -44,14 +46,11 @@ public class CourseServiceImpl implements CourseService {
     @Autowired
     private UserCourseMapper userCourseMapper;
 
-    @Autowired
-    private UserInCourseMapper userInCourseMapper;
-
     @Override
     @Transactional
-    public CourseCreateResponse createCourse(CourseCreateRequest request) {
-        User owner = userRepository.findById(request.getOwnerId())
-                .orElseThrow(() -> new RuntimeException("Instructor không tồn tại"));
+    public CourseCreateResponse createCourse(CourseCreateRequest request, String name) {
+        User owner = userRepository.findByUsername(name)
+                .orElseThrow(() -> new RuntimeException("Không tồn tại người dùng"));
 //
 //        if (owner.getUserRoles() != Role.INSTRUCTOR) {
 //            throw new RuntimeException("Người tạo khóa học phải là INSTRUCTOR");
@@ -67,10 +66,13 @@ public class CourseServiceImpl implements CourseService {
 
         course = courseRepository.save(course);
 
+        Role role = roleRepository.findByName("INSTRUCTOR")
+                .orElseThrow(() -> new AppException(ErrorCode.ROLE_NOT_FOUND));
+
         UserCourse userCourse = UserCourse.builder()
                 .course(course)
                 .user(owner)
-                .role(Role.INSTRUCTOR)
+                .role(role)
                 .isOwner(true)
                 .enrolledAt(LocalDateTime.now())
                 .build();
@@ -83,49 +85,40 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public List<UserCourseResponse> getAllCourseById(Long id) {
-        return userCourseRepository.findByUserId(id)
-                .stream()
-                .map(userCourseMapper::toResponse)
-                .collect(Collectors.toList());
+//        return userCourseRepository.findByUserId(id)
+//                .stream()
+//                .map(userCourseMapper::toResponse)
+//                .collect(Collectors.toList());
+
+        return List.of();
     }
 
     @Override
     public List<UserInCourseResponse> getAllUsersInCourse(Long courseId) {
         return userCourseRepository.findByCourseId(courseId)
                 .stream()
-                .map(userInCourseMapper::toResponse)
+                .map(userCourseMapper::toResponse1)
                 .collect(Collectors.toList());
     }
 
     @Override
-    @Transactional
-    public void addUserToCourse(Long courseId, Long userId, Role role) {
-        Course course = courseRepository.findById(courseId)
-                .orElseThrow(() -> new RuntimeException("Không tìm thấy khóa học với id = "  + courseId));
+    public void updateUserRole(Long courseId, Long userId, com.dophuong.lms.learning_management_system.enums.Role role) {
 
-        User user = userRepository.findById(userId)
-                .orElseThrow(() -> new RuntimeException("Không tìm thấy user với id = " + userId));
-
-        if(userCourseRepository.existsByUserIdAndCourseId(userId, courseId)){
-            throw new RuntimeException("Người dùng đã tham gia khóa học na rồi!");
-        }
-
-        UserCourse userCourse = UserCourse.builder()
-                .user(user)
-                .course(course)
-                .role(role)
-                .enrolledAt(LocalDateTime.now())
-                .isOwner(false)
-                .build();
-        userCourseRepository.save(userCourse);
     }
 
     @Override
-    public void updateUserRole(Long courseId, Long userId, Role role) {
-        UserCourse userCourse = userCourseRepository.findByCourseIdAndUserId(courseId, userId)
-                .orElseThrow(() -> new RuntimeException("User không tồn tại trong khóa học này"));
-
-        userCourse.setRole(role);
-        userCourseRepository.save(userCourse);
+    public AddUserToCourseResponse addUserToCourse(Long courseId, AddUserToCourseRequest request) {
+        courseJdbcRepository.addUserToCourse(courseId, request.getUserId(), request.getRole());
+        UserCourse userCourse = courseJdbcRepository.getUserCourse(courseId, request.getUserId());
+        return userCourseMapper.toResponse(userCourse);
     }
+
+//    @Override
+//    public void updateUserRole(Long courseId, Long userId, Role role) {
+//        UserCourse userCourse = userCourseRepository.findByCourseIdAndUserId(courseId, userId)
+//                .orElseThrow(() -> new RuntimeException("User không tồn tại trong khóa học này"));
+//
+////        userCourse.setRole(role);
+//        userCourseRepository.save(userCourse);
+//    }
 }

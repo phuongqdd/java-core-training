@@ -22,4 +22,6 @@ public interface AuthenticationService {
     UserResponse signup(@Valid UserCreateRequest request, String role);
 
     AuthenticationResponse refreshToken(RefreshTokenRequest request);
+
+    void addGlobalRoleToUser(Long userId, String roleName);
 }

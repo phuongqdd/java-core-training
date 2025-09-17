@@ -2,16 +2,15 @@ package com.dophuong.lms.learning_management_system.entity;
 
 import com.dophuong.lms.learning_management_system.enums.Difficulty;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "question")
-@Data
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -39,18 +38,24 @@ public class Question {
     private String explanation;
 
     @Column(name = "created_at", nullable = false, updatable = false)
-    private LocalDateTime createAt;
+    private LocalDateTime createdAt;
 
     @Column(name = "update_at")
-    private LocalDateTime updateAt;
+    private LocalDateTime updatedAt;
+
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Option> options;
+
+    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<QuestionHistory> histories;
 
     @PrePersist
     protected void onCreate(){
-        createAt = LocalDateTime.now();
+        createdAt = LocalDateTime.now();
     }
 
     @PreUpdate
     protected void onUpdate(){
-        updateAt = LocalDateTime.now();
+        updatedAt = LocalDateTime.now();
     }
 }
