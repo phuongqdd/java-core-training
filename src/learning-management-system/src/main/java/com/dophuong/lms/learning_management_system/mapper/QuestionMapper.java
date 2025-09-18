@@ -9,18 +9,19 @@ import com.dophuong.lms.learning_management_system.entity.Question;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
 
+import java.util.List;
+
 @Mapper(componentModel = "spring")
 public interface QuestionMapper {
-    // Request → Entity
+
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "course", ignore = true) // course set ở service
     @Mapping(target = "options", source = "options")
     Question toEntity(QuestionRequest dto);
 
-    Option toEntity(OptionRequest dto);
 
-    // Entity → Response
+    @Mapping(target = "options", source = "options")
     QuestionResponse toResponse(Question question);
 
-    OptionResponse toResponse(Option option);
+    List<QuestionResponse> toResponseList(List<Question> questions);
 }

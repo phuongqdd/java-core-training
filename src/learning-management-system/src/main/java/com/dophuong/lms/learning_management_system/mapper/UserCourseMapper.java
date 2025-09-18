@@ -25,5 +25,7 @@ public interface UserCourseMapper {
     @Mapping(source = "user.id", target = "userId")
     @Mapping(source = "user.username", target = "username")
     @Mapping(source = "role.name", target = "role")
+    @Mapping(source = "user.fullName", target = "fullName")
+    @Mapping(source = "user.email", target = "email")
     UserInCourseResponse toResponse1(UserCourse userCourse);
 }

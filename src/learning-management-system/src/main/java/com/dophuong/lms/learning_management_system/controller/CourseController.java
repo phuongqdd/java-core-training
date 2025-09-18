@@ -50,6 +50,7 @@ public class CourseController {
     }
 
     @GetMapping("/{courseId}/users")
+    @PreAuthorize("hasRole('ADMIN') or @courseSecurity.isUserInCourse(#courseId)")
     public ResponseEntity<ApiResponse<List<UserInCourseResponse>>> getAllUsersInCourse(@PathVariable Long courseId) {
         List<UserInCourseResponse> users = courseService.getAllUsersInCourse(courseId);
         return ResponseEntity.ok(ApiResponse.<List<UserInCourseResponse>>builder()
@@ -63,7 +64,7 @@ public class CourseController {
 
     // Thêm 1 user vào khóa học
     @PostMapping("/{courseId}/users")
-    @PreAuthorize("@courseSecurity.hasInstructorOrAdmin(#courseId)")
+    @PreAuthorize("hasRole('ADMIN') or @courseSecurity.hasInstructorInCourse(#courseId)")
     public ResponseEntity<ApiResponse<AddUserToCourseResponse>> addUserToCourse(
             @PathVariable Long courseId,
             @RequestBody AddUserToCourseRequest request

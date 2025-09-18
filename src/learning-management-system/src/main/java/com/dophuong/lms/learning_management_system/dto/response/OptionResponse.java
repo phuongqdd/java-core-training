@@ -10,7 +10,7 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @Builder
 public class OptionResponse {
-    private int optionId;
+    private Integer id;
     private String content;
-    private boolean isCorrect;
+    private boolean correct;
 }

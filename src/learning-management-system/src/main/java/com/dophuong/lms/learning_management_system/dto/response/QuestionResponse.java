@@ -14,7 +14,7 @@ import java.util.List;
 public class QuestionResponse {
     private Long id;
     private String content;
-    private String difficulty;
+    private Difficulty difficulty;
     private String imageUrl;
     private String explanation;
     private LocalDateTime createdAt;

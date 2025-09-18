@@ -18,8 +18,8 @@ public class Option {
     @ManyToOne
     @JoinColumn(name = "question_id", nullable = false)
     private Question question;
-    @Column(nullable = false, columnDefinition = "TEXT")
+    @Column(name = "content", nullable = false, columnDefinition = "TEXT")
     private String content;
-    @Column(nullable = false)
-    private Boolean isCorrect = false;
+    @Column(name = "is_correct", nullable = false)
+    private boolean correct;
 }

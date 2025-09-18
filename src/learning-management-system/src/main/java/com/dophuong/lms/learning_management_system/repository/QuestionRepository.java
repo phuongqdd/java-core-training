@@ -1,9 +1,13 @@
 package com.dophuong.lms.learning_management_system.repository;
 
 import com.dophuong.lms.learning_management_system.entity.Question;
-import org.springframework.data.jpa.repository.JpaRepository;
-import org.springframework.stereotype.Repository;
 
-@Repository
-public interface QuestionRepository extends JpaRepository<Question, Long> {
+import java.util.List;
+
+public interface QuestionRepository {
+    Question findById(Long id);
+    List<Question> findByCourseId(Long courseId);
+    Question save(Question question, Long courseId);
+
+    boolean existsById(Long questionId);
 }

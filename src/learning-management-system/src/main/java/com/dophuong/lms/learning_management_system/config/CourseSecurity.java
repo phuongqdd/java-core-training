@@ -11,16 +11,20 @@ public class CourseSecurity {
     @Autowired
     private CourseJdbcRepository courseJdbcRepository;
 
-    public boolean hasInstructorOrAdmin(Long courseId) {
+    private String getUserName(){
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        String username = auth.getName();
+        return auth.getName();
+    }
 
-        // Check user có role ADMIN toàn hệ thống
-        boolean isAdmin = auth.getAuthorities().stream()
-                .anyMatch(a -> a.getAuthority().equals("ROLE_ADMIN"));
-        if (isAdmin) return true;
-
+    public boolean hasInstructorInCourse(Long courseId) {
+        String username = getUserName();
         // Check user có role INSTRUCTOR trong khóa học
         return courseJdbcRepository.checkRoleInCourse(courseId, username);
+    }
+
+    // Check user có trong khóa học hay không
+    public boolean isUserInCourse(Long courseId) {
+        String username = getUserName();
+        return courseJdbcRepository.checkUserInCourse(courseId, username);
     }
 }

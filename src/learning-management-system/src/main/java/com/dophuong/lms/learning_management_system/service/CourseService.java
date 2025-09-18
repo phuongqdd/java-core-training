@@ -6,12 +6,16 @@ import com.dophuong.lms.learning_management_system.dto.response.AddUserToCourseR
 import com.dophuong.lms.learning_management_system.dto.response.CourseCreateResponse;
 import com.dophuong.lms.learning_management_system.dto.response.UserCourseResponse;
 import com.dophuong.lms.learning_management_system.dto.response.UserInCourseResponse;
+import com.dophuong.lms.learning_management_system.entity.Course;
 import com.dophuong.lms.learning_management_system.enums.Role;
 import jakarta.validation.Valid;
 
 import java.util.List;
 
 public interface CourseService {
+
+    Course getCourse(Long id);
+
     CourseCreateResponse createCourse(@Valid CourseCreateRequest request, String name);
 
     List<UserCourseResponse> getAllCourseById(Long id);

@@ -86,7 +86,7 @@ public class User {
     private Set<UserRole> userRoles = new HashSet<>();
 
     @JsonIgnore
-    @OneToMany(mappedBy = "question", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<QuestionHistory> histories;
 
     @PrePersist

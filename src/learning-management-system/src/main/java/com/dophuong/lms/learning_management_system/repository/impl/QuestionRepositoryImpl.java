@@ -1,0 +1,111 @@
+package com.dophuong.lms.learning_management_system.repository.impl;
+
+import com.dophuong.lms.learning_management_system.entity.Question;
+import com.dophuong.lms.learning_management_system.repository.QuestionRepository;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.dao.EmptyResultDataAccessException;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
+import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
+import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
+import org.springframework.jdbc.support.GeneratedKeyHolder;
+import org.springframework.jdbc.support.KeyHolder;
+import org.springframework.stereotype.Repository;
+
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.Map;
+
+@Slf4j
+@Repository
+public class QuestionRepositoryImpl implements QuestionRepository {
+
+    private final NamedParameterJdbcTemplate jdbcTemplate;
+
+    public QuestionRepositoryImpl(NamedParameterJdbcTemplate jdbcTemplate){
+        this.jdbcTemplate = jdbcTemplate;
+    }
+
+    @Override
+    public Question findById(Long id) {
+        log.warn("COn điên 4: {}", id);
+        String sql = """
+            SELECT * FROM question WHERE question_id = :id
+            """;
+        try {
+            return jdbcTemplate.queryForObject(
+                    sql,
+                    Map.of("id", id),
+                    new BeanPropertyRowMapper<>(Question.class)
+            );
+        } catch (EmptyResultDataAccessException e) {
+            return null; // hoặc throw custom exception QuestionNotFound
+        }
+    }
+
+
+    @Override
+    public List<Question> findByCourseId(Long courseId) {
+        String sql = "SELECT * FROM question WHERE course_id = :courseId";
+        return jdbcTemplate.query(
+                sql,
+                Map.of("courseId", courseId),
+                new BeanPropertyRowMapper<>(Question.class)
+        );
+    }
+
+    @Override
+    public Question save(Question question, Long courseId) {
+        if(question.getCreatedAt() == null){
+            question.setCreatedAt(LocalDateTime.now());
+        }
+        question.setUpdatedAt(LocalDateTime.now());
+        if(question.getId() == null){
+            String sql = """
+                INSERT INTO question(course_id, content, difficulty, image_url, explanation, created_at, updated_at)
+                VALUES (:courseId, :content, :difficulty, :imageUrl, :explanation, :createdAt, :updatedAt)
+            """;
+
+            MapSqlParameterSource params = new MapSqlParameterSource()
+                    .addValue("courseId", courseId)
+                    .addValue("content", question.getContent())
+                    .addValue("difficulty", question.getDifficulty().name())
+                    .addValue("imageUrl", question.getImageUrl())
+                    .addValue("explanation", question.getExplanation())
+                    .addValue("createdAt", question.getCreatedAt())
+                    .addValue("updatedAt", question.getUpdatedAt());
+
+            KeyHolder keyHolder = new GeneratedKeyHolder();
+            jdbcTemplate.update(sql, params, keyHolder, new String[]{"question_id"});
+
+            Long generatedId = keyHolder.getKey().longValue();
+            question.setId(generatedId);
+        }else{
+            String sql = """
+                    UPDATE question
+                    SET content = :content, difficulty = :difficulty,
+                        image_url = :image_url, explanation = :explanation, updated_at = :updated_at
+                    WHERE question_id = :id
+                    """;
+            MapSqlParameterSource params = new MapSqlParameterSource()
+                    .addValue("content", question.getContent())
+                    .addValue("difficulty", question.getDifficulty())
+                    .addValue("imageUrl", question.getImageUrl())
+                    .addValue("explanation", question.getExplanation())
+                    .addValue("updatedAt", question.getUpdatedAt())
+                    .addValue("id", question.getId());
+            jdbcTemplate.update(sql, params);
+        }
+
+        return question;
+    }
+
+    @Override
+    public boolean existsById(Long questionId) {
+        String sql = "SELECT COUNT(*) FROM question WHERE question_id = :questionId";
+        MapSqlParameterSource params = new MapSqlParameterSource()
+                .addValue("questionId", questionId);
+
+        Integer count = jdbcTemplate.queryForObject(sql, params, Integer.class);
+        return count != null && count > 0;
+    }
+}

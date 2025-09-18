@@ -22,6 +22,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -38,6 +39,8 @@ public class CourseServiceImpl implements CourseService {
     @Autowired
     private CourseJdbcRepository courseJdbcRepository;
     @Autowired
+    private UserCourseJdbcRepository userCourseJdbcRepository;
+    @Autowired
     private RoleRepository roleRepository;
 
     @Autowired
@@ -45,6 +48,12 @@ public class CourseServiceImpl implements CourseService {
 
     @Autowired
     private UserCourseMapper userCourseMapper;
+
+    @Override
+    public Course getCourse(Long id) {
+        return courseJdbcRepository.findById(id)
+                .orElseThrow(() -> new AppException(ErrorCode.COURSE_NOT_FOUND));
+    }
 
     @Override
     @Transactional
@@ -56,15 +65,10 @@ public class CourseServiceImpl implements CourseService {
 //            throw new RuntimeException("Người tạo khóa học phải là INSTRUCTOR");
 //        }
 
-        log.info("trngj thai: " + request.getIsPublished());
-
         Course course = courseMapper.toEntity(request);
         course.setCreatedAt(LocalDateTime.now());
-        log.info("trngj thai 1: " + course.getIsPublished());
 
-
-
-        course = courseRepository.save(course);
+        course = courseJdbcRepository.save(course);
 
         Role role = roleRepository.findByName("INSTRUCTOR")
                 .orElseThrow(() -> new AppException(ErrorCode.ROLE_NOT_FOUND));
@@ -77,25 +81,24 @@ public class CourseServiceImpl implements CourseService {
                 .enrolledAt(LocalDateTime.now())
                 .build();
 
-        userCourseRepository.save(userCourse);
+        userCourseJdbcRepository.save(userCourse);
+        if (course.getUserCourses() == null) {
+            course.setUserCourses(new ArrayList<>());
+        }
         course.getUserCourses().add(userCourse);
+
 
         return courseMapper.toResponse(course);
     }
 
     @Override
     public List<UserCourseResponse> getAllCourseById(Long id) {
-//        return userCourseRepository.findByUserId(id)
-//                .stream()
-//                .map(userCourseMapper::toResponse)
-//                .collect(Collectors.toList());
-
         return List.of();
     }
 
     @Override
     public List<UserInCourseResponse> getAllUsersInCourse(Long courseId) {
-        return userCourseRepository.findByCourseId(courseId)
+        return userCourseJdbcRepository.findByCourseId(courseId)
                 .stream()
                 .map(userCourseMapper::toResponse1)
                 .collect(Collectors.toList());

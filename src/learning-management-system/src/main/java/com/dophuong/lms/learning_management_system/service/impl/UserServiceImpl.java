@@ -31,9 +31,20 @@ public class UserServiceImpl implements UserService {
     private PasswordEncoder passwordEncoder;
 
     @Override
-    public UserResponse getProfile(String username) {
-        User user = userRepository.findByUsername(username)
+    public User getUserById(Long userId) {
+        return userRepository.findById(userId)
                 .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
+    }
+
+    @Override
+    public User getUserByUsername(String username) {
+        return userRepository.findByUsername(username)
+                .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
+    }
+
+    @Override
+    public UserResponse getProfile(String username) {
+        User user = getUserByUsername(username);
 
         log.warn("Hi HI" + user.getUserRoles());
         return userMapper.toResponse(user);
@@ -58,11 +69,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void changePassword(String username, PasswordChangeRequest request) {
-        User user = userRepository.findByUsername(username)
-                .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
+        User user = getUserByUsername(username);
 
         // Kiểm tra mật khẩu hiện tại
-        if(!passwordEncoder.matches(request.getCurrentPassword(), user.getPassword())){
+        if(!passwordEncoder.matches(request.getOldPassword(), user.getPassword())){
             throw new AppException(ErrorCode.INVALID_PASSWORD);
         }
 
@@ -71,6 +81,9 @@ public class UserServiceImpl implements UserService {
         if(newPassword == null || newPassword.isBlank()){
             throw new AppException(ErrorCode.NEW_PASSWORD_EMPTY);
         }
+
+        if(!request.getNewPassword().equals(request.getConfirmPassword()))
+            throw new AppException(ErrorCode.PASSWORD_CONFIRM_NOT_MATCH);
 
         user.setPassword(passwordEncoder.encode(newPassword));
         userRepository.save(user);
