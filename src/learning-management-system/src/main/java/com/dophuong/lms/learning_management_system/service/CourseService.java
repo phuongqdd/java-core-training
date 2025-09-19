@@ -16,6 +16,8 @@ public interface CourseService {
 
     Course getCourse(Long id);
 
+    boolean existsById(Long id);
+
     CourseCreateResponse createCourse(@Valid CourseCreateRequest request, String name);
 
     List<UserCourseResponse> getAllCourseById(Long id);

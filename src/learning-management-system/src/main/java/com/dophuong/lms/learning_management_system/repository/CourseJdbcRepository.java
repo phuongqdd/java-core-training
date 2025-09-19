@@ -23,4 +23,6 @@ public interface CourseJdbcRepository {
     public boolean checkRoleInCourse(Long courseId, String name);
 
     boolean checkUserInCourse(Long courseId, String username);
+
+    boolean existsById(Long id);
 }

@@ -6,8 +6,11 @@ import java.util.List;
 
 public interface QuestionRepository {
     Question findById(Long id);
-    List<Question> findByCourseId(Long courseId);
     Question save(Question question, Long courseId);
 
     boolean existsById(Long questionId);
+
+    List<Question> findAllByCourseId(Long courseId);
+
+    void deleteById(Long questionId);
 }

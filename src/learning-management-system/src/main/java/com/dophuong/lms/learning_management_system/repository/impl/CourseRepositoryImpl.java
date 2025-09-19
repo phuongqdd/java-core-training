@@ -8,6 +8,7 @@ import com.dophuong.lms.learning_management_system.enums.ErrorCode;
 import com.dophuong.lms.learning_management_system.exception.AppException;
 import com.dophuong.lms.learning_management_system.repository.CourseJdbcRepository;
 import com.dophuong.lms.learning_management_system.repository.RoleRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -23,6 +24,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+@Slf4j
 @Repository
 public class CourseRepositoryImpl implements CourseJdbcRepository {
     @Autowired
@@ -129,11 +131,11 @@ public class CourseRepositoryImpl implements CourseJdbcRepository {
             SELECT uc.course_id, c.name, uc.user_id AS u_id, u.username,
                    uc.id, uc.role_id, uc.is_owner, uc.enrolled_at
             FROM user_course uc
-            JOIN user u 
+            JOIN user u
                 ON uc.user_id = u.user_id
             JOIN course c
                 ON c.course_id = uc.course_id
-            WHERE uc.course_id = ? AND uc.user_id = ?    
+            WHERE uc.course_id = ? AND uc.user_id = ?
         """;
 
         return jdbcTemplate.queryForObject(sql, new Object[]{courseId, userId},
@@ -185,5 +187,13 @@ public class CourseRepositoryImpl implements CourseJdbcRepository {
 
         Integer cnt = jdbcTemplate.queryForObject(sql, Integer.class, courseId, username);
         return cnt != null && cnt > 0;
+    }
+
+    @Override
+    public boolean existsById(Long id) {
+        String sql = "SELECT COUNT(*) FROM course WHERE course_id = ?";
+
+        Integer count = jdbcTemplate.queryForObject(sql, Integer.class, id);
+        return count != null && count > 0;
     }
 }

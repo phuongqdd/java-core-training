@@ -37,10 +37,14 @@ public enum ErrorCode {
     QUESTION_MINIMUM_CHOICES_REQUIRED(1503, "Câu hỏi phải có ít nhất 2 lựa chọn", HttpStatus.BAD_REQUEST),
 
     //Question
-    QUESTION_NOT_FOUND(1512, "Câu hỏi không tồn tại", HttpStatus.NOT_FOUND)
+    QUESTION_NOT_FOUND(1512, "Câu hỏi không tồn tại", HttpStatus.NOT_FOUND),
+
+
+    //Option
+    OPTION_NOT_FOUND(1601, "Đáp án không tồn tại", HttpStatus.NOT_FOUND)
     ;
 
-        private final int code;                  // Mã lỗi nội bộ
+    private final int code;                  // Mã lỗi nội bộ
     private final String message;            // Thông báo lỗi
     private final HttpStatus httpStatus;     // HTTP status trả về
 

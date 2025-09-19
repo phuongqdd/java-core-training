@@ -2,14 +2,14 @@ package com.dophuong.lms.learning_management_system.dto.request;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.*;
+import lombok.Builder;
+import lombok.Data;
 
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 @Builder
-public class OptionRequest {
+public class OptionUpdateRequest {
+    private Long id;
+
     @NotBlank(message = "Nội dung đáp án không được để trống")
     private String content;
 

@@ -56,6 +56,11 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
+    public boolean existsById(Long id) {
+        return courseJdbcRepository.existsById(id);
+    }
+
+    @Override
     @Transactional
     public CourseCreateResponse createCourse(CourseCreateRequest request, String name) {
         User owner = userRepository.findByUsername(name)

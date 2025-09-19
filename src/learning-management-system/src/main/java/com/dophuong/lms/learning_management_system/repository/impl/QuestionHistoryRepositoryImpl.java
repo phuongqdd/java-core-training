@@ -1,9 +1,13 @@
 package com.dophuong.lms.learning_management_system.repository.impl;
 
+import com.dophuong.lms.learning_management_system.entity.Question;
 import com.dophuong.lms.learning_management_system.entity.QuestionHistory;
+import com.dophuong.lms.learning_management_system.entity.User;
+import com.dophuong.lms.learning_management_system.enums.ActionType;
 import com.dophuong.lms.learning_management_system.repository.QuestionHistoryRepository;
 import com.dophuong.lms.learning_management_system.repository.QuestionRepository;
 import lombok.RequiredArgsConstructor;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -15,6 +19,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
 @Repository
 @RequiredArgsConstructor
 public class QuestionHistoryRepositoryImpl implements QuestionHistoryRepository {
@@ -24,12 +29,36 @@ public class QuestionHistoryRepositoryImpl implements QuestionHistoryRepository 
     @Override
     public List<QuestionHistory> findByQuestionId(Long questionId) {
         String sql = "SELECT * FROM question_history WHERE question_id = :questionId";
-        return jdbcTemplate.query(
+        List<QuestionHistory> questionHistories = jdbcTemplate.query(
                 sql,
                 Map.of("questionId", questionId),
-                new BeanPropertyRowMapper<>(QuestionHistory.class)
+                (rs, rowNum) -> {
+                    QuestionHistory qh = new QuestionHistory();
+                    qh.setId(rs.getLong("id"));
+                    qh.setActionType(
+                            ActionType.valueOf(rs.getString("action_type")) // gọn hơn, nhưng chú ý DB phải khớp enum
+                    );
+                    qh.setTime(rs.getTimestamp("time").toLocalDateTime());
+
+                    Question question = Question.builder()
+                            .id(rs.getLong("question_id"))
+                            .build();
+                    qh.setQuestion(question);
+
+                    User user = User.builder()
+                            .id(rs.getLong("user_id"))
+                            .build();
+                    qh.setUser(user);
+
+                    return qh;
+                }
         );
+
+        log.warn("COn iên: {}", questionHistories.get(0));
+
+        return questionHistories;
     }
+
 
     @Override
     public QuestionHistory save(QuestionHistory history) {
@@ -49,5 +78,14 @@ public class QuestionHistoryRepositoryImpl implements QuestionHistoryRepository 
         Long generatedId = keyHolder.getKey().longValue();
         history.setId(generatedId);
         return history;
+    }
+
+    @Override
+    public void deleteByQuestionId(Long questionId) {
+        String sql = """
+                DELETE FROM question_history
+                WHERE question_id = :id
+                """;
+        jdbcTemplate.update(sql, Map.of("id", questionId));
     }
 }

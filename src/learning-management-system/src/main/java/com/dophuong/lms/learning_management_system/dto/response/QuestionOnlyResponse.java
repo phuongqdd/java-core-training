@@ -5,11 +5,10 @@ import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Data
 @Builder
-public class QuestionResponse {
+public class QuestionOnlyResponse {
     private Long id;
     private String content;
     private Difficulty difficulty;
@@ -17,5 +16,4 @@ public class QuestionResponse {
     private String explanation;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
-    private List<OptionResponse> options;
 }

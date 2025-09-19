@@ -27,9 +27,10 @@ public class QuestionRepositoryImpl implements QuestionRepository {
 
     @Override
     public Question findById(Long id) {
-        log.warn("COn điên 4: {}", id);
         String sql = """
-            SELECT * FROM question WHERE question_id = :id
+            SELECT question_id as id, content, image_url, explanation, difficulty, created_at, updated_at
+            FROM question 
+            WHERE question_id = :id
             """;
         try {
             return jdbcTemplate.queryForObject(
@@ -40,17 +41,6 @@ public class QuestionRepositoryImpl implements QuestionRepository {
         } catch (EmptyResultDataAccessException e) {
             return null; // hoặc throw custom exception QuestionNotFound
         }
-    }
-
-
-    @Override
-    public List<Question> findByCourseId(Long courseId) {
-        String sql = "SELECT * FROM question WHERE course_id = :courseId";
-        return jdbcTemplate.query(
-                sql,
-                Map.of("courseId", courseId),
-                new BeanPropertyRowMapper<>(Question.class)
-        );
     }
 
     @Override
@@ -83,17 +73,25 @@ public class QuestionRepositoryImpl implements QuestionRepository {
             String sql = """
                     UPDATE question
                     SET content = :content, difficulty = :difficulty,
-                        image_url = :image_url, explanation = :explanation, updated_at = :updated_at
+                        image_url = :imageUrl, explanation = :explanation, updated_at = :updatedAt
                     WHERE question_id = :id
                     """;
             MapSqlParameterSource params = new MapSqlParameterSource()
                     .addValue("content", question.getContent())
-                    .addValue("difficulty", question.getDifficulty())
+                    .addValue("difficulty", question.getDifficulty().name())
                     .addValue("imageUrl", question.getImageUrl())
                     .addValue("explanation", question.getExplanation())
                     .addValue("updatedAt", question.getUpdatedAt())
                     .addValue("id", question.getId());
             jdbcTemplate.update(sql, params);
+
+            String sql1 = "SELECT created_at FROM question WHERE question_id = :id";
+            LocalDateTime time = jdbcTemplate.queryForObject(
+                    sql1,
+                    Map.of("id", question.getId()),
+                    LocalDateTime.class
+            );
+            question.setCreatedAt(time);
         }
 
         return question;
@@ -107,5 +105,28 @@ public class QuestionRepositoryImpl implements QuestionRepository {
 
         Integer count = jdbcTemplate.queryForObject(sql, params, Integer.class);
         return count != null && count > 0;
+    }
+
+    @Override
+    public List<Question> findAllByCourseId(Long courseId) {
+        String sql = """
+                SELECT question_id as id, content, image_url, explanation, difficulty, created_at, updated_at
+                FROM question
+                WHERE course_id = :id
+                """;
+        return jdbcTemplate.query(
+                sql,
+                Map.of("id", courseId),
+                new BeanPropertyRowMapper<>(Question.class)
+        );
+    }
+
+    @Override
+    public void deleteById(Long questionId) {
+        String sql = """
+                DELETE FROM question
+                WHERE question_id = :id
+                """;
+        jdbcTemplate.update(sql, Map.of("id", questionId));
     }
 }
