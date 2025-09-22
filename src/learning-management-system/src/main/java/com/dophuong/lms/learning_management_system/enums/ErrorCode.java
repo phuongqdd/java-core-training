@@ -39,9 +39,15 @@ public enum ErrorCode {
     //Question
     QUESTION_NOT_FOUND(1512, "Câu hỏi không tồn tại", HttpStatus.NOT_FOUND),
 
-
     //Option
-    OPTION_NOT_FOUND(1601, "Đáp án không tồn tại", HttpStatus.NOT_FOUND)
+    OPTION_NOT_FOUND(1601, "Đáp án không tồn tại", HttpStatus.NOT_FOUND),
+
+    //Quiz
+    PERCENTAGE_NOT_100(1701, "Tổng số 4 mức độ câu hỏi phải bằng 100%", HttpStatus.BAD_REQUEST),
+    INSUFFICIENT_QUESTION_BANK(1702, "Ngân hàng câu hỏi không đủ để tạo đề", HttpStatus.BAD_REQUEST),
+    PERCENTAGE_AN_TOO_HIGH(1703, "Tỉ lệ vận dụng cao (AN) tối đa 10%", HttpStatus.BAD_REQUEST),
+    PERCENTAGE_NEGATIVE(1704, "Tỉ lệ các mức độ không được âm", HttpStatus.BAD_REQUEST),
+    TIME_LIMIT_EXCEEDS_CLOSE_TIME(1706, "Thời gian làm bài không được vượt quá thời gian đóng", HttpStatus.BAD_REQUEST)
     ;
 
     private final int code;                  // Mã lỗi nội bộ

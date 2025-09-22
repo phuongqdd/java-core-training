@@ -29,7 +29,7 @@ public class Quiz {
     private String title;
 
     @Column(name = "description", columnDefinition = "TEXT")
-    private String Description;
+    private String description;
 
     @Column(name = "open_time", nullable = false)
     private LocalDateTime openTime;
@@ -57,6 +57,9 @@ public class Quiz {
 
     @Column(name = "updated_at")
     private LocalDateTime updatedAt;
+
+    @Column(name = "total")
+    private int total;
 
     @Column(name = "pct_rl")
     private int pctRl = 30;

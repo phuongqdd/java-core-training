@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="4dfe783e-bf13-4037-94f9-9c5143ac8f28" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/../learning-management-system/src/main/java/com/dophuong/lms/learning_management_system/controller/QuizController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../learning-management-system/src/main/java/com/dophuong/lms/learning_management_system/controller/QuizController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../learning-management-system/src/main/java/com/dophuong/lms/learning_management_system/entity/Quiz.java" beforeDir="false" afterPath="$PROJECT_DIR$/../learning-management-system/src/main/java/com/dophuong/lms/learning_management_system/entity/Quiz.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../learning-management-system/src/main/java/com/dophuong/lms/learning_management_system/enums/ErrorCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/../learning-management-system/src/main/java/com/dophuong/lms/learning_management_system/enums/ErrorCode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../learning-management-system/src/main/java/com/dophuong/lms/learning_management_system/repository/QuestionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../learning-management-system/src/main/java/com/dophuong/lms/learning_management_system/repository/QuestionRepository.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../learning-management-system/src/main/java/com/dophuong/lms/learning_management_system/repository/impl/QuestionRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../learning-management-system/src/main/java/com/dophuong/lms/learning_management_system/repository/impl/QuestionRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../learning-management-system/src/main/java/com/dophuong/lms/learning_management_system/service/QuestionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../learning-management-system/src/main/java/com/dophuong/lms/learning_management_system/service/QuestionService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../learning-management-system/src/main/java/com/dophuong/lms/learning_management_system/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../learning-management-system/src/main/java/com/dophuong/lms/learning_management_system/service/UserService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../learning-management-system/src/main/java/com/dophuong/lms/learning_management_system/service/impl/QuestionServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../learning-management-system/src/main/java/com/dophuong/lms/learning_management_system/service/impl/QuestionServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../learning-management-system/src/main/java/com/dophuong/lms/learning_management_system/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../learning-management-system/src/main/java/com/dophuong/lms/learning_management_system/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/transactional.docx" beforeDir="false" afterPath="$PROJECT_DIR$/transactional.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/~$ansactional.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/~WRL3930.tmp" beforeDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
+  </component>
+  <component name="ProjectColorInfo"><![CDATA[{
+  "associatedIndex": 4
+}]]></component>
+  <component name="ProjectId" id="333FwhsB7hvcSZFX3NxijitWjBc" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent"><![CDATA[{
+  "keyToString": {
+    "ModuleVcsDetector.initialDetectionPerformed": "true",
+    "RunOnceActivity.ShowReadmeOnStart": "true",
+    "RunOnceActivity.git.unshallow": "true",
+    "dart.analysis.tool.window.visible": "false",
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "D:/TaiLieu/7.JavaSpring/1_hoc_tu_co_ban/intern-java/java-core-learning/src/spring"
+  }
+}]]></component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="4dfe783e-bf13-4037-94f9-9c5143ac8f28" name="Changes" comment="" />
+      <created>1758538088262</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1758538088262</updated>
+    </task>
+    <servers />
+  </component>
+</project>

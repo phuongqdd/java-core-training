@@ -1,6 +1,7 @@
 package com.dophuong.lms.learning_management_system.repository;
 
 import com.dophuong.lms.learning_management_system.entity.Question;
+import com.dophuong.lms.learning_management_system.enums.Difficulty;
 
 import java.util.List;
 
@@ -13,4 +14,8 @@ public interface QuestionRepository {
     List<Question> findAllByCourseId(Long courseId);
 
     void deleteById(Long questionId);
+
+    int countByCourseId(Long courseId);
+
+    int countByCourseIdAndDifficulty(Long courseId, Difficulty difficulty);
 }

@@ -5,9 +5,11 @@ import com.dophuong.lms.learning_management_system.dto.request.QuestionUpdateReq
 import com.dophuong.lms.learning_management_system.dto.response.QuestionOnlyResponse;
 import com.dophuong.lms.learning_management_system.dto.response.QuestionResponse;
 import com.dophuong.lms.learning_management_system.entity.Question;
+import com.dophuong.lms.learning_management_system.enums.Difficulty;
 import jakarta.validation.Valid;
 
 import java.util.List;
+import java.util.Map;
 
 public interface QuestionService {
     boolean existsQuestion(Long questionId);
@@ -23,4 +25,8 @@ public interface QuestionService {
     QuestionResponse updateQuestion(Long courseId, Long questionId, QuestionUpdateRequest request);
 
     void deleteQuestion(Long courseId, Long questionId);
+
+    int getTotalQuestions(Long courseId);
+
+    public Map<Difficulty, Integer> getQuestionsByDifficulty(Long courseId);
 }

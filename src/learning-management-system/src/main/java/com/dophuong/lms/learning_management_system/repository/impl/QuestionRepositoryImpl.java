@@ -1,6 +1,7 @@
 package com.dophuong.lms.learning_management_system.repository.impl;
 
 import com.dophuong.lms.learning_management_system.entity.Question;
+import com.dophuong.lms.learning_management_system.enums.Difficulty;
 import com.dophuong.lms.learning_management_system.repository.QuestionRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -128,5 +129,34 @@ public class QuestionRepositoryImpl implements QuestionRepository {
                 WHERE question_id = :id
                 """;
         jdbcTemplate.update(sql, Map.of("id", questionId));
+    }
+
+    @Override
+    public int countByCourseId(Long courseId) {
+        String sql = """
+            SELECT COUNT(*)
+            FROM question
+            WHERE course_id = :id
+            """;
+
+        return jdbcTemplate.queryForObject(
+                sql,
+                Map.of("id", courseId),
+                Integer.class
+        );
+    }
+
+    @Override
+    public int countByCourseIdAndDifficulty(Long courseId, Difficulty difficulty) {
+        String sql = """
+                SELECT COUNT(*)
+                FROM question
+                WHERE course_id = :id AND difficulty = :difficulty
+                """;
+
+        MapSqlParameterSource source = new MapSqlParameterSource();
+        source.addValue("id", courseId);
+        source.addValue("difficulty", difficulty.name());
+        return jdbcTemplate.queryForObject(sql, source, Integer.class);
     }
 }

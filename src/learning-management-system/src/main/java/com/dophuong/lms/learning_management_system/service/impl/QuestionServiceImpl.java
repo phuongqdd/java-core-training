@@ -11,6 +11,7 @@ import com.dophuong.lms.learning_management_system.entity.Course;
 import com.dophuong.lms.learning_management_system.entity.Question;
 import com.dophuong.lms.learning_management_system.entity.QuestionHistory;
 import com.dophuong.lms.learning_management_system.enums.ActionType;
+import com.dophuong.lms.learning_management_system.enums.Difficulty;
 import com.dophuong.lms.learning_management_system.enums.ErrorCode;
 import com.dophuong.lms.learning_management_system.exception.AppException;
 import com.dophuong.lms.learning_management_system.mapper.QuestionMapper;
@@ -27,7 +28,9 @@ import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.EnumMap;
 import java.util.List;
+import java.util.Map;
 
 @Service
 @RequiredArgsConstructor
@@ -137,4 +140,24 @@ public class QuestionServiceImpl implements QuestionService {
 
         questionRepository.deleteById(questionId);
     }
+
+    @Override
+    public int getTotalQuestions(Long courseId) {
+        if(!courseService.existsById(courseId))
+            throw new AppException(ErrorCode.COURSE_NOT_FOUND);
+        return questionRepository.countByCourseId(courseId);
+    }
+
+    @Override
+    public Map<Difficulty, Integer> getQuestionsByDifficulty(Long courseId) {
+        if(!courseService.existsById(courseId))
+            throw new AppException(ErrorCode.COURSE_NOT_FOUND);
+        Map<Difficulty, Integer> map = new EnumMap<>(Difficulty.class);
+        for(Difficulty difficulty : Difficulty.values()){
+            int cnt = questionRepository.countByCourseIdAndDifficulty(courseId, difficulty);
+            map.put(difficulty, cnt);
+        }
+        return map;
+    }
+
 }

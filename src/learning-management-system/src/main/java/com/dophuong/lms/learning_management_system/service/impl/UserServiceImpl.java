@@ -12,6 +12,7 @@ import com.dophuong.lms.learning_management_system.service.UserService;
 import com.dophuong.lms.learning_management_system.util.StringUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -36,10 +37,18 @@ public class UserServiceImpl implements UserService {
                 .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
     }
 
+
     @Override
     public User getUserByUsername(String username) {
         return userRepository.findByUsername(username)
                 .orElseThrow(() -> new AppException(ErrorCode.USER_NOT_EXISTED));
+    }
+
+    @Override
+    public User getIdInLogin() {
+        String userName = SecurityContextHolder.getContext().getAuthentication().getName();
+        return userRepository.findByUsername(userName).orElseThrow(
+                () -> new AppException(ErrorCode.USER_NOT_EXISTED));
     }
 
     @Override

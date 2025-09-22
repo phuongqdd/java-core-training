@@ -13,6 +13,8 @@ public interface UserService {
 
     User getUserByUsername(String username);
 
+    User getIdInLogin();
+
     UserResponse getProfile(String username);
 
     UserResponse updateProfile(String username, UserUpdateProfileRequest request);
