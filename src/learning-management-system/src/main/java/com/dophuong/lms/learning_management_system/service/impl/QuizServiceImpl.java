@@ -1,6 +1,9 @@
 package com.dophuong.lms.learning_management_system.service.impl;
 
+import com.dophuong.lms.learning_management_system.dto.request.AddQuestionToQuizRequest;
 import com.dophuong.lms.learning_management_system.dto.request.QuizCreateRequest;
+import com.dophuong.lms.learning_management_system.dto.request.QuizUpdateRequest;
+import com.dophuong.lms.learning_management_system.dto.response.QuestionResponse;
 import com.dophuong.lms.learning_management_system.dto.response.QuizDetailResponse;
 import com.dophuong.lms.learning_management_system.dto.response.QuizResponse;
 import com.dophuong.lms.learning_management_system.entity.Quiz;
@@ -9,6 +12,7 @@ import com.dophuong.lms.learning_management_system.enums.Difficulty;
 import com.dophuong.lms.learning_management_system.enums.ErrorCode;
 import com.dophuong.lms.learning_management_system.exception.AppException;
 import com.dophuong.lms.learning_management_system.mapper.QuizMapper;
+import com.dophuong.lms.learning_management_system.repository.QuizQuestionRepository;
 import com.dophuong.lms.learning_management_system.repository.QuizRepository;
 import com.dophuong.lms.learning_management_system.service.CourseService;
 import com.dophuong.lms.learning_management_system.service.QuestionService;
@@ -24,6 +28,7 @@ import java.util.Map;
 
 @Slf4j
 @Service
+@Transactional
 public class QuizServiceImpl implements QuizService {
 
     @Autowired
@@ -35,6 +40,8 @@ public class QuizServiceImpl implements QuizService {
 
     @Autowired
     private QuizRepository quizRepository;
+    @Autowired
+    private QuizQuestionRepository quizQuestionRepository;
 
     @Autowired
     private QuizMapper quizMapper;
@@ -67,12 +74,85 @@ public class QuizServiceImpl implements QuizService {
 
     @Override
     public QuizDetailResponse getQuizDetail(Long courseId, Long quizId) {
-        if(courseService.existsById(courseId))
+        if(!courseService.existsById(courseId))
             throw new AppException(ErrorCode.COURSE_NOT_FOUND);
+
+        if(!quizRepository.existsById(quizId))
+            throw new AppException(ErrorCode.QUIZ_NOT_FOUND);
 
         Quiz quiz = quizRepository.findById(quizId);
 
-        return null;
+        List<QuestionResponse> questionResponses = quizQuestionRepository.findTestDetailsByQuizId(quizId);
+
+        QuizDetailResponse quizDetailResponse = quizMapper.toQuizDetailResponse(quiz);
+
+        quizDetailResponse.setQuestionResponses(questionResponses);
+
+        return quizDetailResponse;
+    }
+
+    @Override
+    @Transactional
+    public void deleteQuestionFromQuiz(Long courseId, Long quizId, Long questionId) {
+        if(!courseService.existsById(courseId))
+            throw new AppException(ErrorCode.COURSE_NOT_FOUND);
+
+        if(!quizRepository.existsById(quizId))
+            throw new AppException(ErrorCode.QUIZ_NOT_FOUND);
+
+        if(!questionService.existsQuestion(questionId))
+            throw new AppException(ErrorCode.QUESTION_NOT_FOUND);
+
+        if(!quizRepository.existsQuestionInQuiz(quizId, questionId))
+            throw new AppException(ErrorCode.QUESTION_NOT_FOUND);
+
+        User user = userService.getIdInLogin();
+
+        quizRepository.deleteQuestionInQuiz(courseId, quizId, questionId, user.getId());
+    }
+
+    @Override
+    @Transactional
+    public void addQuestionToQuiz(Long courseId, Long quizId, AddQuestionToQuizRequest request) {
+        if(!courseService.existsById(courseId))
+            throw new AppException(ErrorCode.COURSE_NOT_FOUND);
+
+        if(!quizRepository.existsById(quizId))
+            throw new AppException(ErrorCode.QUIZ_NOT_FOUND);
+
+        if(!questionService.existsQuestion(request.getQuestionId()))
+            throw new AppException(ErrorCode.QUESTION_NOT_FOUND);
+
+        if(quizRepository.existsQuestionInQuiz(quizId, request.getQuestionId()))
+            throw new AppException(ErrorCode.QUESTION_EXISTED);
+
+        User user = userService.getIdInLogin();
+
+        quizRepository.addQuestionToQuiz(quizId, user.getId(), request.getQuestionId());
+    }
+
+    @Override
+    public void updateQuiz(Long courseId, Long quizId, QuizUpdateRequest request) {
+        if(!courseService.existsById(courseId))
+            throw new AppException(ErrorCode.COURSE_NOT_FOUND);
+
+        if(!quizRepository.existsById(quizId))
+            throw new AppException(ErrorCode.QUIZ_NOT_FOUND);
+
+        User user = userService.getIdInLogin();
+        Quiz quiz = quizMapper.toEntityUpdate(request);
+        quizRepository.updateQuiz(quizId, user.getId(),quiz);
+    }
+
+    @Override
+    public void deleteQuiz(Long courseId, Long quizId) {
+        if(!courseService.existsById(courseId))
+            throw new AppException(ErrorCode.COURSE_NOT_FOUND);
+
+        if(!quizRepository.existsById(quizId))
+            throw new AppException(ErrorCode.QUIZ_NOT_FOUND);
+
+        quizRepository.deleteQuizById(quizId);
     }
 
     private List<Integer> validateToTalQuizRequest(Quiz quiz, Long courseId) {

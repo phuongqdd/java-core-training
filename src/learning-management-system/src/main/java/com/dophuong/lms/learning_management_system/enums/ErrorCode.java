@@ -38,6 +38,7 @@ public enum ErrorCode {
 
     //Question
     QUESTION_NOT_FOUND(1512, "Câu hỏi không tồn tại", HttpStatus.NOT_FOUND),
+    QUESTION_EXISTED(1513, "Câu hỏi đã tồn tại", HttpStatus.CONFLICT),
 
     //Option
     OPTION_NOT_FOUND(1601, "Đáp án không tồn tại", HttpStatus.NOT_FOUND),
@@ -47,7 +48,8 @@ public enum ErrorCode {
     INSUFFICIENT_QUESTION_BANK(1702, "Ngân hàng câu hỏi không đủ để tạo đề", HttpStatus.BAD_REQUEST),
     PERCENTAGE_AN_TOO_HIGH(1703, "Tỉ lệ vận dụng cao (AN) tối đa 10%", HttpStatus.BAD_REQUEST),
     PERCENTAGE_NEGATIVE(1704, "Tỉ lệ các mức độ không được âm", HttpStatus.BAD_REQUEST),
-    TIME_LIMIT_EXCEEDS_CLOSE_TIME(1706, "Thời gian làm bài không được vượt quá thời gian đóng", HttpStatus.BAD_REQUEST)
+    TIME_LIMIT_EXCEEDS_CLOSE_TIME(1706, "Thời gian làm bài không được vượt quá thời gian đóng", HttpStatus.BAD_REQUEST),
+    QUIZ_NOT_FOUND(1707, "Bài kiểm tra không tồn tại", HttpStatus.NOT_FOUND)
     ;
 
     private final int code;                  // Mã lỗi nội bộ

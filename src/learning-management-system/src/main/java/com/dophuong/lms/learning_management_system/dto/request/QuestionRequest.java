@@ -17,6 +17,8 @@ import java.util.List;
 @AllArgsConstructor
 @Builder
 public class QuestionRequest {
+    private Long questionId;
+
     @NotBlank(message = "Nội dung câu hỏi không được để trống")
     @Size(min = 5, message = "Nội dung câu hỏi phải có ít nhất 5 ký tự")
     private String content;
