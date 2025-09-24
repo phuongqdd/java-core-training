@@ -50,7 +50,7 @@ public class Quiz {
     private boolean allowReview = true;
 
     @Column(name = "is_published", nullable = false)
-    private boolean isPublished = false;
+    private boolean published = false;
 
     @Column(name = "created_at", nullable = false)
     private LocalDateTime createdAt;

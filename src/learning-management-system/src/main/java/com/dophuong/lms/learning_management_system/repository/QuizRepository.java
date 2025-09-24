@@ -23,4 +23,10 @@ public interface QuizRepository{
     void updateQuiz(Long quizId, Long userId, Quiz quiz);
 
     void deleteQuizById(Long quizId);
+
+    List<Quiz> findAllByCourseId(Long courseId);
+
+    List<Quiz> findAllByCourseIdForStudent(Long courseId);
+
+    boolean existsByCourseIdAndQuizId(Long courseId, Long quizId);
 }

@@ -6,6 +6,7 @@ import com.dophuong.lms.learning_management_system.enums.ActionType;
 import com.dophuong.lms.learning_management_system.repository.QuizRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
@@ -99,7 +100,7 @@ public class QuizRepositoryImpl implements QuizRepository {
                             .id(rs.getLong("quiz_id"))
                             .title(rs.getString("title"))
                             .description(rs.getString("description"))
-                            .isPublished(rs.getBoolean("is_published"))
+                            .published(rs.getBoolean("is_published"))
                             .allowReview(rs.getBoolean("allow_review"))
                             .attemptsAllowed(rs.getInt("attempts_allowed"))
                             .openTime(rs.getTimestamp("open_time").toLocalDateTime())
@@ -260,5 +261,55 @@ public class QuizRepositoryImpl implements QuizRepository {
                 CALL delete_quiz(:quizId)
                 """;
         jdbcTemplate.update(sql, Map.of("quizId", quizId));
+    }
+
+    @Override
+    public List<Quiz> findAllByCourseId(Long courseId) {
+        String sql = """
+            SELECT quiz_id as id, description, allow_review, attempts_allowed,
+                    close_time, created_at, is_published as published, open_time, pass_mark,
+                    pct_an, pct_ap, pct_rl, pct_un, time_limit, title,
+                    updated_at, course_id , total
+            FROM quiz
+            WHERE course_id = :id
+            """;
+
+        return jdbcTemplate.query(
+                sql,
+                Map.of("id", courseId),
+                new BeanPropertyRowMapper<>(Quiz.class)
+        );
+    }
+
+    @Override
+    public List<Quiz> findAllByCourseIdForStudent(Long courseId) {
+        String sql = """
+            SELECT quiz_id as id, description, allow_review, attempts_allowed,
+                    close_time, created_at, is_published as published, open_time, pass_mark,
+                    pct_an, pct_ap, pct_rl, pct_un, time_limit, title,
+                    updated_at, course_id , total
+            FROM quiz
+            WHERE course_id = :id AND is_published = true
+            """;
+
+        return jdbcTemplate.query(
+                sql,
+                Map.of("id", courseId),
+                new BeanPropertyRowMapper<>(Quiz.class)
+        );
+    }
+
+    @Override
+    public boolean existsByCourseIdAndQuizId(Long courseId, Long quizId) {
+        String sql = """
+                SELECT COUNT(*)
+                FROM quiz
+                WHERE quiz_id = :quizId, course_id = :courseId
+                """;
+        MapSqlParameterSource source = new MapSqlParameterSource()
+                .addValue("quizId", quizId)
+                .addValue("courseId", courseId);
+        Integer cnt = jdbcTemplate.queryForObject(sql, source, Integer.class);
+        return cnt != null && cnt > 0;
     }
 }

@@ -4,6 +4,7 @@ import com.dophuong.lms.learning_management_system.dto.request.QuizCreateRequest
 import com.dophuong.lms.learning_management_system.dto.request.QuizUpdateRequest;
 import com.dophuong.lms.learning_management_system.dto.response.QuizDetailResponse;
 import com.dophuong.lms.learning_management_system.dto.response.QuizResponse;
+import com.dophuong.lms.learning_management_system.dto.response.QuizSummaryResponse;
 import com.dophuong.lms.learning_management_system.entity.Quiz;
 import org.mapstruct.Mapper;
 import org.mapstruct.Mapping;
@@ -24,4 +25,9 @@ public interface QuizMapper {
     QuizDetailResponse toQuizDetailResponse(Quiz quiz);
 
     Quiz toEntityUpdate(QuizUpdateRequest request);
+
+    @Mapping(source = "published", target = "published")
+    QuizSummaryResponse toQuizSummaryResponse(Quiz quiz);
+
+    List<QuizSummaryResponse> toQuizSummaryResponses(List<Quiz> list);
 }

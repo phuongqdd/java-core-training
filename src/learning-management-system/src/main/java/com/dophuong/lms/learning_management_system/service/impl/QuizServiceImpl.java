@@ -6,10 +6,13 @@ import com.dophuong.lms.learning_management_system.dto.request.QuizUpdateRequest
 import com.dophuong.lms.learning_management_system.dto.response.QuestionResponse;
 import com.dophuong.lms.learning_management_system.dto.response.QuizDetailResponse;
 import com.dophuong.lms.learning_management_system.dto.response.QuizResponse;
+import com.dophuong.lms.learning_management_system.dto.response.QuizSummaryResponse;
 import com.dophuong.lms.learning_management_system.entity.Quiz;
 import com.dophuong.lms.learning_management_system.entity.User;
+import com.dophuong.lms.learning_management_system.entity.UserRole;
 import com.dophuong.lms.learning_management_system.enums.Difficulty;
 import com.dophuong.lms.learning_management_system.enums.ErrorCode;
+import com.dophuong.lms.learning_management_system.enums.Role;
 import com.dophuong.lms.learning_management_system.exception.AppException;
 import com.dophuong.lms.learning_management_system.mapper.QuizMapper;
 import com.dophuong.lms.learning_management_system.repository.QuizQuestionRepository;
@@ -23,6 +26,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -80,6 +84,9 @@ public class QuizServiceImpl implements QuizService {
         if(!quizRepository.existsById(quizId))
             throw new AppException(ErrorCode.QUIZ_NOT_FOUND);
 
+        if(!quizRepository.existsByCourseIdAndQuizId(courseId, quizId))
+            throw new AppException(ErrorCode.QUIZ_NOT_IN_COURSE);
+
         Quiz quiz = quizRepository.findById(quizId);
 
         List<QuestionResponse> questionResponses = quizQuestionRepository.findTestDetailsByQuizId(quizId);
@@ -106,6 +113,9 @@ public class QuizServiceImpl implements QuizService {
         if(!quizRepository.existsQuestionInQuiz(quizId, questionId))
             throw new AppException(ErrorCode.QUESTION_NOT_FOUND);
 
+        if(!quizRepository.existsByCourseIdAndQuizId(courseId, quizId))
+            throw new AppException(ErrorCode.QUIZ_NOT_IN_COURSE);
+
         User user = userService.getIdInLogin();
 
         quizRepository.deleteQuestionInQuiz(courseId, quizId, questionId, user.getId());
@@ -123,6 +133,9 @@ public class QuizServiceImpl implements QuizService {
         if(!questionService.existsQuestion(request.getQuestionId()))
             throw new AppException(ErrorCode.QUESTION_NOT_FOUND);
 
+        if(!quizRepository.existsByCourseIdAndQuizId(courseId, quizId))
+            throw new AppException(ErrorCode.QUIZ_NOT_IN_COURSE);
+
         if(quizRepository.existsQuestionInQuiz(quizId, request.getQuestionId()))
             throw new AppException(ErrorCode.QUESTION_EXISTED);
 
@@ -139,6 +152,9 @@ public class QuizServiceImpl implements QuizService {
         if(!quizRepository.existsById(quizId))
             throw new AppException(ErrorCode.QUIZ_NOT_FOUND);
 
+        if(!quizRepository.existsByCourseIdAndQuizId(courseId, quizId))
+            throw new AppException(ErrorCode.QUIZ_NOT_IN_COURSE);
+
         User user = userService.getIdInLogin();
         Quiz quiz = quizMapper.toEntityUpdate(request);
         quizRepository.updateQuiz(quizId, user.getId(),quiz);
@@ -152,7 +168,38 @@ public class QuizServiceImpl implements QuizService {
         if(!quizRepository.existsById(quizId))
             throw new AppException(ErrorCode.QUIZ_NOT_FOUND);
 
+        if(!quizRepository.existsByCourseIdAndQuizId(courseId, quizId))
+            throw new AppException(ErrorCode.QUIZ_NOT_IN_COURSE);
         quizRepository.deleteQuizById(quizId);
+    }
+
+    @Override
+    public List<QuizSummaryResponse> getQuizzes(Long courseId) {
+        if(!courseService.existsById(courseId))
+            throw new AppException(ErrorCode.COURSE_NOT_FOUND);
+
+        User user = userService.getIdInLogin();
+        boolean isInstructorOrAdmin = false;
+        boolean isStudent = false;
+        for (UserRole ur : user.getUserRoles()) {
+            String roleName = ur.getRole().getName();
+            if ("ADMIN".equals(roleName) || "INSTRUCTOR".equals(roleName)) {
+                isInstructorOrAdmin = true;
+            }
+            if ("STUDENT".equals(roleName)) {
+                isStudent = true;
+            }
+        }
+        List<Quiz> quizList = new ArrayList<>();
+        if(isInstructorOrAdmin){
+            quizList = quizRepository.findAllByCourseId(courseId);
+        } else if (isStudent) {
+            quizList = quizRepository.findAllByCourseIdForStudent(courseId);
+        }
+
+        List<QuizSummaryResponse> quizSummaryResponses = quizMapper.toQuizSummaryResponses(quizList);
+
+        return quizSummaryResponses;
     }
 
     private List<Integer> validateToTalQuizRequest(Quiz quiz, Long courseId) {
@@ -171,6 +218,10 @@ public class QuizServiceImpl implements QuizService {
                 quiz.getPctAp() < 0 || quiz.getPctAn() < 0)
             throw new AppException(ErrorCode.PERCENTAGE_NEGATIVE);
 
+        int total = quiz.getPctRl() + quiz.getPctUn() + quiz.getPctAp() + quiz.getPctAn();
+        if(total != 100)
+            throw new AppException(ErrorCode.PERCENTAGE_NOT_100);
+
         Map<Difficulty, Integer> questionsByDifficulty = questionService.getQuestionsByDifficulty(courseId);
 
         int rlCount = Math.round(quiz.getTotal() * quiz.getPctRl() / 100.0f);
@@ -183,10 +234,6 @@ public class QuizServiceImpl implements QuizService {
                 apCount > questionsByDifficulty.get(Difficulty.HARD) ||
                 anCount > questionsByDifficulty.get(Difficulty.VERY_HARD))
             throw new AppException(ErrorCode.INSUFFICIENT_QUESTION_BANK);
-
-        int total = quiz.getPctRl() + quiz.getPctUn() + quiz.getPctAp() + quiz.getPctAn();
-        if(total != 100)
-            throw new AppException(ErrorCode.PERCENTAGE_NOT_100);
 
         if(quiz.getPctAn() > 10)
             throw new AppException(ErrorCode.PERCENTAGE_AN_TOO_HIGH);

@@ -49,7 +49,8 @@ public enum ErrorCode {
     PERCENTAGE_AN_TOO_HIGH(1703, "Tỉ lệ vận dụng cao (AN) tối đa 10%", HttpStatus.BAD_REQUEST),
     PERCENTAGE_NEGATIVE(1704, "Tỉ lệ các mức độ không được âm", HttpStatus.BAD_REQUEST),
     TIME_LIMIT_EXCEEDS_CLOSE_TIME(1706, "Thời gian làm bài không được vượt quá thời gian đóng", HttpStatus.BAD_REQUEST),
-    QUIZ_NOT_FOUND(1707, "Bài kiểm tra không tồn tại", HttpStatus.NOT_FOUND)
+    QUIZ_NOT_FOUND(1707, "Bài kiểm tra không tồn tại", HttpStatus.NOT_FOUND),
+    QUIZ_NOT_IN_COURSE(1708, "Bài kiểm tra không tồn tại trong khóa học", HttpStatus.NOT_FOUND)
     ;
 
     private final int code;                  // Mã lỗi nội bộ

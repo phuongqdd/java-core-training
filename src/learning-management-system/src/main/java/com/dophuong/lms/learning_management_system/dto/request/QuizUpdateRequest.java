@@ -31,5 +31,5 @@ public class QuizUpdateRequest {
     private int attemptsAllowed;
 
     private boolean allowReview = true;
-    private boolean isPublished = false;
+    private boolean published = false;
 }

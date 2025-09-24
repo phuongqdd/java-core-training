@@ -38,7 +38,7 @@ public class QuizCreateRequest {
     private int attemptsAllowed;
 
     private boolean allowReview = true;
-    private boolean isPublished = false;
+    private boolean published = false;
 
     private int pctRl;
     private int pctUn;

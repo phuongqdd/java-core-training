@@ -1,13 +1,9 @@
 package com.dophuong.lms.learning_management_system.controller;
 
 import com.dophuong.lms.learning_management_system.dto.request.AddQuestionToQuizRequest;
-import com.dophuong.lms.learning_management_system.dto.request.QuestionRequest;
 import com.dophuong.lms.learning_management_system.dto.request.QuizCreateRequest;
 import com.dophuong.lms.learning_management_system.dto.request.QuizUpdateRequest;
-import com.dophuong.lms.learning_management_system.dto.response.ApiResponse;
-import com.dophuong.lms.learning_management_system.dto.response.QuizDetailResponse;
-import com.dophuong.lms.learning_management_system.dto.response.QuizExportResponse;
-import com.dophuong.lms.learning_management_system.dto.response.QuizResponse;
+import com.dophuong.lms.learning_management_system.dto.response.*;
 import com.dophuong.lms.learning_management_system.service.QuizExportService;
 import com.dophuong.lms.learning_management_system.service.QuizService;
 import jakarta.validation.Valid;
@@ -18,6 +14,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @RestController
 @RequestMapping("/courses/{courseId}/quizzes")
@@ -26,6 +23,20 @@ public class QuizController {
     private QuizService quizService;
     @Autowired
     private QuizExportService quizExportService;
+
+    @GetMapping
+    @PreAuthorize("hasRole('ADMIN') or @courseSecurity.isUserInCourse(#courseId)")
+    public ResponseEntity<ApiResponse<List<QuizSummaryResponse>>> getQuizzes(
+            @PathVariable(name = "courseId") Long courseId
+    ){
+        List<QuizSummaryResponse> quizResponses = quizService.getQuizzes(courseId);
+        return ResponseEntity.ok(ApiResponse.<List<QuizSummaryResponse>>builder()
+                        .status(HttpStatus.OK.value())
+                        .message("Lấy danh sách quiz thành công")
+                        .data(quizResponses)
+                        .timestamp(LocalDateTime.now())
+                .build());
+    }
 
     @PostMapping
     @PreAuthorize("hasRole('ADMIN') or @courseSecurity.hasInstructorInCourse(#courseId)")

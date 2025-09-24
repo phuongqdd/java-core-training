@@ -7,17 +7,11 @@ import java.time.LocalDateTime;
 
 @Data
 @Builder
-public class QuizResponse {
+public class QuizSummaryResponse {
     private Long id;
-    private String courseTitle;
     private String title;
-    private String description;
     private LocalDateTime openTime;
     private LocalDateTime closeTime;
     private int timeLimit;
-    private int attemptsAllowed;
-    private int total;
-    private float passMark;
-    private boolean allowReview;
     private boolean published;
 }

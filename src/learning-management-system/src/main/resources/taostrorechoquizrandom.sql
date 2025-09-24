@@ -116,4 +116,160 @@ END $$
 
 DELIMITER ;
 
+-- tạo 1 submission
+DELIMITER $$
+CREATE PROCEDURE create_submission(
+	IN p_quiz_id BIGINT,
+    IN p_user_id BIGINT
+)
+BEGIN
+	DECLARE v_submission_id BIGINT;
+    DECLARE V_attempt_no INT;
+    DECLARE done INT DEFAULT 0;
+    DECLARE v_question_id BIGINT;
+    DECLARE v_option_id BIGINT;
+    
+    -- Tính lần làm thứ mấy
+    SELECT COALESCE(MAX(attempt_no), 0) + 1
+    INTO v_attempt_no
+    FROM submission
+    WHERE quiz_id = p_quiz_id AND user_id = p_user_id;
+    
+    -- Tạo submission
+    INSERT INTO submission(quiz_id, user_id, attempt_no, status, started_at, duration)
+    VALUES(p_quiz_id, p_user_id, v_attempt_no, "IN_PROGRESS", NOW(), 0);
+    
+    SET v_submission_id = LAST_INSERT_ID();
+    
+    -- Sinh câu hỏi từ quiz gốc (trộn câu hỏi)
+    WITH shuffed_question AS(
+		SELECT q.question_id, q.content
+        FROM quiz_question qq JOIN question q
+			ON qq.quiz_id = p_quiz_id
+		ORDER BY RAND()
+    )
+    INSERT INTO submission_question(submission_id, question_id, question_text, question_order, is_correct, score)
+    SELECT v_submission_id, question_id, content, ROW_NUMBER() OVER() AS question_order, 0, 0
+    FROM shuffed_question;
+    
+    
+    -- Đảo cả đáp án
+    WITH submission_questions AS (
+        SELECT submission_question_id, question_id
+        FROM submission_question
+        WHERE submission_id = v_submission_id
+    )
+    INSERT INTO submission_question_option(submission_question_id, option_id, option_text, option_order, is_correct, is_chosen)
+    SELECT 
+        sq.submission_question_id,
+        o.id,
+        o.content,
+        ROW_NUMBER() OVER (PARTITION BY sq.submission_question_id ORDER BY RAND()) AS option_order,
+        o.is_correct,
+        false
+    FROM submission_questions sq
+    JOIN option o ON o.question_id = sq.question_id;
+    
+    
+END $$
+DELIMITER ;
+
+-- dùng cursor loop
+
+DELIMITER $$
+
+CREATE PROCEDURE create_submission(
+    IN p_quiz_id BIGINT,
+    IN p_user_id BIGINT
+)
+BEGIN
+    DECLARE v_submission_id BIGINT;
+    DECLARE v_attempt_no INT;
+
+    DECLARE done_question INT DEFAULT 0;
+    DECLARE done_option INT DEFAULT 0;
+
+    DECLARE v_question_id BIGINT;
+    DECLARE v_question_text TEXT;
+    DECLARE v_submission_question_id BIGINT;
+
+    DECLARE v_option_id BIGINT;
+    DECLARE v_option_text TEXT;
+    DECLARE v_option_is_correct BOOLEAN;
+
+    -- Tính lần làm mới
+    SELECT COALESCE(MAX(attempt_no),0) + 1
+    INTO v_attempt_no
+    FROM submission
+    WHERE quiz_id = p_quiz_id AND enrollment_id = p_user_id;
+
+    -- Tạo submission
+    INSERT INTO submission(quiz_id, enrollment_id, attempt_no, status, started_at, duration)
+    VALUES(p_quiz_id, p_user_id, v_attempt_no, 'IN_PROGRESS', NOW(), 0);
+
+    SET v_submission_id = LAST_INSERT_ID();
+
+    -- Cursor cho câu hỏi (shuffle)
+    DECLARE cur_question CURSOR FOR
+        SELECT q.question_id, q.content
+        FROM quiz_question qq
+        JOIN question q ON qq.question_id = q.question_id
+        WHERE qq.quiz_id = p_quiz_id
+        ORDER BY RAND();
+
+    DECLARE CONTINUE HANDLER FOR NOT FOUND SET done_question = 1;
+
+    OPEN cur_question;
+    SET @q_order = 1;
+
+    question_loop: LOOP
+        FETCH cur_question INTO v_question_id, v_question_text;
+        IF done_question = 1 THEN
+            LEAVE question_loop;
+        END IF;
+
+        -- Tạo submission_question
+        INSERT INTO submission_question(submission_id, question_id, question_text, question_order, is_correct, score)
+        VALUES(v_submission_id, v_question_id, v_question_text, @q_order, 0, 0);
+
+        SET v_submission_question_id = LAST_INSERT_ID();
+        SET @q_order = @q_order + 1;
+
+        -- Cursor cho đáp án (shuffle)
+        DECLARE cur_option CURSOR FOR
+            SELECT option_id, content, is_correct
+            FROM option
+            WHERE question_id = v_question_id
+            ORDER BY RAND();
+
+        DECLARE CONTINUE HANDLER FOR NOT FOUND SET done_option = 1;
+
+        OPEN cur_option;
+        SET @o_order = 1;
+
+        option_loop: LOOP
+            FETCH cur_option INTO v_option_id, v_option_text, v_option_is_correct;
+            IF done_option = 1 THEN
+                LEAVE option_loop;
+            END IF;
+
+            -- Tạo submission_question_option
+            INSERT INTO submission_question_option(
+                submission_question_id, option_id, option_text, option_order, is_correct, is_chosen
+            )
+            VALUES(v_submission_question_id, v_option_id, v_option_text, @o_order, v_option_is_correct, 0);
+
+            SET @o_order = @o_order + 1;
+        END LOOP option_loop;
+
+        CLOSE cur_option;
+        SET done_option = 0; -- reset flag cho đáp án câu tiếp theo
+    END LOOP question_loop;
+
+    CLOSE cur_question;
+END$$
+
+DELIMITER ;
+
+
 
