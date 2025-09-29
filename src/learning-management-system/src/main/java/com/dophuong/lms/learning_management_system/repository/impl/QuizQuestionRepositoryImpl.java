@@ -1,8 +1,9 @@
-package com.dophuong.lms.learning_management_system.repository;
+package com.dophuong.lms.learning_management_system.repository.impl;
 
 import com.dophuong.lms.learning_management_system.dto.response.OptionResponse;
 import com.dophuong.lms.learning_management_system.dto.response.QuestionResponse;
 import com.dophuong.lms.learning_management_system.enums.Difficulty;
+import com.dophuong.lms.learning_management_system.repository.QuizQuestionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Service;
@@ -13,7 +14,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class QuizQuestionRepositoryImpl implements QuizQuestionRepository{
+public class QuizQuestionRepositoryImpl implements QuizQuestionRepository {
 
     @Autowired
     private NamedParameterJdbcTemplate jdbcTemplate;

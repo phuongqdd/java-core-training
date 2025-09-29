@@ -304,12 +304,56 @@ public class QuizRepositoryImpl implements QuizRepository {
         String sql = """
                 SELECT COUNT(*)
                 FROM quiz
-                WHERE quiz_id = :quizId, course_id = :courseId
+                WHERE quiz_id = :quizId AND course_id = :courseId
                 """;
         MapSqlParameterSource source = new MapSqlParameterSource()
                 .addValue("quizId", quizId)
                 .addValue("courseId", courseId);
         Integer cnt = jdbcTemplate.queryForObject(sql, source, Integer.class);
         return cnt != null && cnt > 0;
+    }
+
+    @Override
+    public int findAttemptsById(Long quizId) {
+        String sql = """
+            SELECT attempts_allowed
+            FROM quiz
+            WHERE quiz_id = :quizId
+            """;
+
+        Integer attempts = jdbcTemplate.queryForObject(sql, Map.of("quizId", quizId), Integer.class);
+        return (attempts != null) ? attempts : 0;
+    }
+
+    public LocalDateTime findOpenTimeById(Long quizId) {
+        String sql = """
+                SELECT open_time
+                FROM quiz
+                WHERE quiz_id = :quizId
+                """;
+
+        return jdbcTemplate.queryForObject(
+                sql,
+                new MapSqlParameterSource("quizId", quizId),
+                (rs, rowNum) -> rs.getTimestamp("open_time") != null
+                        ? rs.getTimestamp("open_time").toLocalDateTime()
+                        : null
+        );
+    }
+
+    public LocalDateTime findCloseTimeById(Long quizId) {
+        String sql = """
+                SELECT close_time
+                FROM quiz
+                WHERE quiz_id = :quizId
+                """;
+
+        return jdbcTemplate.queryForObject(
+                sql,
+                new MapSqlParameterSource("quizId", quizId),
+                (rs, rowNum) -> rs.getTimestamp("close_time") != null
+                        ? rs.getTimestamp("close_time").toLocalDateTime()
+                        : null
+        );
     }
 }

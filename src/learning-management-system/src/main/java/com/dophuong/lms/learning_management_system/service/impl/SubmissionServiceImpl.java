@@ -1,13 +1,9 @@
 package com.dophuong.lms.learning_management_system.service.impl;
 
 import com.dophuong.lms.learning_management_system.dto.response.SubmissionResponse;
-import com.dophuong.lms.learning_management_system.entity.Quiz;
-import com.dophuong.lms.learning_management_system.entity.Submission;
 import com.dophuong.lms.learning_management_system.entity.User;
 import com.dophuong.lms.learning_management_system.enums.ErrorCode;
-import com.dophuong.lms.learning_management_system.enums.Status;
 import com.dophuong.lms.learning_management_system.exception.AppException;
-import com.dophuong.lms.learning_management_system.repository.CourseJdbcRepository;
 import com.dophuong.lms.learning_management_system.repository.QuizRepository;
 import com.dophuong.lms.learning_management_system.repository.SubmissionRepository;
 import com.dophuong.lms.learning_management_system.service.CourseService;
@@ -46,6 +42,30 @@ public class SubmissionServiceImpl implements SubmissionService {
 
         User user = userService.getIdInLogin();
         Long userId = user.getId();
-        return submissionRepository.createSubmission(quizId, courseId);
+
+        int soLanDaLam = submissionRepository.countQuizAttempts(userId, quizId);
+        int soLanLamToiDa = quizRepository.findAttemptsById(quizId);
+
+        if(soLanDaLam >= soLanLamToiDa)
+            throw new AppException(ErrorCode.SUBMISSION_OUT_OF_ATTEMPTS);
+
+
+
+        return submissionRepository.createSubmission(quizId, userId);
+    }
+
+    public void validateQuizTime(Long quizId) {
+        LocalDateTime now = LocalDateTime.now();
+
+        LocalDateTime openTime = quizRepository.findOpenTimeById(quizId);
+        LocalDateTime closeTime = quizRepository.findCloseTimeById(quizId);
+
+        if (openTime != null && now.isBefore(openTime)) {
+            throw new AppException(ErrorCode.SUBMISSION_NOT_OPEN_YET);
+        }
+
+        if (closeTime != null && now.isAfter(closeTime)) {
+            throw new AppException(ErrorCode.SUBMISSION_CLOSED);
+        }
     }
 }

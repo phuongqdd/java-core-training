@@ -5,5 +5,7 @@ import com.dophuong.lms.learning_management_system.dto.response.SubmissionRespon
 
 public interface SubmissionRepository {
 
-    SubmissionResponse createSubmission(Long quizId, Long courseId);
+    SubmissionResponse createSubmission(Long quizId, Long userId);
+
+    int countQuizAttempts(Long userId, Long quizId);
 }

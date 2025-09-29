@@ -9,7 +9,6 @@ import java.util.List;
 @Builder
 public class SubmissionQuestionResponse {
     private Long submissionQuestionId;
-    private Long questionId;
     private String questionText;
     private int questionOrder;
     private List<SubmissionQuestionOptionResponse> options;

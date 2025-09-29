@@ -1,4 +1,4 @@
-- Khái niệm:
+git- Khái niệm:
     + là một tiến trình thực hiện nhiều luồng đồng thời.
     + Một ứng dụng Java ngoài luồng chính có thể có các luồng khác thực thi đồng thời làm ứng dụng chạy nhanh và hiệu quả hơn.
     + Ví dụ:

@@ -39,12 +39,12 @@ public class CourseController {
         return ResponseEntity.status(HttpStatus.CREATED).body(response1);
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ApiResponse<List<UserCourseResponse>>> getAllCourseById(@PathVariable Long id){
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<ApiResponse<List<UserCourseResponse>>> getAllCourseById(@PathVariable Long userId){
         return ResponseEntity.ok(ApiResponse.<List<UserCourseResponse>>builder()
                         .status(HttpStatus.OK.value())
-                        .message("Lấy danh sách khóa học cho id = " + id + " thành công")
-                        .data(courseService.getAllCourseById(id))
+                        .message("Lấy danh sách khóa học cho id = " + userId + " thành công")
+                        .data(courseService.getAllCourseById(userId))
                         .timestamp(LocalDateTime.now())
                 .build());
     }

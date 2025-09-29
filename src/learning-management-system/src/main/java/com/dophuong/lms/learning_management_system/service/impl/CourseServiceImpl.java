@@ -31,15 +31,11 @@ import java.util.stream.Collectors;
 public class CourseServiceImpl implements CourseService {
 
     @Autowired
-    private CourseRepository courseRepository;
-    @Autowired
     private UserRepository userRepository;
     @Autowired
+    private CourseRepository courseRepository;
+    @Autowired
     private UserCourseRepository userCourseRepository;
-    @Autowired
-    private CourseJdbcRepository courseJdbcRepository;
-    @Autowired
-    private UserCourseJdbcRepository userCourseJdbcRepository;
     @Autowired
     private RoleRepository roleRepository;
 
@@ -51,13 +47,13 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public Course getCourse(Long id) {
-        return courseJdbcRepository.findById(id)
+        return courseRepository.findById(id)
                 .orElseThrow(() -> new AppException(ErrorCode.COURSE_NOT_FOUND));
     }
 
     @Override
     public boolean existsById(Long id) {
-        return courseJdbcRepository.existsById(id);
+        return courseRepository.existsById(id);
     }
 
     @Override
@@ -73,7 +69,7 @@ public class CourseServiceImpl implements CourseService {
         Course course = courseMapper.toEntity(request);
         course.setCreatedAt(LocalDateTime.now());
 
-        course = courseJdbcRepository.save(course);
+        course = courseRepository.save(course);
 
         Role role = roleRepository.findByName("INSTRUCTOR")
                 .orElseThrow(() -> new AppException(ErrorCode.ROLE_NOT_FOUND));
@@ -86,7 +82,7 @@ public class CourseServiceImpl implements CourseService {
                 .enrolledAt(LocalDateTime.now())
                 .build();
 
-        userCourseJdbcRepository.save(userCourse);
+        userCourseRepository.save(userCourse);
         if (course.getUserCourses() == null) {
             course.setUserCourses(new ArrayList<>());
         }
@@ -97,13 +93,18 @@ public class CourseServiceImpl implements CourseService {
     }
 
     @Override
-    public List<UserCourseResponse> getAllCourseById(Long id) {
-        return List.of();
+    public List<UserCourseResponse> getAllCourseById(Long userId) {
+        User user = userRepository.findById(userId).orElseThrow(() ->
+                new AppException(ErrorCode.USER_NOT_EXISTED));
+        return userCourseRepository.findAllByCourseForUser(userId);
     }
 
     @Override
     public List<UserInCourseResponse> getAllUsersInCourse(Long courseId) {
-        return userCourseJdbcRepository.findByCourseId(courseId)
+        if(!courseRepository.existsById(courseId))
+            throw new AppException(ErrorCode.COURSE_NOT_FOUND);
+
+        return userCourseRepository.findByCourseId(courseId)
                 .stream()
                 .map(userCourseMapper::toResponse1)
                 .collect(Collectors.toList());
@@ -116,8 +117,8 @@ public class CourseServiceImpl implements CourseService {
 
     @Override
     public AddUserToCourseResponse addUserToCourse(Long courseId, AddUserToCourseRequest request) {
-        courseJdbcRepository.addUserToCourse(courseId, request.getUserId(), request.getRole());
-        UserCourse userCourse = courseJdbcRepository.getUserCourse(courseId, request.getUserId());
+        courseRepository.addUserToCourse(courseId, request.getUserId(), request.getRole());
+        UserCourse userCourse = courseRepository.getUserCourse(courseId, request.getUserId());
         return userCourseMapper.toResponse(userCourse);
     }
 

@@ -9,7 +9,7 @@ import java.util.List;
 
 @Mapper(componentModel = "spring")
 public interface SubmissionQuestionOptionMapper {
-    @Mapping(source = "option.id", target = "optionId")
+    @Mapping(source = "option.id", target = "submissionOptionId")
     SubmissionQuestionOptionResponse toResponse(SubmissionQuestionOption submissionQuestionOption);
 
     List<SubmissionQuestionOptionResponse> toResponseList(List<SubmissionQuestionOption> list);

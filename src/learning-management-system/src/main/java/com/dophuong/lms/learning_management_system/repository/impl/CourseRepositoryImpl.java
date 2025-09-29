@@ -6,7 +6,7 @@ import com.dophuong.lms.learning_management_system.entity.User;
 import com.dophuong.lms.learning_management_system.entity.UserCourse;
 import com.dophuong.lms.learning_management_system.enums.ErrorCode;
 import com.dophuong.lms.learning_management_system.exception.AppException;
-import com.dophuong.lms.learning_management_system.repository.CourseJdbcRepository;
+import com.dophuong.lms.learning_management_system.repository.CourseRepository;
 import com.dophuong.lms.learning_management_system.repository.RoleRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,7 +26,7 @@ import java.util.Optional;
 
 @Slf4j
 @Repository
-public class CourseRepositoryImpl implements CourseJdbcRepository {
+public class CourseRepositoryImpl implements CourseRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 

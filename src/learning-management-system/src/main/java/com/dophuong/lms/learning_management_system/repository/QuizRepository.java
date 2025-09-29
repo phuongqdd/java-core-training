@@ -3,6 +3,7 @@ package com.dophuong.lms.learning_management_system.repository;
 import com.dophuong.lms.learning_management_system.entity.Quiz;
 import jakarta.validation.constraints.NotNull;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public interface QuizRepository{
@@ -29,4 +30,10 @@ public interface QuizRepository{
     List<Quiz> findAllByCourseIdForStudent(Long courseId);
 
     boolean existsByCourseIdAndQuizId(Long courseId, Long quizId);
+
+    int findAttemptsById(Long quizId);
+
+    LocalDateTime findOpenTimeById(Long quizId);
+
+    LocalDateTime findCloseTimeById(Long quizId);
 }

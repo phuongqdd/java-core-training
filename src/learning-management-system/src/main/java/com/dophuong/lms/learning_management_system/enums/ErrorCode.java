@@ -50,7 +50,13 @@ public enum ErrorCode {
     PERCENTAGE_NEGATIVE(1704, "Tỉ lệ các mức độ không được âm", HttpStatus.BAD_REQUEST),
     TIME_LIMIT_EXCEEDS_CLOSE_TIME(1706, "Thời gian làm bài không được vượt quá thời gian đóng", HttpStatus.BAD_REQUEST),
     QUIZ_NOT_FOUND(1707, "Bài kiểm tra không tồn tại", HttpStatus.NOT_FOUND),
-    QUIZ_NOT_IN_COURSE(1708, "Bài kiểm tra không tồn tại trong khóa học", HttpStatus.NOT_FOUND)
+    QUIZ_NOT_IN_COURSE(1708, "Bài kiểm tra không tồn tại trong khóa học", HttpStatus.NOT_FOUND),
+
+
+    //Submission
+    SUBMISSION_OUT_OF_ATTEMPTS(1801, "Bạn đã hết lượt làm bài kiểm tra này!", HttpStatus.BAD_REQUEST),
+    SUBMISSION_NOT_OPEN_YET(1802, "Bài kiểm tra chưa được mở!", HttpStatus.BAD_REQUEST),
+    SUBMISSION_CLOSED(1803, "Bài kiểm tra đã kết thúc!", HttpStatus.BAD_REQUEST)
     ;
 
     private final int code;                  // Mã lỗi nội bộ

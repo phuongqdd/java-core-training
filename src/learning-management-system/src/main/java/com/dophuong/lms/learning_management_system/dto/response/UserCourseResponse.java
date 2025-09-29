@@ -1,5 +1,6 @@
 package com.dophuong.lms.learning_management_system.dto.response;
 
+import com.dophuong.lms.learning_management_system.enums.Role;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -13,15 +14,12 @@ import java.time.LocalDateTime;
 @Builder
 public class UserCourseResponse {
     private Long courseId;
-    private String name;          // thay vì title
+    private String courseName;
     private String description;
-    private String thumbnailUrl;  // thay vì thumbnail
-    private Integer capacity;
-    private Boolean isPublished;
-    private LocalDateTime createdAt;
+    private String thumbnailUrl;
 
     // Thông tin tham gia của user
     private LocalDateTime enrolledAt;
-    private String role;
+    private Role roleName;
     private Boolean isOwner;
 }

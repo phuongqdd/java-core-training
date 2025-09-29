@@ -15,7 +15,7 @@ import com.dophuong.lms.learning_management_system.enums.Difficulty;
 import com.dophuong.lms.learning_management_system.enums.ErrorCode;
 import com.dophuong.lms.learning_management_system.exception.AppException;
 import com.dophuong.lms.learning_management_system.mapper.QuestionMapper;
-import com.dophuong.lms.learning_management_system.repository.CourseJdbcRepository;
+import com.dophuong.lms.learning_management_system.repository.CourseRepository;
 import com.dophuong.lms.learning_management_system.repository.QuestionRepository;
 import com.dophuong.lms.learning_management_system.service.CourseService;
 import com.dophuong.lms.learning_management_system.service.OptionService;
@@ -38,7 +38,7 @@ import java.util.Map;
 public class QuestionServiceImpl implements QuestionService {
 
     private final QuestionRepository questionRepository;
-    private final CourseJdbcRepository courseJdbcRepository;
+    private final CourseRepository courseRepository;
 
     private final CourseService courseService;
     private final OptionService optionService;

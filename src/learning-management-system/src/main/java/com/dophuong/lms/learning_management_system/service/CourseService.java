@@ -20,7 +20,7 @@ public interface CourseService {
 
     CourseCreateResponse createCourse(@Valid CourseCreateRequest request, String name);
 
-    List<UserCourseResponse> getAllCourseById(Long id);
+    List<UserCourseResponse> getAllCourseById(Long userId);
 
     List<UserInCourseResponse> getAllUsersInCourse(Long courseId);
 

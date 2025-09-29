@@ -7,7 +7,6 @@ import lombok.Data;
 @Builder
 public class SubmissionQuestionOptionResponse {
     private Long submissionOptionId;
-    private Long optionId;
     private String optionText;
     private int optionOrder;
     private boolean chosen;

@@ -1,9 +1,10 @@
 package com.dophuong.lms.learning_management_system.repository.impl;
 
+import com.dophuong.lms.learning_management_system.dto.response.UserCourseResponse;
 import com.dophuong.lms.learning_management_system.entity.Role;
 import com.dophuong.lms.learning_management_system.entity.User;
 import com.dophuong.lms.learning_management_system.entity.UserCourse;
-import com.dophuong.lms.learning_management_system.repository.UserCourseJdbcRepository;
+import com.dophuong.lms.learning_management_system.repository.UserCourseRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
@@ -17,7 +18,7 @@ import java.sql.Timestamp;
 import java.util.List;
 
 @Service
-public class UserCourseRepositoryImpl implements UserCourseJdbcRepository {
+public class UserCourseRepositoryImpl implements UserCourseRepository {
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
@@ -113,5 +114,22 @@ public class UserCourseRepositoryImpl implements UserCourseJdbcRepository {
     public void deleteById(Long id) {
         String sql = "DELETE FROM user_course WHERE id=?";
         jdbcTemplate.update(sql, id);
+    }
+
+    @Override
+    public List<UserCourseResponse> findAllByCourseForUser(Long userId) {
+        String sql = """
+                SELECT c.course_id, c.name as courseName, c.description, c.thumbnail_url,
+                        uc.enrolled_at, r.name as roleName, uc.is_owner
+                FROM user_course uc
+                    JOIN user u ON uc.user_id = u.user_id
+                    JOIN course c ON uc.course_id = c.course_id
+                    JOIN role r ON uc.role_id = r.role_id
+                WHERE u.user_id = ?
+                """;
+
+        return jdbcTemplate.query(sql,
+                new BeanPropertyRowMapper<>(UserCourseResponse.class),
+                userId);
     }
 }
