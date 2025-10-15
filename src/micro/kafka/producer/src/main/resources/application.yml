@@ -1,0 +1,30 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: producer
+
+  cloud:
+    function:
+      definition: toLowerCase
+    function.web.path: /tolower
+
+  kafka:
+    producer:
+      bootstrap-servers: localhost:9092
+#      key-serializer: org.apache.kafka.common.serialization.StringSerializer
+#      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+#
+#      properties:
+#        # Không thêm header __TypeId__ ?? tránh ràng bu?c class gi?a microservice
+#        spring.json.add.type.headers: false
+
+#        # G?i retry t?i ?a 3 l?n n?u Kafka t?m l?i
+#        retries: 3
+#        # Ch? ack t? t?t c? broker ? ??m b?o d? li?u an toàn
+#        acks: all
+#        # Nén d? li?u ?? t?i ?u network
+#        compression.type: gzip
+
+

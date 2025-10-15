@@ -171,8 +171,10 @@ public class CourseRepositoryImpl implements CourseRepository {
             JOIN user u ON uc.user_id = u.user_id
             WHERE uc.course_id = ? AND u.username = ?
             """;
+        log.warn("Con điên user: {}", name);
 
         String role = jdbcTemplate.queryForObject(sql, new Object[]{courseId, name}, String.class);
+        log.warn("Con điên {}", role);
         return "INSTRUCTOR".equals(role);
     }
 

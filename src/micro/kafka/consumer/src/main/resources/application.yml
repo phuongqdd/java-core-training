@@ -1,0 +1,27 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: consumer
+
+  kafka:
+    consumer:
+      bootstrap-servers: localhost:9092 #K?t n?i ??n Kafka broker
+
+      # Deserializer = b? gi?i mã (byte -> Object)
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      # Dùng ErrorHandlingDeserializer giúp b?t l?i gi?i mã mà không làm consumer crash
+
+      properties:
+        # Khi ErrorHandlingDeserializer ho?t ??ng, nó c?n bi?t deserializer th?c s? là gì:
+        spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
+        # Th?c t? v?n deserialize b?ng JsonDeserializer
+
+        spring.json.trusted.packages: "*"
+        # Cho phép deserialize JSON ??n t? b?t k? package nào (d? phát tri?n).
+        # Trong production, có th? gi?i h?n, ví d?: "com.demo.consumer"
+
+        spring.json.value.default.type: com.dophuong.consumer.RiderLocation
+        # Khi nh?n JSON, s? t? ??ng chuy?n thành object ki?u RiderLocation

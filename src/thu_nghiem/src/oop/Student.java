@@ -18,6 +18,10 @@ public class Student {
 	        return a + b;
 	    }
 
+		double add(int a, double b) {
+			return a + b;
+		}
+
 	    int add(int a, int b, int c) {
 	        return a + b + c;
 	    }

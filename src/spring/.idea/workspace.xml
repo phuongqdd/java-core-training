@@ -1,19 +1,71 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="4dfe783e-bf13-4037-94f9-9c5143ac8f28" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/../micro-lms/course-service/src/main/java/com/dophuong/course_service/entity/Course.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/course-service/src/main/java/com/dophuong/course_service/entity/UserCourse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/course-service/src/main/java/com/dophuong/course_service/mapper/CourseMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/course-service/src/main/java/com/dophuong/course_service/mapper/UserCourseMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/config/ApplicationInitConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/config/CustomJwtDecoder.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/config/JwtAuthenticationEntryPoint.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/config/PasswordConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/config/SecurityConfig.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/controller/AuthenticationController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/controller/UserController.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/dto/request/AuthenticationRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/dto/request/IntrospectRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/dto/request/LogoutRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/dto/request/PasswordChangeRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/dto/request/RefreshTokenRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/dto/request/RoleRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/dto/request/UpdateUserRoleRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/dto/request/UserCreateRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/dto/request/UserUpdateProfileRequest.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/dto/response/ApiResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/dto/response/AuthenticationResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/dto/response/IntrospectResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/dto/response/RoleResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/dto/response/UserResponse.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/entity/InvalidatedToken.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/entity/Role.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/entity/User.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/entity/UserRole.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/enums/ActionType.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/enums/Difficulty.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/enums/ErrorCode.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/enums/Gender.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/enums/Role.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/enums/Status.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/exception/AppException.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/exception/CustomAccessDeniedHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/exception/GlobalExceptionHandler.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/mapper/RoleMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/mapper/UserMapper.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/repository/InvalidatedTokenRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/repository/RoleRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/repository/UserRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/repository/UserRoleRepository.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/service/AuthenticationService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/service/RoleService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/service/UserService.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/service/impl/AuthenticationServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/service/impl/RoleServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/service/impl/UserServiceImpl.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/identity-service/src/main/java/com/dophuong/identity_service/util/StringUtil.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/question-service/src/main/java/com/dophuong/question_service/repository/feign/UserClient.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/../micro-lms/quiz-service/src/main/resources/application.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../learning-management-system/src/main/java/com/dophuong/lms/learning_management_system/controller/QuizController.java" beforeDir="false" afterPath="$PROJECT_DIR$/../learning-management-system/src/main/java/com/dophuong/lms/learning_management_system/controller/QuizController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../learning-management-system/src/main/java/com/dophuong/lms/learning_management_system/entity/Quiz.java" beforeDir="false" afterPath="$PROJECT_DIR$/../learning-management-system/src/main/java/com/dophuong/lms/learning_management_system/entity/Quiz.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../learning-management-system/src/main/java/com/dophuong/lms/learning_management_system/enums/ErrorCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/../learning-management-system/src/main/java/com/dophuong/lms/learning_management_system/enums/ErrorCode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../learning-management-system/src/main/java/com/dophuong/lms/learning_management_system/repository/QuestionRepository.java" beforeDir="false" afterPath="$PROJECT_DIR$/../learning-management-system/src/main/java/com/dophuong/lms/learning_management_system/repository/QuestionRepository.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../learning-management-system/src/main/java/com/dophuong/lms/learning_management_system/repository/impl/QuestionRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../learning-management-system/src/main/java/com/dophuong/lms/learning_management_system/repository/impl/QuestionRepositoryImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../learning-management-system/src/main/java/com/dophuong/lms/learning_management_system/service/QuestionService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../learning-management-system/src/main/java/com/dophuong/lms/learning_management_system/service/QuestionService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../learning-management-system/src/main/java/com/dophuong/lms/learning_management_system/service/UserService.java" beforeDir="false" afterPath="$PROJECT_DIR$/../learning-management-system/src/main/java/com/dophuong/lms/learning_management_system/service/UserService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../learning-management-system/src/main/java/com/dophuong/lms/learning_management_system/service/impl/QuestionServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../learning-management-system/src/main/java/com/dophuong/lms/learning_management_system/service/impl/QuestionServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../learning-management-system/src/main/java/com/dophuong/lms/learning_management_system/service/impl/UserServiceImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../learning-management-system/src/main/java/com/dophuong/lms/learning_management_system/service/impl/UserServiceImpl.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/transactional.docx" beforeDir="false" afterPath="$PROJECT_DIR$/transactional.docx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/~$ansactional.docx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/~WRL3930.tmp" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../learning-management-system/src/main/java/com/dophuong/lms/learning_management_system/repository/impl/CourseRepositoryImpl.java" beforeDir="false" afterPath="$PROJECT_DIR$/../learning-management-system/src/main/java/com/dophuong/lms/learning_management_system/repository/impl/CourseRepositoryImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../micro/1.intro.docx" beforeDir="false" afterPath="$PROJECT_DIR$/../micro/1.intro.docx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../micro/micro-parent/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/../micro/micro-parent/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../micro/~$.intro.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/~$ới thiệu spring Framework.docx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/~WRL2545.tmp" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -23,24 +75,24 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/../.." />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 4
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 4
+}</component>
   <component name="ProjectId" id="333FwhsB7hvcSZFX3NxijitWjBc" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "ModuleVcsDetector.initialDetectionPerformed": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "dart.analysis.tool.window.visible": "false",
-    "git-widget-placeholder": "master",
-    "last_opened_file_path": "D:/TaiLieu/7.JavaSpring/1_hoc_tu_co_ban/intern-java/java-core-learning/src/spring"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ModuleVcsDetector.initialDetectionPerformed&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;dart.analysis.tool.window.visible&quot;: &quot;false&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;last_opened_file_path&quot;: &quot;D:/TaiLieu/7.JavaSpring/1_hoc_tu_co_ban/intern-java/java-core-learning/src/spring&quot;
   }
-}]]></component>
+}</component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
       <changelist id="4dfe783e-bf13-4037-94f9-9c5143ac8f28" name="Changes" comment="" />

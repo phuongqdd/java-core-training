@@ -45,6 +45,7 @@ public class QuizController {
             @Valid @RequestBody QuizCreateRequest request
             ){
         QuizResponse quizResponse = quizService.createQuiz(courseId, request);
+
         return ResponseEntity.status(HttpStatus.CREATED.value())
                 .body(ApiResponse.<QuizResponse>builder()
                         .status(HttpStatus.CREATED.value())

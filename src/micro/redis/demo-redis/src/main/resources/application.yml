@@ -1,0 +1,52 @@
+server:
+  port: 8089
+
+spring:
+  application:
+    name: demo-redis
+
+  datasource:
+    url: jdbc:mysql://localhost:3306/demo_redis
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    username: root
+    password: Dp17103919@
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+#    properties:
+#      hibernate:
+#        format_sql: true
+
+  redis:
+    host: localhost
+    port: 6379
+
+  cache:
+    type: redis
+
+app:
+  cache:
+    # Thời gian sống (TTL) của cache chi tiết sản phẩm trong Redis (tính bằng giây)
+    # 86400 giây = 24 giờ
+    product-ttl-seconds: 86400
+
+    # Thời gian sống (TTL) của cache danh sách "sản phẩm liên quan"
+    # Mỗi 24h cache này sẽ tự động hết hạn và xóa khỏi Redis
+    related-ttl-seconds: 86400
+
+  jobs:
+    # Thời gian lặp lại giữa các lần chạy cron job "warmup" cache sản phẩm
+    # Format ISO-8601 Duration: PT1M = 1 phút
+    # Nghĩa là mỗi 1 phút hệ thống sẽ quét DB, cache các product mới/cập nhật, và đẩy productId vào Redis Queue
+    warmup-fixed-delay: PT1M
+
+    # Thời gian lặp lại giữa các lần worker xử lý queue
+    # PT2S = 2 giây
+    # Nghĩa là cứ mỗi 2 giây, worker sẽ lấy các job (productId) trong Redis Queue ra để tính toán "related products"
+    queue-process-fixed-delay: PT2S
+
+    # Số lượng job (productId) tối đa mà worker xử lý trong 1 lần chạy
+    # Nếu queue còn nhiều hơn con số này, phần còn lại sẽ đợi lượt kế tiếp (2 giây sau)
+    queue-batch-size: 100

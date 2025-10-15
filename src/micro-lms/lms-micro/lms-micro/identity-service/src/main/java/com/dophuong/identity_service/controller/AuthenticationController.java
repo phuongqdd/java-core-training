@@ -1,0 +1,88 @@
+package com.dophuong.identity_service.controller;
+
+import com.dophuong.identity_service.dto.request.*;
+import com.dophuong.identity_service.dto.response.ApiResponse;
+import com.dophuong.identity_service.dto.response.AuthenticationResponse;
+import com.dophuong.identity_service.dto.response.IntrospectResponse;
+import com.dophuong.identity_service.dto.response.UserResponse;
+import com.dophuong.identity_service.service.AuthenticationService;
+import jakarta.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.*;
+
+import java.time.LocalDateTime;
+
+@RestController
+@RequestMapping("/auth")
+public class AuthenticationController {
+
+    @Autowired
+    private AuthenticationService authenticationService;
+
+    @PostMapping("/signup")
+    public ResponseEntity<ApiResponse<UserResponse>> signup(@Valid @RequestBody UserCreateRequest request){
+        UserResponse user = authenticationService.signup(request, "STUDENT");
+        return ResponseEntity.status(HttpStatus.CREATED)
+                .body(ApiResponse.<UserResponse>builder()
+                        .status(HttpStatus.CREATED.value())
+                        .message("Tạo tài khoản thành công")
+                        .data(user)
+                        .timestamp(LocalDateTime.now())
+                        .build());
+    }
+
+    @PostMapping("/login")
+    public ApiResponse<AuthenticationResponse> login(@Valid @RequestBody AuthenticationRequest request){
+        AuthenticationResponse result = authenticationService.login(request);
+        return ApiResponse.<AuthenticationResponse>builder()
+                .status(result.isAuthenticated() ? 200 : 401)
+                .message(result.isAuthenticated() ? "Đăng nhập thành công" : "Đăng nhập thất bại")
+                .data(result)
+                .timestamp(LocalDateTime.now())
+                .build();
+    }
+
+    @PostMapping("/refresh")
+    public ResponseEntity<AuthenticationResponse> refresh(@RequestBody RefreshTokenRequest request) {
+        AuthenticationResponse response = authenticationService.refreshToken(request);
+        return ResponseEntity.ok(response);
+    }
+
+    @PostMapping("/introspect")
+    public ApiResponse<IntrospectResponse> authenticate(@RequestBody IntrospectRequest request){
+        IntrospectResponse response = authenticationService.introspectResponse(request);
+
+        return ApiResponse.<IntrospectResponse>builder()
+                .status(response.isValid() ? 200 : 401)
+                .message(response.isValid() ? "Đăng nhập thành công" : "Đăng nhập thất bại")
+                .data(response)
+                .timestamp(LocalDateTime.now())
+                .build();
+    }
+
+    @PostMapping("/logout")
+    public ApiResponse<Void> logout(@RequestBody LogoutRequest request){
+        authenticationService.logout(request);
+        return ApiResponse.<Void>builder()
+                .status(200)
+                .message("Đăng xuất đã được xử lý thành công")
+                .data(null)
+                .timestamp(LocalDateTime.now())
+                .build();
+    }
+
+    @PostMapping("/{userId}/roles")
+    public ResponseEntity<ApiResponse<String>> addGlobalRole(@PathVariable Long userId,
+                                                             @RequestParam String roleName){
+        authenticationService.addGlobalRoleToUser(userId, roleName);
+        return ResponseEntity.ok(ApiResponse.<String>builder()
+                        .data(null)
+                        .timestamp(LocalDateTime.now())
+                        .message("Đã thêm role " + roleName + " cho userid = " + userId + " thành công1")
+                        .status(HttpStatus.OK.value())
+                .build());
+    }
+
+}
