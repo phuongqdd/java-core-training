@@ -1,0 +1,13 @@
+spring:
+  application:
+    name: producer-2
+
+  producer:
+    bootstrap-servers: localhost:9092
+
+    # Class d?ng ?? m? h?a key t? String -> byte
+    key-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+    # Class d?ng ?? m? h?a value t? String -> byte
+    value-serializer: org.apache.kafka.common.serialization.StringSerializer
+#    value-serializer: org.springframework.kafka.support.serializer.JsonSerializer

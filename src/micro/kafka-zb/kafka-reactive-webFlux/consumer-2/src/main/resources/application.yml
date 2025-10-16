@@ -1,0 +1,25 @@
+spring:
+  application:
+    name: consumer-2
+  kafka:
+    consumer:
+      # ??a ch? Kafka broker (c? th? l? 1 ho?c nhi?u, c?ch nhau b?ng d?u ph?y)
+      bootstrap-servers: localhost:9092
+
+      # M?i consumer ph?i thu?c 1 group. Kafka d?ng group-id ?? chia message.
+      group-id: myGroup
+
+      # N?u ch?a c? offset (v?a t?o m?i), ??c message t? ??u?
+      # earliest: ??c t? ??u topic
+      # latest: ch? ??c c?c message m?i
+      auto-offset-reset: earliest
+
+      # Class d?ng ?? gi?i m? key t? byte -> String
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+
+      # Class d?ng ?? gi?i m? value t? byte -> String
+      value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+#      value-deserializer: org.springframework.kafka.support.serializer.JsonDeserializer
+#      # C?u h?nh b? sung cho JsonDeserializer
+#      properties:
+#        spring.json.trusted.packages: "*"
