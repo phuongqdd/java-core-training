@@ -20,6 +20,11 @@ public class CourseSecurity {
 
     public boolean hasInstructorInCourse(Long courseId) {
         String username = getUserName();
+
+        if (!Boolean.TRUE.equals(courseClient.exists(courseId, username).getBody())) {
+            return false;
+        }
+
         return Boolean.TRUE.equals(courseClient.hasRole(courseId, username).getBody());
     }
 

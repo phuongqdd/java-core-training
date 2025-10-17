@@ -18,19 +18,18 @@ public class CourseSecurity {
         return auth.getName();
     }
 
-
     public boolean hasInstructorInCourse(Long courseId) {
         String username = getUserName();
-        // Check user có role INSTRUCTOR trong khóa học
-        log.warn("Role: {}", username);
-        log.warn("COurseId: {}", courseId);
-        return Boolean.TRUE.equals(courseClient.exists(courseId, username).getBody());
+
+        if (!Boolean.TRUE.equals(courseClient.exists(courseId, username).getBody())) {
+            return false;
+        }
+
+        return Boolean.TRUE.equals(courseClient.hasRole(courseId, username).getBody());
     }
 
-    // Check user có trong khóa học hay không
     public boolean isUserInCourse(Long courseId) {
         String username = getUserName();
-        log.warn("COurseId: {}", courseId);
-        return Boolean.TRUE.equals(courseClient.hasRole(courseId, username).getBody());
+        return Boolean.TRUE.equals(courseClient.exists(courseId, username).getBody());
     }
 }
