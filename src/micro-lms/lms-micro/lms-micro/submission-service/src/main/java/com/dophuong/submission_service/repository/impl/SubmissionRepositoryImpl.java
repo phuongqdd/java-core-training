@@ -4,6 +4,7 @@ import com.dophuong.submission_service.dto.response.*;
 import com.dophuong.submission_service.entity.Submission;
 import com.dophuong.submission_service.repository.SubmissionRepository;
 import com.dophuong.submission_service.repository.feign.QuizClient;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.BeanPropertyRowMapper;
@@ -12,12 +13,16 @@ import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.support.GeneratedKeyHolder;
 import org.springframework.jdbc.support.KeyHolder;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
+import org.springframework.transaction.support.TransactionSynchronizationManager;
 
 import java.sql.Timestamp;
 import java.time.Duration;
 import java.time.LocalDateTime;
 import java.util.*;
 
+@Slf4j
 @Repository
 public class SubmissionRepositoryImpl implements SubmissionRepository {
 
@@ -26,6 +31,17 @@ public class SubmissionRepositoryImpl implements SubmissionRepository {
 
     @Autowired
     private QuizClient quizClient;
+
+    @Override
+    public boolean exist(Long id) {
+        String sql = """
+            SELECT COUNT(*)
+            FROM submission
+            WHERE submission_id = :id
+            """;
+        Integer count = jdbcTemplate.queryForObject(sql, Map.of("id", id), Integer.class);
+        return count != null && count > 0;
+    }
 
     @Override
     public SubmissionResponse createSubmission(Long courseId, Long quizId, Long userId) {
@@ -209,6 +225,7 @@ public class SubmissionRepositoryImpl implements SubmissionRepository {
 
     @Override
     public Submission getInProgressSubmission(Long userId, Long quizId) {
+        log.warn("User: {} - quizId: {}", userId, quizId);
         String sql = """
         SELECT * FROM submission
         WHERE quiz_id = :quizId
@@ -228,6 +245,7 @@ public class SubmissionRepositoryImpl implements SubmissionRepository {
     }
 
     @Override
+    @Transactional(propagation = Propagation.REQUIRES_NEW)
     public void finishSubmission(Long courseId, Long quizId, Long submissionId) {
         // Lấy thông tin quiz (để biết giới hạn thời gian)
         QuizResponse quiz = quizClient.getQuiz(courseId, quizId).getBody();
@@ -255,12 +273,16 @@ public class SubmissionRepositoryImpl implements SubmissionRepository {
         // Cập nhật trạng thái và thời gian kết thúc
         String sqlUpdate = """
             UPDATE submission
-            SET status = 'SUBMITTED',
+            SET `status` = 'SUBMITTED',
                 ended_at = :endedAt,
                 duration = :duration
             WHERE submission_id = :submissionId
-              AND status = 'IN_PROGRESS'
+              AND `status` = 'IN_PROGRESS'
             """;
+        MapSqlParameterSource source = new MapSqlParameterSource()
+                .addValue("submissionId", submissionId)
+                .addValue("endedAt", Timestamp.valueOf(finalFinish))
+                .addValue("duration", duration);
 
         Map<String, Object> params = Map.of(
                 "submissionId", submissionId,
@@ -268,7 +290,10 @@ public class SubmissionRepositoryImpl implements SubmissionRepository {
                 "duration", duration
         );
 
-        jdbcTemplate.update(sqlUpdate, params);
+        int rows = jdbcTemplate.update(sqlUpdate, source);
+        log.warn("rows: {}", rows);
+        log.warn("Transaction status: {}", TransactionSynchronizationManager.isActualTransactionActive());
+
     }
 
     @Override
@@ -277,5 +302,105 @@ public class SubmissionRepositoryImpl implements SubmissionRepository {
         saveSubmissionQuestionsAndOptions(questionResponseList, submissionId, quizId);
         return traKetQua(courseId, quizId, submissionId);
     }
+
+    @Override
+    public List<SubmissionResponse> getAllSubmission(List<QuizDetailResponse> quizDetailResponseList) {
+        // Nếu không có quiz nào đang mở thì trả về rỗng
+        if (quizDetailResponseList == null || quizDetailResponseList.isEmpty()) {
+            return List.of();
+        }
+
+        // Lấy danh sách quizId
+        List<Long> quizIds = quizDetailResponseList.stream()
+                .map(QuizDetailResponse::getId)
+                .toList();
+
+        String sql = """
+            SELECT *
+            FROM submission
+            WHERE status = 'IN_PROGRESS'
+              AND quiz_id IN (:quizIds)
+            """;
+
+        List<SubmissionResponse> submissions = jdbcTemplate.query(
+                sql,
+                Map.of("quizIds", quizIds),
+                new BeanPropertyRowMapper<>(SubmissionResponse.class)
+        );
+
+        // Lọc lại theo thời gian làm bài của từng quiz
+        return submissions.stream()
+                // Bước 1: Gán timeLimit cho từng submission dựa vào quiz tương ứng
+                .map(submission -> {
+                    // Tìm quiz tương ứng với submission hiện tại trong danh sách quiz đang mở
+                    QuizDetailResponse quiz = quizDetailResponseList.stream()
+                            .filter(q -> q.getId().equals(submission.getQuizId()))
+                            .findFirst()
+                            .orElse(null);
+
+                    // Nếu tìm thấy quiz → gán thời gian làm bài (timeLimit) cho submission
+                    if (quiz != null) {
+                        submission.setTimeLimit(quiz.getTimeLimit());
+                    }
+                    return submission; // trả lại submission (có thể đã gán timeLimit)
+                })
+
+                // Bước 2: Lọc những submission hợp lệ (đang trong thời gian làm bài)
+                .filter(submission -> {
+                    // Nếu không có quiz tương ứng hoặc timeLimit <= 0 → loại bỏ
+                    if (submission.getTimeLimit() <= 0) return false;
+
+                    // Lấy thời gian bắt đầu làm bài
+                    LocalDateTime startedAt = submission.getStartedAt();
+
+                    // Tính thời gian hết hạn = thời gian bắt đầu + số phút làm bài
+                    LocalDateTime expiredAt = startedAt.plusMinutes(submission.getTimeLimit());
+
+                    // Chỉ giữ lại nếu thời gian hiện tại vẫn trước thời điểm hết hạn
+                    return LocalDateTime.now().isBefore(expiredAt);
+                })
+
+                // Bước 3: Thu kết quả về danh sách
+                .toList();
+    }
+
+    @Override
+    public int getAttemptNo(Long submissionId) {
+        String sql = "SELECT attempt_no FROM submission WHERE submission_id = :id";
+        try {
+            Integer attemptNo = jdbcTemplate.queryForObject(sql, Map.of("id", submissionId), Integer.class);
+            return (attemptNo != null) ? attemptNo : 0;
+        } catch (EmptyResultDataAccessException e) {
+            // Không tìm thấy submission -> trả về 0
+            return 0;
+        }
+    }
+
+    @Override
+    public void updateGrade(Long submissionId, double score) {
+        String updateSql = """
+        UPDATE submission
+        SET score = :score,
+            ended_at = :endedAt,
+            duration = TIMESTAMPDIFF(MINUTE, started_at, :endedAt),
+            status = 'SUBMITTED'
+        WHERE submission_id = :id
+        """;
+
+        jdbcTemplate.update(updateSql, Map.of(
+                "score", score,
+                "endedAt", LocalDateTime.now(),
+                "id", submissionId
+        ));
+    }
+
+    @Override
+    public Submission findById(Long submissionId) {
+        String sql = """
+                SELECT * FROM submission WHERE submission_id = :id
+                """;
+        return jdbcTemplate.queryForObject(sql, Map.of("id", submissionId), new BeanPropertyRowMapper<>(Submission.class));
+    }
+
 
 }

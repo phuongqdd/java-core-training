@@ -28,4 +28,8 @@ public interface QuizMapper {
     QuizSummaryResponse toQuizSummaryResponse(Quiz quiz);
 
     List<QuizSummaryResponse> toQuizSummaryResponses(List<Quiz> list);
+
+    com.example.common_service.dto.response.QuizDetailResponse toResponseDetail(QuizDetailResponse quizDetailResponse);
+
+    QuizDetailResponse toResponseDetailQS(com.example.common_service.dto.response.QuizDetailResponse quizDetailResponse);
 }

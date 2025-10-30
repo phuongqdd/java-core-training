@@ -1,0 +1,35 @@
+spring:
+  application:
+    name=notification-email-svc
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: notification-email-svc
+      auto-offset-reset: earliest
+      enable-auto-commit: false
+      key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
+      value-deserializer: org.springframework.kafka.support.serializer.ErrorHandlingDeserializer
+      properties:
+        spring.deserializer.value.delegate.class: org.springframework.kafka.support.serializer.JsonDeserializer
+        spring.json.trusted.packages: "*"
+        spring.json.use.type.headers: false
+        spring.json.value.default.type: com.dophuong.notification_email_svc.model.OrderEvent
+    listener:
+      ack-mode: MANUAL
+      missing-topics-fatal: false
+
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: doquangphuong.nd2003@gmail.com
+    password: vbtk orev swav kxba
+    properties:
+      mail.smtp.auth: true
+      mail.smtp.starttls.enable: true
+    default-encoding: UTF-8
+
+app:
+  email:
+    from: "DoPhuong Shop <doquangphuong.nd2003@gmail.com>"
+    enabled: true

@@ -39,7 +39,7 @@ public class QuizServiceImpl implements QuizService {
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
 
-    private static final String CACHE_PREFIX_QUIZ = "quiz:";
+    private static final String CACHE_PREFIX_QUIZ = "quiz:template:";
 
     @Autowired
     private QuizHistoryRepository quizHistoryRepository;
@@ -136,11 +136,11 @@ public class QuizServiceImpl implements QuizService {
             throw new AppException(ErrorCode.QUIZ_NOT_IN_COURSE);
 
         String key = CACHE_PREFIX_QUIZ + quizId;
-        QuizDetailResponse cached = (QuizDetailResponse) redisTemplate.opsForValue().get(key);
+        com.example.common_service.dto.response.QuizDetailResponse cached = (com.example.common_service.dto.response.QuizDetailResponse) redisTemplate.opsForValue().get(key);
         if(cached == null){
             return traLai(courseId, quizId);
         }else {
-            return cached;
+            return quizMapper.toResponseDetailQS(cached);
         }
     }
 

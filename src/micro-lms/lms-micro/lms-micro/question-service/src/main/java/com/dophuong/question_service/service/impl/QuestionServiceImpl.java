@@ -15,7 +15,7 @@ import com.dophuong.question_service.enums.Difficulty;
 import com.dophuong.question_service.enums.ErrorCode;
 import com.dophuong.question_service.exception.AppException;
 import com.dophuong.question_service.mapper.QuestionMapper;
-import com.dophuong.question_service.producer.QuestionEventProducer;
+//import com.dophuong.question_service.producer.QuestionEventProducer;
 import com.dophuong.question_service.repository.QuestionRepository;
 import com.dophuong.question_service.repository.feign.CourseClient;
 import com.dophuong.question_service.service.OptionService;
@@ -24,7 +24,8 @@ import com.dophuong.question_service.service.QuestionService;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Service;
@@ -34,7 +35,6 @@ import java.util.ArrayList;
 import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
-import java.util.logging.Level;
 
 @Service
 @Transactional
@@ -50,12 +50,12 @@ public class QuestionServiceImpl implements QuestionService {
     private final QuestionHistoryService questionHistoryService;
 
     private final QuestionMapper questionMapper;
-    private final QuestionEventProducer questionEventProducer;
+//    private final QuestionEventProducer questionEventProducer;
 
     private final RedisTemplate<String, Object> redisTemplate;
 
     // Prefix key chuẩn cho Redis
-    private static final String CACHE_PREFIX = "courseQuestions:";
+    private static final String CACHE_PREFIX = "question:list:";
 
 
     @Override
@@ -113,32 +113,32 @@ public class QuestionServiceImpl implements QuestionService {
         QuestionResponse response = questionMapper.toResponse(question);
         response.setOptions(optionResponseList);
 
-//        String key = CACHE_PREFIX + courseId + ":" + question.getDifficulty().name();
-//        List<Long> cached = (List<Long>) redisTemplate.opsForValue().get(key);
-//        if (cached != null) {
-//            cached.add(question.getId());
-//            updateCache(courseId, question.getDifficulty().name(), cached);
-//        } else {
-//            updateCache(courseId, question.getDifficulty().name(), List.of(question.getId()));
-//        }
+        String key = CACHE_PREFIX + courseId + ":" + question.getDifficulty().name();
+        List<Long> cached = (List<Long>) redisTemplate.opsForValue().get(key);
+        if (cached != null) {
+            cached.add(question.getId());
+            updateCache(courseId, question.getDifficulty().name(), cached);
+        } else {
+            updateCache(courseId, question.getDifficulty().name(), List.of(question.getId()));
+        }
 
-        questionEventProducer.sendQuestionEvent(
-                QuestionEvent.builder()
-                        .courseId(courseId)
-                        .questionId(response.getId())
-                        .action("ADD")
-                        .difficulty(response.getDifficulty().name())
-                        .build()
-        );
+//        questionEventProducer.sendQuestionEvent(
+//                QuestionEvent.builder()
+//                        .courseId(courseId)
+//                        .questionId(response.getId())
+//                        .action("ADD")
+//                        .difficulty(response.getDifficulty().name())
+//                        .build()
+//        );
 
         return response;
     }
 
     @Override
-    public List<QuestionOnlyResponse> getAllQuestion(Long courseId) {
+    public Page<QuestionOnlyResponse> getAllQuestion(Long courseId, Pageable pageable) {
         if(!Boolean.TRUE.equals(courseClient.exists(courseId).getBody()))
             throw new AppException(ErrorCode.COURSE_NOT_FOUND);
-        List<Question> questions = questionRepository.findAllByCourseId(courseId);
+        Page<Question> questions = questionRepository.findAllByCourseId(courseId, pageable);
         return questionMapper.toQuestionOnlyResponses(questions);
     }
 
@@ -167,25 +167,25 @@ public class QuestionServiceImpl implements QuestionService {
         QuestionResponse response = questionMapper.toResponse(question);
         response.setOptions(optionResponseList);
 
-//        String key = CACHE_PREFIX + courseId + ":" + response.getDifficulty().name();
-//        List<Long> cached = (List<Long>) redisTemplate.opsForValue().get(key);
-//        if (cached != null) {
-//            if (!cached.contains(response.getId())) {
-//                cached.add(response.getId());
-//            }
-//            updateCache(courseId, response.getDifficulty().name(), cached);
-//        }
-//        removeCacheQuestion(courseId, questionId, level);
+        String key = CACHE_PREFIX + courseId + ":" + response.getDifficulty().name();
+        List<Long> cached = (List<Long>) redisTemplate.opsForValue().get(key);
+        if (cached != null) {
+            if (!cached.contains(response.getId())) {
+                cached.add(response.getId());
+            }
+            updateCache(courseId, response.getDifficulty().name(), cached);
+        }
+        removeCacheQuestion(courseId, questionId, level);
 
-        questionEventProducer.sendQuestionEvent(
-                QuestionEvent.builder()
-                        .courseId(courseId)
-                        .questionId(questionId)
-                        .difficulty(response.getDifficulty().name())
-                        .action("UPDATE")
-                        .oldDifficulty(level)
-                        .build()
-        );
+//        questionEventProducer.sendQuestionEvent(
+//                QuestionEvent.builder()
+//                        .courseId(courseId)
+//                        .questionId(questionId)
+//                        .difficulty(response.getDifficulty().name())
+//                        .action("UPDATE")
+//                        .oldDifficulty(level)
+//                        .build()
+//        );
 
         return response;
     }
@@ -219,15 +219,15 @@ public class QuestionServiceImpl implements QuestionService {
 
         questionRepository.deleteById(questionId);
 
-//        removeCacheQuestion(courseId, questionId, level);
-        questionEventProducer.sendQuestionEvent(
-                QuestionEvent.builder()
-                        .courseId(courseId)
-                        .questionId(questionId)
-                        .difficulty(level)
-                        .action("DELETE")
-                        .build()
-        );
+        removeCacheQuestion(courseId, questionId, level);
+//        questionEventProducer.sendQuestionEvent(
+//                QuestionEvent.builder()
+//                        .courseId(courseId)
+//                        .questionId(questionId)
+//                        .difficulty(level)
+//                        .action("DELETE")
+//                        .build()
+//        );
     }
 
     @Override

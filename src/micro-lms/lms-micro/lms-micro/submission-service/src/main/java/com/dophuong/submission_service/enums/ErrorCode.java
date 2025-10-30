@@ -13,6 +13,7 @@ public enum ErrorCode {
     LOGIN_FAILED(1007, "Sai mật khẩu hoặc username", HttpStatus.UNAUTHORIZED),
     USER_LOCKED(1008, "Tài khoản bị khóa", HttpStatus.LOCKED),
     PASSWORD_CONFIRM_NOT_MATCH(1009, "Mật khẩu xác nhận không khớp", HttpStatus.BAD_REQUEST),
+    UNAUTHORIZED_ACCESS(1010, "Người dùng không hợp lệ", HttpStatus.BAD_REQUEST),
 
     // Role / Permission
     ROLE_NOT_FOUND(1101, "Không tìm thấy role trong hệ thống", HttpStatus.BAD_REQUEST),
@@ -56,7 +57,8 @@ public enum ErrorCode {
     //Submission
     SUBMISSION_OUT_OF_ATTEMPTS(1801, "Bạn đã hết lượt làm bài kiểm tra này!", HttpStatus.BAD_REQUEST),
     SUBMISSION_NOT_OPEN_YET(1802, "Bài kiểm tra chưa được mở!", HttpStatus.BAD_REQUEST),
-    SUBMISSION_CLOSED(1803, "Bài kiểm tra đã kết thúc!", HttpStatus.BAD_REQUEST);
+    SUBMISSION_CLOSED(1803, "Bài kiểm tra đã kết thúc!", HttpStatus.BAD_REQUEST),
+    SUBMISSION_NOT_FOUND(1804, "Bài kiểm tra không tồn tại!", HttpStatus.NOT_FOUND);
 
     private final int code;                  // Mã lỗi nội bộ
     private final String message;            // Thông báo lỗi

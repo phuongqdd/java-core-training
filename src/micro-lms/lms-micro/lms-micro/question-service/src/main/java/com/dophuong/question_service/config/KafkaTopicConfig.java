@@ -6,12 +6,12 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class KafkaTopicConfig {
-    @Bean
-    public NewTopic questionTopic(){
-        return TopicBuilder
-                .name("question")
-                .partitions(3)
-                .replicas(1)
-                .build();
-    }
+//    @Bean
+//    public NewTopic questionTopic(){
+//        return TopicBuilder
+//                .name("question")
+//                .partitions(3)
+//                .replicas(1)
+//                .build();
+//    }
 }

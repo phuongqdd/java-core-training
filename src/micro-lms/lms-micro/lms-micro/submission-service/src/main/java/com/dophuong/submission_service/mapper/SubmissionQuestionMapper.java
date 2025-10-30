@@ -1,5 +1,6 @@
 package com.dophuong.submission_service.mapper;
 
+import com.dophuong.submission_service.dto.response.QuestionReviewResponse;
 import com.dophuong.submission_service.dto.response.SubmissionQuestionResponse;
 import com.dophuong.submission_service.entity.SubmissionQuestion;
 import org.mapstruct.Mapper;
@@ -12,4 +13,8 @@ public interface SubmissionQuestionMapper {
     SubmissionQuestionResponse toResponse(SubmissionQuestion question);
 
     List<SubmissionQuestionResponse> toResponseList(List<SubmissionQuestion> questionList);
+
+    QuestionReviewResponse toReviewResponse(SubmissionQuestion question);
+
+    List<QuestionReviewResponse> toReviewResponseList(List<SubmissionQuestion> questionList);
 }

@@ -2,14 +2,22 @@ package com.dophuong.question_service.service;
 
 import com.dophuong.question_service.repository.QuestionRepository;
 import com.dophuong.question_service.repository.feign.CourseClient;
+import com.dophuong.question_service.util.DateTimeUtils;
+import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 
 import java.time.Duration;
+import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.Executor;
 
+@Slf4j
 @Component
 public class QuestionCacheService {
 
@@ -22,8 +30,11 @@ public class QuestionCacheService {
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
 
+    @Resource(name = "warmupExecutor")
+    private Executor warmupExecutor;
+
     // Prefix key chuẩn cho Redis
-    private static final String CACHE_PREFIX = "courseQuestions:";
+    private static final String CACHE_PREFIX = "question:list:";
 
     /**
      * Lấy question IDs theo course + level từ Redis
@@ -34,8 +45,11 @@ public class QuestionCacheService {
         Object cached = redisTemplate.opsForValue().get(key);
 
         if (cached != null) {
+            log.warn("Da co Khoa {} - muc do {}", courseId, level);
             return (List<Long>) cached;
         }
+
+        log.warn("Chua co tao moi Khoa {} - muc do {}", courseId, level);
 
         // Nếu chưa có cache, load từ DB
         List<Long> questionIds = questionRepository.getQuestionsByLevel(courseId, level);
@@ -52,11 +66,22 @@ public class QuestionCacheService {
     @Scheduled(fixedRate = 300_000) // 5 phút
     public void preloadQuestions() {
         List<Long> courseIds = getAllCourseIds();
-        for (Long courseId : courseIds) {
-            for (String level : List.of("EASY", "MEDIUM", "HARD", "VERY_HARD")) {
-                getQuestionsByLevel(courseId, level);
+        List<String> levels = List.of("EASY", "MEDIUM", "HARD", "VERY_HARD");
+        List<CompletableFuture<Void>> futures = new ArrayList<>();
+        for(Long courseId : courseIds){
+            for (String level : levels){
+                CompletableFuture<Void> f = CompletableFuture.runAsync(() -> {
+                    try {
+                        getQuestionsByLevel(courseId, level);
+                    } catch (Exception e) {
+                    }
+                }, warmupExecutor);
+                futures.add(f);
             }
         }
+
+        CompletableFuture.allOf(futures.toArray(new CompletableFuture[0])).join();
+        log.warn("Chay xong luc {}", DateTimeUtils.formatNow());
     }
 
 

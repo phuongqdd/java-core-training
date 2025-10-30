@@ -43,7 +43,7 @@ public class QuizRepositoryImpl implements QuizRepository {
     private RedisTemplate<String, Object> redisTemplate;
 
     // Prefix key chuẩn cho Redis
-    private static final String CACHE_PREFIX = "courseQuestions:";
+    private static final String CACHE_PREFIX = "question:list:";
 
     @Override
     public Quiz createQuiz(Quiz quiz) {
